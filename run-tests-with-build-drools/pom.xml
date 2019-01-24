@@ -79,6 +79,7 @@
           <streamLogs>true</streamLogs>
           <mergeUserSettings>true</mergeUserSettings>
           <parallelThreads>3</parallelThreads>
+          <ignoreFailures>true</ignoreFailures>
           <pomIncludes>
             <pomIncludes>drools/*/pom.xml</pomIncludes>
             <pomIncludes>droolsjbpm-knowledge/*/pom.xml</pomIncludes>
