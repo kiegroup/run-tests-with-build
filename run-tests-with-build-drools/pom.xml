@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>run-test-with-build-drools</artifactId>
+
+  <properties>
+    <drools.repository.url>${git.server.url}/drools</drools.repository.url>
+    <drools.repository.directory>${sources.directory}/drools</drools.repository.directory>
+
+    <kie.api.repository.url>${git.server.url}/droolsjbpm-knowledge</kie.api.repository.url>
+    <kie.api.repository.directory>${sources.directory}/droolsjbpm-knowledge</kie.api.repository.directory>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>checkout-drools</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>checkout</goal>
+            </goals>
+            <configuration>
+              <connectionUrl>scm:git:${drools.repository.url}</connectionUrl>
+              <scmVersion>${sources.revision}</scmVersion>
+              <scmVersionType>${sources.revision.type}</scmVersionType>
+              <checkoutDirectory>${drools.repository.directory}</checkoutDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>checkout-droolsjbpm-knowledge</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>checkout</goal>
+            </goals>
+            <configuration>
+              <connectionUrl>scm:git:${kie.api.repository.url}</connectionUrl>
+              <scmVersion>${sources.revision}</scmVersion>
+              <scmVersionType>${sources.revision.type}</scmVersionType>
+              <checkoutDirectory>${kie.api.repository.directory}</checkoutDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>unpack-build-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-build-jars</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack-build</goal>
+            </goals>
+            <configuration>
+              <version>${download.build.version}</version>
+              <rootDirectory>${sources.directory}</rootDirectory>
+              <excludeDirectories>.*drools-persistence.*</excludeDirectories>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <configuration>
+          <projectsDirectory>${sources.directory}</projectsDirectory>
+          <streamLogs>true</streamLogs>
+          <mergeUserSettings>true</mergeUserSettings>
+          <parallelThreads>3</parallelThreads>
+          <pomIncludes>
+            <pomIncludes>drools/*/pom.xml</pomIncludes>
+            <pomIncludes>droolsjbpm-knowledge/*/pom.xml</pomIncludes>
+          </pomIncludes>
+          <pomExcludes>
+            <pomExclude>drools/drools-persistence/pom.xml</pomExclude>
+          </pomExcludes>
+          <goals>
+            <goal>test -Dmaven.main.skip -Denforcer.skip -fae -Dkie.maven.settings.custom=${settings.xml.file}</goal>
+          </goals>
+        </configuration>
+        <executions>
+          <execution>
+            <id>run-tests</id>
+            <phase>test</phase>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
