@@ -11,6 +11,7 @@
 
   <modules>
     <module>run-tests-with-build-drools</module>
+    <module>run-tests-with-build-optaplanner</module>
   </modules>
 
   <properties>
@@ -29,6 +30,11 @@
     <git.server.url>https://github.com/kiegroup</git.server.url>
     <sources.revision>7.16.0.Final</sources.revision>
     <sources.revision.type>tag</sources.revision.type>
+
+    <drools.repo.url>${git.server.url}/drools</drools.repo.url>
+    <droolsjbpm.knowledge.repo.url>${git.server.url}/droolsjbpm-knowledge</droolsjbpm.knowledge.repo.url>
+    <jbpm.repo.url>${git.server.url}/jbpm</jbpm.repo.url>
+    <optaplanner.repo.url>${git.server.url}/optaplanner</optaplanner.repo.url>
   </properties>
 
   <build>
@@ -51,6 +57,64 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-plugin</artifactId>
+        <configuration>
+          <scmVersion>${sources.revision}</scmVersion>
+          <scmVersionType>${sources.revision.type}</scmVersionType>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>unpack-build-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-build-jars</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack-build</goal>
+            </goals>
+            <configuration>
+              <version>${download.build.version}</version>
+              <rootDirectory>${sources.directory}</rootDirectory>
+              <excludeDirectories>
+                <excludeDirectory>.*-distribution</excludeDirectory>
+                <excludeDirectory>.*-docs</excludeDirectory>
+                <excludeDirectory>.*archetype.*</excludeDirectory>
+                <excludeDirectory>^kjar-.*</excludeDirectory>
+                <excludeDirectory>.*webapp.*</excludeDirectory>
+              </excludeDirectories>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <version>${invoker.plugin.version}</version>
+        <configuration>
+          <projectsDirectory>${sources.directory}</projectsDirectory>
+          <streamLogs>true</streamLogs>
+          <mergeUserSettings>true</mergeUserSettings>
+          <mavenOpts>-Xms1g -Xmx3g</mavenOpts>
+          <parallelThreads>2</parallelThreads>
+          <goals>
+            <goal>test -Dmaven.main.skip -DskipTests -Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</goal>
+          </goals>
+        </configuration>
+        <executions>
+          <execution>
+            <id>run-tests</id>
+            <phase>test</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
   <repositories>
