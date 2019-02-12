@@ -12,6 +12,7 @@
   <modules>
     <module>run-tests-with-build-drools</module>
     <module>run-tests-with-build-optaplanner</module>
+    <module>run-tests-with-build-optaplanner-examples</module>
   </modules>
 
   <properties>
@@ -101,7 +102,7 @@
           <mavenOpts>-Xms1g -Xmx3g</mavenOpts>
           <parallelThreads>2</parallelThreads>
           <goals>
-            <goal>test -Dmaven.main.skip -DskipTests -Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</goal>
+            <goal>test -Dmaven.main.skip -Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</goal>
           </goals>
         </configuration>
         <executions>
