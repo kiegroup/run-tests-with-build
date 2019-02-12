@@ -22,13 +22,13 @@
     <invoker.plugin.version>3.1.0</invoker.plugin.version>
     <unpack.build.version>1.0-SNAPSHOT</unpack.build.version>
 
-    <download.build.version>7.16.0.Final</download.build.version>
+    <download.build.version>7.17.0.Final</download.build.version>
     <!--TODO - settings.xml-->
     <settings.xml.file>${project.parent.basedir}/settings/settings.xml</settings.xml.file>
     <sources.directory>${project.build.directory}/sources/</sources.directory>
 
     <git.server.url>https://github.com/kiegroup</git.server.url>
-    <sources.revision>7.16.0.Final</sources.revision>
+    <sources.revision>7.17.0.Final</sources.revision>
     <sources.revision.type>tag</sources.revision.type>
 
     <drools.repo.url>${git.server.url}/drools</drools.repo.url>

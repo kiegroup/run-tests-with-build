@@ -8,6 +8,10 @@ target/
 /*.ipr
 /*.iws
 *.iml
+.vscode
+.classpath
+.project
+.settings
 
 # Repository wide ignore mac DS_Store files
 .DS_Store
