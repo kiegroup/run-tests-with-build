@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>run-test-with-build-drools-turtle</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>checkout-drools</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>checkout</goal>
+            </goals>
+            <configuration>
+              <connectionUrl>scm:git:${drools.repo.url}</connectionUrl>
+              <checkoutDirectory>${sources.directory}/drools</checkoutDirectory>
+            </configuration>
+          </execution>
+        </executions>  
+      </plugin>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>unpack-build-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-build-jars</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack-build</goal>
+            </goals>
+            <configuration>
+              <excludeDirectories combine.children="append">
+                <excludeDirectory>.*drools-beliefs.*</excludeDirectory>
+                <excludeDirectory>.*drools-cdi.*</excludeDirectory>
+                <excludeDirectory>.*drools-core.*</excludeDirectory>
+                <excludeDirectory>.*drools-decisiontables.*</excludeDirectory>
+                <excludeDirectory>.*drools-distribution.*</excludeDirectory>
+                <excludeDirectory>.*drools-examples.*</excludeDirectory>
+                <excludeDirectory>.*drools-model.*</excludeDirectory>
+                <excludeDirectory>.*drools-persistence.*</excludeDirectory>
+                <excludeDirectory>.*drools-scorecards.*</excludeDirectory>
+                <excludeDirectory>.*drools-templates.*</excludeDirectory>
+                <excludeDirectory>.*drools-verifier.*</excludeDirectory>
+                <excludeDirectory>.*drools-workbench-models.*</excludeDirectory>
+                <excludeDirectory>.*kie-ci-osgi.*</excludeDirectory>
+                <excludeDirectory>.*kie-ci.*</excludeDirectory>
+                <excludeDirectory>.*kie-dmn.*</excludeDirectory>
+                <excludeDirectory>.*kie-pmml.*</excludeDirectory>
+                <excludeDirectory>.*kie-test-util.*</excludeDirectory>
+                <excludeDirectory>.*standalone.*</excludeDirectory>
+                <excludeDirectory>.*test-compiler-integration.*</excludeDirectory>
+              </excludeDirectories>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <configuration>
+          <pomIncludes>
+            <pomIncludes>drools/drools-compiler/pom.xml</pomIncludes>
+            <pomIncludes>drools/*/test-suite/pom.xml</pomIncludes>
+          </pomIncludes>
+          <goals>
+            <goal>${maven.default.command} -DrunTurtleTests=true</goal>
+          </goals>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

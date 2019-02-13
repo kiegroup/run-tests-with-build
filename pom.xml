@@ -11,6 +11,7 @@
 
   <modules>
     <module>run-tests-with-build-drools</module>
+    <module>run-tests-with-build-drools-turtle</module>
     <module>run-tests-with-build-optaplanner</module>
     <module>run-tests-with-build-optaplanner-examples</module>
   </modules>
