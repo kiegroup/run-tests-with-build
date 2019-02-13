@@ -62,6 +62,9 @@
           <pomIncludes>
             <pomIncludes>optaplanner/*-examples/pom.xml</pomIncludes>
           </pomIncludes>
+          <goals>
+            <goal>${maven.default.command}-DmoveThreadCounts=NONE,2</goal>
+          </goals>
         </configuration>
       </plugin>
     </plugins>

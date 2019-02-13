@@ -28,6 +28,8 @@
     <settings.xml.file>${project.parent.basedir}/settings/settings.xml</settings.xml.file>
     <sources.directory>${project.build.directory}/sources/</sources.directory>
 
+    <maven.default.command>verify -Dmaven.main.skip -Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</maven.default.command>
+
     <git.server.url>https://github.com/kiegroup</git.server.url>
     <sources.revision>7.17.0.Final</sources.revision>
     <sources.revision.type>tag</sources.revision.type>
@@ -102,7 +104,7 @@
           <mavenOpts>-Xms1g -Xmx3g</mavenOpts>
           <parallelThreads>2</parallelThreads>
           <goals>
-            <goal>test -Dmaven.main.skip -Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</goal>
+            <goal>${maven.default.command}</goal>
           </goals>
         </configuration>
         <executions>
