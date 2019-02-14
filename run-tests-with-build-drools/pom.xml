@@ -64,8 +64,8 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomIncludes>drools/*/pom.xml</pomIncludes>
-            <pomIncludes>droolsjbpm-knowledge/*/pom.xml</pomIncludes>
+            <pomInclude>drools/*/pom.xml</pomInclude>
+            <pomInclude>droolsjbpm-knowledge/*/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
             <pomExclude>drools/drools-persistence/pom.xml</pomExclude>

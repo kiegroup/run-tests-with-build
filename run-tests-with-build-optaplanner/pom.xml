@@ -53,7 +53,7 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomIncludes>optaplanner/*/pom.xml</pomIncludes>
+            <pomInclude>optaplanner/*/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
             <pomExclude>optaplanner/*examples/pom.xml</pomExclude>

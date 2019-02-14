@@ -60,7 +60,6 @@
                 <excludeDirectory>.*kie-pmml.*</excludeDirectory>
                 <excludeDirectory>.*kie-test-util.*</excludeDirectory>
                 <excludeDirectory>.*standalone.*</excludeDirectory>
-                <excludeDirectory>.*test-compiler-integration.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>
@@ -71,12 +70,13 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomIncludes>drools/drools-compiler/pom.xml</pomIncludes>
-            <pomIncludes>drools/*/test-suite/pom.xml</pomIncludes>
+            <pomInclude>drools/drools-compiler/pom.xml</pomInclude>
+            <pomInclude>drools/*/test-suite/pom.xml</pomInclude>
+            <pomInclude>drools/*/test-compiler-integration/pom.xml</pomInclude>
           </pomIncludes>
-          <goals>
-            <goal>${maven.default.command} -DrunTurtleTests=true</goal>
-          </goals>
+          <profiles>
+            <profile>runTurtleTests</profile>
+          </profiles>
         </configuration>
       </plugin>
     </plugins>

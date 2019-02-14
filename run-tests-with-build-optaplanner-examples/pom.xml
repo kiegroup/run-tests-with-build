@@ -60,7 +60,7 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomIncludes>optaplanner/*-examples/pom.xml</pomIncludes>
+            <pomInclude>optaplanner/*-examples/pom.xml</pomInclude>
           </pomIncludes>
           <goals>
             <goal>${maven.default.command}-DmoveThreadCounts=NONE,2</goal>
