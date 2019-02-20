@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>run-test-with-build-drools-turtle</artifactId>
+  <artifactId>run-tests-with-build-drools-turtle</artifactId>
 
   <build>
     <plugins>

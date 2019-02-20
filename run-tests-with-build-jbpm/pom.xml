@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>run-tests-with-build-drools</artifactId>
+  <artifactId>run-tests-with-build-jbpm</artifactId>
 
   <build>
     <plugins>
@@ -18,25 +18,14 @@
         <artifactId>maven-scm-plugin</artifactId>
         <executions>
           <execution>
-            <id>checkout-drools</id>
+            <id>checkout-jbpm</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>checkout</goal>
             </goals>
             <configuration>
-              <connectionUrl>scm:git:${drools.repo.url}</connectionUrl>
-              <checkoutDirectory>${sources.directory}/drools</checkoutDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>checkout-droolsjbpm-knowledge</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>checkout</goal>
-            </goals>
-            <configuration>
-              <connectionUrl>scm:git:${droolsjbpm.knowledge.repo.url}</connectionUrl>
-              <checkoutDirectory>${sources.directory}/droolsjbpm-knowledge</checkoutDirectory>
+              <connectionUrl>scm:git:${jbpm.repo.url}</connectionUrl>
+              <checkoutDirectory>${sources.directory}/jbpm</checkoutDirectory>
             </configuration>
           </execution>
         </executions>
@@ -53,7 +42,15 @@
             </goals>
             <configuration>
               <excludeDirectories combine.children="append">
-                <excludeDirectory>.*drools-persistence.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-case-mgmt.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-executor-ejb.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-executor-ejb-timer.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-services-ejb-impl.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-services-ejb-timer.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-test.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-container-test.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-remote-ejb-test-suite.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-remote-ejb-test-domain.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>
@@ -64,11 +61,18 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomInclude>drools/*/pom.xml</pomInclude>
-            <pomInclude>droolsjbpm-knowledge/*/pom.xml</pomInclude>
+            <pomInclude>jbpm/**/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
-            <pomExclude>drools/drools-persistence/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/target/**/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/src/**/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/jbpm-case-mgmt/**/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/jbpm-executor-ejb/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/jbpm-services-ejb-impl/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/jbpm-services-ejb-timer/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/jbpm-test/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/jbpm-container-test/**/pom.xml</pomExclude>
+            <pomExclude>jbpm/**/jbpm-distribution/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
