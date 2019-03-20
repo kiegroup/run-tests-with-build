@@ -42,15 +42,25 @@
             </goals>
             <configuration>
               <excludeDirectories combine.children="append">
-                <excludeDirectory>.*jbpm-case-mgmt.*</excludeDirectory>
-                <excludeDirectory>.*jbpm-executor-ejb.*</excludeDirectory>
-                <excludeDirectory>.*jbpm-executor-ejb-timer.*</excludeDirectory>
-                <excludeDirectory>.*jbpm-services-ejb-impl.*</excludeDirectory>
-                <excludeDirectory>.*jbpm-services-ejb-timer.*</excludeDirectory>
-                <excludeDirectory>.*jbpm-test.*</excludeDirectory>
-                <excludeDirectory>.*jbpm-container-test.*</excludeDirectory>
-                <excludeDirectory>.*jbpm-remote-ejb-test-suite.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-audit</excludeDirectory>
+                <excludeDirectory>.*jbpm-bpmn2</excludeDirectory>
+                <excludeDirectory>.*jbpm-executor-ejb</excludeDirectory>
+                <excludeDirectory>.*jbpm-executor-ejb-timer</excludeDirectory>
+                <excludeDirectory>.*jbpm-human-task-core</excludeDirectory>
+                <excludeDirectory>.*jbpm-installer</excludeDirectory>
+                <excludeDirectory>.*jbpm-persistence-jpa</excludeDirectory>
+                <excludeDirectory>.*jbpm-services-ejb-impl</excludeDirectory>
+                <excludeDirectory>.*jbpm-services-ejb-timer</excludeDirectory>
+                <excludeDirectory>.*jbpm-test</excludeDirectory>
+                <excludeDirectory>.*jbpm-container-test-suite</excludeDirectory>
+                <excludeDirectory>.*jbpm-container-integration-deps.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-remote-ejb-test-app.*</excludeDirectory>
                 <excludeDirectory>.*jbpm-remote-ejb-test-domain.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-remote-ejb-test-suite</excludeDirectory>
+                <excludeDirectory>.*shrinkwrap-war-profiles.*</excludeDirectory>
+                <excludeDirectory>.*test-kjar-evaluation.*</excludeDirectory>
+                <excludeDirectory>.*test-kjar-integration.*</excludeDirectory>
+                <excludeDirectory>.*test-kjar-bpmn-build.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>
@@ -61,19 +71,11 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomInclude>jbpm/**/pom.xml</pomInclude>
+            <pomInclude>jbpm/pom.xml</pomInclude>
           </pomIncludes>
-          <pomExcludes>
-            <pomExclude>jbpm/**/target/**/pom.xml</pomExclude>
-            <pomExclude>jbpm/**/src/**/pom.xml</pomExclude>
-            <pomExclude>jbpm/**/jbpm-case-mgmt/**/pom.xml</pomExclude>
-            <pomExclude>jbpm/**/jbpm-executor-ejb/pom.xml</pomExclude>
-            <pomExclude>jbpm/**/jbpm-services-ejb-impl/pom.xml</pomExclude>
-            <pomExclude>jbpm/**/jbpm-services-ejb-timer/pom.xml</pomExclude>
-            <pomExclude>jbpm/**/jbpm-test/pom.xml</pomExclude>
-            <pomExclude>jbpm/**/jbpm-container-test/**/pom.xml</pomExclude>
-            <pomExclude>jbpm/**/jbpm-distribution/pom.xml</pomExclude>
-          </pomExcludes>
+          <goals>
+            <goal>${maven.default.command} -pl !:jbpm-audit,!:jbpm-bpmn2,!:jbpm-case-mgmt,!:jbpm-executor-ejb,!:jbpm-human-task-core,!:jbpm-installer,!:jbpm-persistence-jpa,!:jbpm-services-ejb-impl,!:jbpm-services-ejb-timer,!:jbpm-test,!:jbpm-container-test-suite,!:jbpm-remote-ejb-test-suite</goal>
+          </goals>
         </configuration>
       </plugin>
     </plugins>

@@ -25,16 +25,17 @@
     <invoker.plugin.version>3.1.0</invoker.plugin.version>
     <unpack.build.version>1.0-SNAPSHOT</unpack.build.version>
 
-    <download.build.version>7.17.0.Final</download.build.version>
+    <download.build.version>7.18.1-SNAPSHOT</download.build.version>
     <!--TODO - settings.xml-->
     <settings.xml.file>${project.parent.basedir}/settings/settings.xml</settings.xml.file>
     <sources.directory>${project.build.directory}/sources/</sources.directory>
 
-    <maven.default.command>verify -Dmaven.main.skip -Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</maven.default.command>
+    <maven.unnecessary.plugins.skip>-Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip</maven.unnecessary.plugins.skip>
+    <maven.default.command>verify -Dmaven.main.skip -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.test.redirectTestOutputToFile=true -Djdk.min.version=1.8.0 ${maven.unnecessary.plugins.skip} -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</maven.default.command>
 
     <git.server.url>https://github.com/kiegroup</git.server.url>
-    <sources.revision>7.17.0.Final</sources.revision>
-    <sources.revision.type>tag</sources.revision.type>
+    <sources.revision>7.18.x</sources.revision>
+    <sources.revision.type>branch</sources.revision.type>
 
     <drools.repo.url>${git.server.url}/drools</drools.repo.url>
     <droolsjbpm.knowledge.repo.url>${git.server.url}/droolsjbpm-knowledge</droolsjbpm.knowledge.repo.url>
