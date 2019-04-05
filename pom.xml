@@ -15,6 +15,7 @@
     <module>run-tests-with-build-jbpm</module>
     <module>run-tests-with-build-optaplanner</module>
     <module>run-tests-with-build-optaplanner-examples</module>
+    <module>run-tests-with-build-kie-osgi</module>
   </modules>
 
   <properties>
@@ -41,6 +42,7 @@
     <droolsjbpm.knowledge.repo.url>${git.server.url}/droolsjbpm-knowledge</droolsjbpm.knowledge.repo.url>
     <jbpm.repo.url>${git.server.url}/jbpm</jbpm.repo.url>
     <optaplanner.repo.url>${git.server.url}/optaplanner</optaplanner.repo.url>
+    <droolsjbpm.integration.repo.url>${git.server.url}/droolsjbpm-integration</droolsjbpm.integration.repo.url>
   </properties>
 
   <build>
