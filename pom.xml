@@ -16,6 +16,7 @@
     <module>run-tests-with-build-optaplanner</module>
     <module>run-tests-with-build-optaplanner-examples</module>
     <module>run-tests-with-build-kie-osgi</module>
+    <module>run-tests-with-build-camel-container</module>
   </modules>
 
   <properties>
