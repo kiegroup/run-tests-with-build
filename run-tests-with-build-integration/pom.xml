@@ -2,6 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <parent>
         <artifactId>run-tests-with-build</artifactId>
         <groupId>org.kie</groupId>
@@ -12,13 +13,11 @@
     <artifactId>run-tests-with-build-integration</artifactId>
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-plugin</artifactId>
                 <executions>
-
                     <execution>
                         <id>checkout-droolsjbpm-integration</id>
                         <phase>generate-sources</phase>
@@ -30,8 +29,6 @@
                             <checkoutDirectory>${sources.directory}/droolsjbpm-integration</checkoutDirectory>
                         </configuration>
                     </execution>
-
-
                 </executions>
             </plugin>
             <plugin>
@@ -46,16 +43,16 @@
                         </goals>
                         <configuration>
                             <excludeDirectories combine.children="append">
-                                <excludeDirectory>^roboguice-.*</excludeDirectory>                                            from bootstrap version
-                                <excludeDirectory>^kie-maven-plugin.*</excludeDirectory>                                      from bootstrap version
+                                <excludeDirectory>^roboguice-.*</excludeDirectory>
+                                <excludeDirectory>^kie-maven-plugin.*</excludeDirectory>
 
-                                <excludeDirectory>.*jbpm.test.*</excludeDirectory>                                            it does not exist on nexus repo
-                                <excludeDirectory>.*drools-simulator.*</excludeDirectory>                                     it does not exist on nexus repo [it is also on getFullMatchesForFilteringOut list]]
-                                <excludeDirectory>.*kie-maven-project-example.*</excludeDirectory>                            it does not exist on nexus repo
-                                <excludeDirectory>.*drools-examples-android.*</excludeDirectory>                              it does not exist on nexus repo
-                                <excludeDirectory>.*kie-maven-plugin-example.*</excludeDirectory>                             it does not exist on nexus repo
-                                <excludeDirectory>.*evaluation.*</excludeDirectory>                                           it does not exist on nexus repo
-                                <excludeDirectory>.*timer.*</excludeDirectory>                                                it does not exist on nexus repo
+                                <excludeDirectory>.*jbpm.test.*</excludeDirectory>
+                                <excludeDirectory>.*drools-simulator.*</excludeDirectory>
+                                <excludeDirectory>.*kie-maven-project-example.*</excludeDirectory>
+                                <excludeDirectory>.*drools-examples-android.*</excludeDirectory>
+                                <excludeDirectory>.*kie-maven-plugin-example.*</excludeDirectory>
+                                <excludeDirectory>.*evaluation.*</excludeDirectory>
+                                <excludeDirectory>.*timer.*</excludeDirectory>
                             </excludeDirectories>
                         </configuration>
                     </execution>
@@ -65,54 +62,53 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-invoker-plugin</artifactId>
-                <configuration>
-                    <pomIncludes>
-                        <pomInclude>droolsjbpm-integration/*/pom.xml</pomInclude>
-                    </pomIncludes>
-                    <pomExcludes>
-                        <pomExclude>droolsjbpm-integration/drools-examples-android/roboguice-*.*xml</pomExclude>                <!--from bootstrap version-->
-                        <pomExclude>droolsjbpm-integration/kie-maven-plugin-.*xml</pomExclude>                                  <!--from bootstrap version-->
+                <executions>
+                    <execution>
+                        <id>precompile</id>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <phase>generate-test-resources</phase>
+                        <configuration>
+                            <goals>
+                                <goal>clean install</goal>
+                            </goals>
+                            <pomIncludes>
+                                <pomInclude>droolsjbpm-integration/kie-spring-boot/kie-spring-boot-samples/kie-server-spring-boot-sample/pom.xml</pomInclude>
+                                <pomInclude>droolsjbpm-integration/kie-spring-boot/kie-spring-boot-samples/jbpm-spring-boot-sample-basic/pom.xml</pomInclude>
+                                <pomInclude>droolsjbpm-integration/kie-spring-boot/kie-spring-boot-samples/keycloak-kie-server-spring-boot-sample/pom.xml</pomInclude>
+                                <pomInclude>droolsjbpm-integration/process-migration-service/pom.xml</pomInclude>
+                            </pomIncludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>run-tests</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <pomIncludes>
+                                <pomInclude>droolsjbpm-integration/*/pom.xml</pomInclude>
+                            </pomIncludes>
+                            <pomExcludes>
+                                <pomExclude>droolsjbpm-integration/drools-examples-android/roboguice-*.*xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/kie-maven-plugin-.*xml</pomExclude>
 
-                        <pomExclude>droolsjbpm-integration-tests/pom.xml</pomExclude>                                           <!--from bootstrap version-->
-                        <pomExclude>droolsjbpm-integration/kie-karaf-itests/pom.xml</pomExclude>                                <!--from bootstrap version-->
-                        <pomExclude>droolsjbpm-integration/drools-simulator/pom.xml</pomExclude>                                <!--from bootstrap version-->
-                        <pomExclude>droolsjbpm-integration/kie-maven-plugin-tests/pom.xml</pomExclude>                          <!--from bootstrap version-->
-                        <pomExclude>droolsjbpm-integration/test-suite/pom.xml</pomExclude>                                      <!--from bootstrap version-->
-
-                        <!--<pomExclude>droolsjbpm-integration/kie-spring-boot/pom.xml</pomExclude>                                 FAILURE [Compilation failure]
-                                                                                                                                    cannot find symbol symbol:   class JBPMApplication
-                                                                                                                                    it builds fine when ignoring <module>kie-spring-boot-samples</module> on kie-spring-boot/pom.xml
-
-                                                                                                                                -->
-                        <pomExclude>droolsjbpm-integration/process-migration-service/pom.xml</pomExclude>                       <!--FAILURE [Compilation failure] should we fix the PlanServiceImplTest test?
-                                                                                                                                    package org.kie.processmigration.model does not exist
-                                                                                                                                    cannot find symbol symbol:   class PlanServiceImpl
-                                                                                                                                -->
-                        <pomExclude>droolsjbpm-integration/drools-examples-android/pom.xml</pomExclude>                         <!--FAILURE [No Android SDK path could be found. Should it be ignored?
-                                                                                                                                    After install (manually) the SDK #21 and the dependencies, there's a compilation error during the execution of Helloworld.drl rule
-                                                                                                                                ]-->
-                        <pomExclude>droolsjbpm-integration/kie-maven-plugin-example/pom.xml</pomExclude>                        <!--FAILURE [Could not find artifact org.drools:droolsjbpm-integration:pom:7.26.0-SNAPSHOT and 'parent.relativePath' points at wrong local POM @ line 6, column 11]. Wasn't it supposed to be 7.26.0.Final? After fixing the version, a compilation error comes out.
-                                                                                                                                    package org.acme.test_generateModel_kjararchetype does not exist
-                                                                                                                                    package org.kie.firealarm does not exist
-                                                                                                                                    cannot find symbol  class Measurement
-                                                                                                                                                        class Room
-                                                                                                                                                        class Sprinkler
-                                                                                                                                                        class Fire
-                                                                                                                                    used kie-maven-plugin-example/src/test/java/org/kie/kproject/KProjectTest.java
-                                                                                                                                    on the 7.26.x repo they exist on org.drools.examples.fire package but they don't compile after updating the imports
-                                                                                                                                    -->
-                        <!--<pomExclude>droolsjbpm-integration/kie-maven-project-example/pom.xml</pomExclude>                       FAILURE [Could not find artifact org.drools:droolsjbpm-integration:pom:7.26.0-SNAPSHOT and 'parent.relativePath' points at wrong local POM @ line 6, column 11]. Wasn't it supposed to be 7.26.0.Final? It works after fixing this on pom.xml-->
-
-                    </pomExcludes>
-                </configuration>
+                                <pomExclude>droolsjbpm-integration-tests/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/kie-karaf-itests/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/drools-simulator/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/kie-maven-plugin-tests/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/test-suite/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/drools-examples-android/pom.xml</pomExclude>
+                            </pomExcludes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
+
         </plugins>
 
     </build>
-
-    <profiles>
-
-
-    </profiles>
 
 </project>
