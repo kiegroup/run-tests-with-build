@@ -101,6 +101,8 @@
                                 <pomExclude>droolsjbpm-integration/kie-maven-plugin-tests/pom.xml</pomExclude>
                                 <pomExclude>droolsjbpm-integration/test-suite/pom.xml</pomExclude>
                                 <pomExclude>droolsjbpm-integration/drools-examples-android/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/kie-maven-plugin-example/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/kie-maven-project-example/pom.xml</pomExclude>
                             </pomExcludes>
                         </configuration>
                     </execution>

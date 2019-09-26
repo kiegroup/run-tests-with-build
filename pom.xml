@@ -13,7 +13,7 @@
     <module>run-tests-with-build-drools</module>
     <module>run-tests-with-build-drools-turtle</module>
     <module>run-tests-with-build-jbpm</module>
-    <module>run-tests-with-build-optaplanner</module>
+    <!--<module>run-tests-with-build-optaplanner</module>-->
     <module>run-tests-with-build-optaplanner-examples</module>
     <module>run-tests-with-build-kie-osgi</module>
     <module>run-tests-with-build-camel-container</module>
