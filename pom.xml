@@ -19,6 +19,7 @@
     <module>run-tests-with-build-camel-container</module>
     <module>run-tests-with-build-integration</module>
     <module>run-tests-with-build-business-central-community</module>
+    <module>run-tests-with-build-jbpm-database-community</module>
   </modules>
 
   <properties>
