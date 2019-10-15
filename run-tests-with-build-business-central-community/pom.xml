@@ -25,7 +25,7 @@
                         </goals>
                         <configuration>
                             <connectionUrl>scm:git:${drools.wb.repo.url}</connectionUrl>
-                            <checkoutDirectory>${sources.directory}/jbpm-wb</checkoutDirectory>
+                            <checkoutDirectory>${sources.directory}/drools.wb</checkoutDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -36,7 +36,7 @@
                         </goals>
                         <configuration>
                             <connectionUrl>scm:git:${jbpm.wb.repo.url}</connectionUrl>
-                            <checkoutDirectory>${sources.directory}/droolsjbpm-knowledge</checkoutDirectory>
+                            <checkoutDirectory>${sources.directory}/jbpm.wb</checkoutDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -74,18 +74,22 @@
                             <goal>unpack-build</goal>
                         </goals>
                         <configuration>
-                            <excludeDirectories combine.children="append">
+                            <excludeDirectories>
                                 <excludeDirectory>.*kie-wb-common-dmn.*</excludeDirectory>
                                 <excludeDirectory>.*kie-wb-common-forms.*</excludeDirectory>
-                                <excludeDirectory>.*kie-wb-common-stunner.*</excludeDirectory>
                                 <excludeDirectory>.*kie-wb-common-dynamic-forms.*</excludeDirectory>
-                                <excludeDirectory>.*optaplanner-wb-ui.*</excludeDirectory>
-                                <excludeDirectory>.*^kie-server.*</excludeDirectory>
-                                <excludeDirectory>.*^guvnor.*-client</excludeDirectory>
-                                <excludeDirectory>.*^jbpm-console-ng.*-client</excludeDirectory>
-                                <excludeDirectory>.*optaplanner-wb-ui.*</excludeDirectory>
+                                <excludeDirectory>.*kie-wb-common-stunner.*</excludeDirectory>
+                                <excludeDirectory>^drools-wb-jcr2vfs.*</excludeDirectory>
+                                <excludeDirectory>^guvnor-asset-mgmt.*</excludeDirectory>
+                                <excludeDirectory>^kie-server.*</excludeDirectory>
+                                <excludeDirectory>^guvnor.*-client.*</excludeDirectory>
+                                <excludeDirectory>^jbpm-console-ng.*-client</excludeDirectory>
                                 <excludeDirectory>.*drools-workbench-models-guided-template.*</excludeDirectory>
-                                <excludeDirectory>.*kie-wb-common-services-backend.*</excludeDirectory>
+                                <excludeDirectory>.*guvnor-webapp-distribution-wars.*</excludeDirectory>
+                                <excludeDirectory>^kie-wb-common-services-backend.*</excludeDirectory>
+                                <excludeDirectory>.*optaplanner-wb-ui.*</excludeDirectory>
+                                <excludeDirectory>.*optaplanner-wb-webapp.*</excludeDirectory>
+                                <excludeDirectory>.*drools-wb-webapp.*</excludeDirectory>
                             </excludeDirectories>
                         </configuration>
                     </execution>
@@ -106,17 +110,8 @@
                                 <goal>clean install</goal>
                             </goals>
                             <pomIncludes>
-                                <pomInclude>jbpm-wb/drools-wb-services/*/pom.xml</pomInclude>
-                                <pomInclude>kie-wb-common/kie-wb-common-services/*/pom.xml</pomInclude>
-                                <pomInclude>kie-wb-common/kie-wb-common-screens/*/pom.xml</pomInclude>
-                                <pomInclude>optaplanner-wb/optaplanner-wb-webapp/*/pom.xml</pomInclude>
+                                <pomInclude>kie-wb-common/kie-wb-common-services/kie-wb-common-compiler/kie-wb-common-compiler-distribution/pom.xml</pomInclude>
                             </pomIncludes>
-                            <pomExcludes>
-                                <pomExclude>kie-wb-common/kie-wb-common-screens/kie-wb-common-server-ui/pom.xml</pomExclude><!--failure (dump file)-->
-                                <pomExclude>kie-wb-common/kie-wb-common-services/kie-wb-common-datamodel/pom.xml</pomExclude><!--failure (dump file)-->
-                                <pomExclude>kie-wb-common/kie-wb-common-screens/kie-wb-common-library/pom.xml</pomExclude><!--failure (dump file)-->
-                                <pomExclude>jbpm-wb/drools-wb-webapp/pom.xml</pomExclude><!--compilation failure-->
-                            </pomExcludes>
                         </configuration>
                     </execution>
                     <execution>
@@ -136,15 +131,8 @@
                                 <pomExclude>kie-wb-common/kie-wb-common-dmn/pom.xml</pomExclude>
                                 <pomExclude>kie-wb-common/kie-wb-common-forms/pom.xml</pomExclude>
                                 <pomExclude>kie-wb-common/kie-wb-common-stunner/pom.xml</pomExclude>
-                                <pomExclude>kie-wb-common/kie-wb-common-dynamic-forms/pom.xml</pomExclude>
                                 <pomExclude>optaplanner-wb/optaplanner-wb-ui/pom.xml</pomExclude>
-                                <pomExclude>optaplanner-wb/optaplanner-wb-webapp/pom.xml</pomExclude><!--it has optaplanner-wb-ui dependences-->
-                                <pomExclude>^kie-server/pom.xml</pomExclude>
-                                <pomExclude>^guvnor.*-client/pom.xml</pomExclude>
-                                <pomExclude>^jbpm-console-ng.*-client/pom.xml</pomExclude>
-                                <pomExclude>jbpm-wb/drools-wb-webapp/pom.xml</pomExclude><!--failure-->
-                                <pomExclude>drools-workbench-models-guided-template/pom.xml</pomExclude>
-                                <pomExclude>kie-wb-common-services-backend/pom.xml</pomExclude>
+                                <pomExclude>optaplanner-wb/optaplanner-wb-webapp/pom.xml</pomExclude>
                             </pomExcludes>
                         </configuration>
                     </execution>
