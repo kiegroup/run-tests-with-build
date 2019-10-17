@@ -18,6 +18,7 @@
     <module>run-tests-with-build-kie-osgi</module>
     <module>run-tests-with-build-camel-container</module>
     <module>run-tests-with-build-integration</module>
+    <module>run-tests-with-build-business-central-community</module>
   </modules>
 
   <properties>
@@ -45,6 +46,10 @@
     <jbpm.repo.url>${git.server.url}/jbpm</jbpm.repo.url>
     <optaplanner.repo.url>${git.server.url}/optaplanner</optaplanner.repo.url>
     <droolsjbpm.integration.repo.url>${git.server.url}/droolsjbpm-integration</droolsjbpm.integration.repo.url>
+    <drools.wb.repo.url>${git.server.url}/drools-wb</drools.wb.repo.url>
+    <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
+    <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
+    <optaplanner.wb.repo.url>${git.server.url}/optaplanner-wb</optaplanner.wb.repo.url>
   </properties>
 
   <build>
