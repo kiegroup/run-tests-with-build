@@ -1,6 +1,9 @@
 # run-tests-with-build
 
 TODO
+
+---
+Note: `run-tests-with-build` project is dependent on https://github.com/baldimir/unpack-build-maven-plugin
 ### KIE OSGI tests
 
 ```
