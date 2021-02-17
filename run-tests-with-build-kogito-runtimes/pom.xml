@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>run-tests-with-build-kogito-runtimes</artifactId>
+
+  <properties>
+    <!-- Fail build if there is any issue in tests. This is passed to ${maven.default.command} -->
+    <maven.test.failure.ignore>false</maven.test.failure.ignore>
+    <maven.test.error.ignore>false</maven.test.error.ignore>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.kie.kogito</groupId>
+                  <artifactId>kogito-runtimes</artifactId>
+                  <version>${kogito.download.build.version}</version>
+                  <classifier>project-sources</classifier>
+                  <type>tar.gz</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${sources.directory}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <configuration>
+          <pomIncludes>
+            <pomInclude>kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-extension/*/pom.xml</pomInclude>
+          </pomIncludes>
+          <pomExcludes>
+            <pomExclude>kogito-runtimes*/integration-tests/integration-tests-quarkus-processes/pom.xml</pomExclude>
+            <pomExclude>kogito-runtimes*/kogito-quarkus-extension/deployment/pom.xml</pomExclude>
+            <pomExclude>kogito-runtimes*/kogito-quarkus-extension/integration-test-legacy/pom.xml</pomExclude>
+            <pomExclude>kogito-runtimes*/kogito-quarkus-extension/integration-test/pom.xml</pomExclude>
+          </pomExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
