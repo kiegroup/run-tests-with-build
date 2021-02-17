@@ -50,6 +50,7 @@
                 <excludeDirectory>optaplanner-persistence</excludeDirectory>
                 <excludeDirectory>optaplanner-test</excludeDirectory>
                 <excludeDirectory>optaplanner-webexamples</excludeDirectory>
+                <excludeDirectory>.*quickstart.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>

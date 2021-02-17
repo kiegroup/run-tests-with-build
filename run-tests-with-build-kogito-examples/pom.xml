@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>run-tests-with-build-kogito-examples</artifactId>
+
+  <properties>
+    <sources.url>${sources.url}</sources.url>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-prod-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>${sources.url}</url>
+              <unpack>true</unpack>
+              <outputDirectory>${sources.directory}</outputDirectory>
+              <outputFileName>kogito-examples.tar.gz</outputFileName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>unpack-build-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>download-build-jars</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack-build</goal>
+            </goals>
+            <configuration>
+              <version>${kogito.download.build.version}</version>
+              <excludeDirectories combine.children="append">
+                <excludeDirectory>.*conversion-workflow.*</excludeDirectory>
+                <excludeDirectory>.*subtraction-service.*</excludeDirectory>
+                <excludeDirectory>.*multiplication-service.*</excludeDirectory>
+              </excludeDirectories>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <configuration>
+          <pomIncludes>
+            <pomInclude>kogito-examples*/*/pom.xml</pomInclude>
+          </pomIncludes>
+          <pomExcludes>
+            <pomExclude>kogito-examples*/decisiontable-springboot-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-scripts-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-service-rest-call-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-kafka-quickstart-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-usertasks-with-security-oidc-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-pmml-springboot-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-mongodb-persistence-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-listener-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-springboot-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-tracing-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/serverless-workflow-temperature-conversion/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/serverless-workflow-greeting-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/pmml-springboot-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-service-calls-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-springboot-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-business-rules-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-usertasks-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/flexible-process-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/ruleunit-springboot-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-drools-quarkus-metrics/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-usertasks-with-security-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/serverless-workflow-service-calls-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-optaplanner-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-usertasks-custom-lifecycle-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/onboarding-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-drools-springboot-metrics/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-event-driven-springboot/pom.xml</pomExclude>
+          </pomExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+
+</project>

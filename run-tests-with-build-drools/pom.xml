@@ -54,6 +54,7 @@
             <configuration>
               <excludeDirectories combine.children="append">
                 <excludeDirectory>.*drools-persistence.*</excludeDirectory>
+                <excludeDirectory>.*drools-impact.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>
@@ -69,6 +70,7 @@
           </pomIncludes>
           <pomExcludes>
             <pomExclude>drools/drools-persistence/pom.xml</pomExclude>
+            <pomExclude>drools/drools-impact-analysis/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>

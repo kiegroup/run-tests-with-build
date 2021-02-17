@@ -19,6 +19,7 @@
     <module>run-tests-with-build-camel-container</module>
     <module>run-tests-with-build-integration</module>
     <module>run-tests-with-build-business-central-community</module>
+    <module>run-tests-with-build-kogito-examples</module>
   </modules>
 
   <properties>
@@ -29,7 +30,8 @@
     <invoker.plugin.version>3.1.0</invoker.plugin.version>
     <unpack.build.version>1.0-SNAPSHOT</unpack.build.version>
 
-    <download.build.version>7.26.0.Final</download.build.version>
+    <kie.download.build.version>7.48.0.Final</kie.download.build.version>
+    <kogito.download.build.version>7.11.0.redhat-210216</kogito.download.build.version>
     <!--TODO - settings.xml-->
     <settings.xml.file>${project.parent.basedir}/settings/settings.xml</settings.xml.file>
     <sources.directory>${project.build.directory}/sources/</sources.directory>
@@ -38,7 +40,8 @@
     <maven.default.command>verify -Dmaven.main.skip -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.test.redirectTestOutputToFile=true -Djdk.min.version=1.8.0 ${maven.unnecessary.plugins.skip} -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</maven.default.command>
 
     <git.server.url>https://github.com/kiegroup</git.server.url>
-    <sources.revision>7.26.0.Final</sources.revision>
+    <kie.sources.revision>7.48.0.Final</kie.sources.revision>
+    <kogito.sources.revision>7.11.0.redhat-210216</kogito.sources.revision>
     <sources.revision.type>tag</sources.revision.type>
 
     <drools.repo.url>${git.server.url}/drools</drools.repo.url>
@@ -50,6 +53,7 @@
     <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
     <optaplanner.wb.repo.url>${git.server.url}/optaplanner-wb</optaplanner.wb.repo.url>
+    <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
   </properties>
 
   <build>
@@ -77,7 +81,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-scm-plugin</artifactId>
         <configuration>
-          <scmVersion>${sources.revision}</scmVersion>
+          <scmVersion>${kie.sources.revision}</scmVersion>
           <scmVersionType>${sources.revision.type}</scmVersionType>
         </configuration>
       </plugin>
@@ -92,7 +96,7 @@
               <goal>unpack-build</goal>
             </goals>
             <configuration>
-              <version>${download.build.version}</version>
+              <version>${kie.download.build.version}</version>
               <rootDirectory>${sources.directory}</rootDirectory>
               <excludeDirectories>
                 <excludeDirectory>.*-distribution</excludeDirectory>

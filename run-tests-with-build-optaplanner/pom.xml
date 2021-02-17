@@ -43,6 +43,7 @@
             <configuration>
               <excludeDirectories combine.children="append">
                 <excludeDirectory>.*examples.*</excludeDirectory>
+                <excludeDirectory>.*quickstart.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>
@@ -57,6 +58,8 @@
           </pomIncludes>
           <pomExcludes>
             <pomExclude>optaplanner/*examples/pom.xml</pomExclude>
+            <pomExclude>optaplanner/optaplanner-docs/pom.xml</pomExclude>
+            <pomExclude>optaplanner/optaplanner-quickstarts/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
