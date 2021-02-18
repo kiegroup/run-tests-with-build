@@ -12,26 +12,35 @@
   <artifactId>run-tests-with-build-kogito-examples</artifactId>
 
   <properties>
-    <sources.url>${sources.url}</sources.url>
+    <!-- Fail build if there is any issue in tests. This is passed to ${maven.default.command} -->
+    <maven.test.failure.ignore>false</maven.test.failure.ignore>
+    <maven.test.error.ignore>false</maven.test.error.ignore>
   </properties>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>com.googlecode.maven-download-plugin</groupId>
-        <artifactId>download-maven-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
         <executions>
           <execution>
-            <id>download-prod-sources</id>
+            <id>unpack</id>
             <phase>generate-sources</phase>
             <goals>
-              <goal>wget</goal>
+              <goal>unpack</goal>
             </goals>
             <configuration>
-              <url>${sources.url}</url>
-              <unpack>true</unpack>
-              <outputDirectory>${sources.directory}</outputDirectory>
-              <outputFileName>kogito-examples.tar.gz</outputFileName>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.kie.kogito</groupId>
+                  <artifactId>kogito-examples</artifactId>
+                  <version>${kogito.download.build.version}</version>
+                  <classifier>project-sources</classifier>
+                  <type>tar.gz</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${sources.directory}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
             </configuration>
           </execution>
         </executions>
