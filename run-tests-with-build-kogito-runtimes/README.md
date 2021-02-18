@@ -7,7 +7,7 @@ This module executes [kogito-runtimes](https://github.com/kiegroup/kogito-runtim
 
 Execution
 ---------
-Tests are started from a project sources archive. By default we use latest kogito build version. You can override this using `-Dkogito.download.build.version` property.
+Tests are started from a project sources archive. By default, we use latest kogito build version. You can override this using `-Dkogito.download.build.version` property.
 
 Note
 ----

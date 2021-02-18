@@ -39,14 +39,10 @@
     <sources.directory>${project.build.directory}/sources/</sources.directory>
 
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
-    <maven.test.error.ignore>true</maven.test.error.ignore>
-
-    <maven.unnecessary.plugins.skip>-Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip</maven.unnecessary.plugins.skip>
-    <maven.default.command>verify -Dmaven.main.skip -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.test.redirectTestOutputToFile=true -Djdk.min.version=1.8.0 ${maven.unnecessary.plugins.skip} -Dmaven.test.failure.ignore=${maven.test.failure.ignore} -Dmaven.test.error.ignore=${maven.test.error.ignore} -Dkie.maven.settings.custom=${settings.xml.file}</maven.default.command>
+    <maven.main.skip>true</maven.main.skip>
 
     <git.server.url>https://github.com/kiegroup</git.server.url>
     <kie.sources.revision>7.48.0.Final</kie.sources.revision>
-    <kogito.sources.revision>7.11.0.redhat-210216</kogito.sources.revision>
     <sources.revision.type>tag</sources.revision.type>
 
     <drools.repo.url>${git.server.url}/drools</drools.repo.url>
@@ -103,13 +99,32 @@
           <artifactId>maven-invoker-plugin</artifactId>
           <version>${invoker.plugin.version}</version>
           <configuration>
+            <ignoreFailures>${maven.test.failure.ignore}</ignoreFailures>
             <projectsDirectory>${sources.directory}</projectsDirectory>
             <streamLogs>true</streamLogs>
             <mergeUserSettings>true</mergeUserSettings>
             <mavenOpts>-Xms1g -Xmx3g</mavenOpts>
             <parallelThreads>2</parallelThreads>
+            <properties>
+              <!-- maven-compiler-plugin properties -->
+              <maven.main.skip>${maven.main.skip}</maven.main.skip>
+              <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>
+
+              <!-- maven-surefire-plugin properties -->
+              <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+
+              <!-- Used for running kiegroup 7x upstream projects -->
+              <kie.maven.settings.custom>${settings.xml.file}</kie.maven.settings.custom>>
+
+              <!-- skip unnecessary maven plugins -->
+              <enforcer.skip>true</enforcer.skip>
+              <revapi.skip>true</revapi.skip>
+              <source.skip>true</source.skip>
+              <asciidoctor.skip>true</asciidoctor.skip>
+            </properties>
             <goals>
-              <goal>${maven.default.command}</goal>
+              <goal>clean</goal>
+              <goal>verify</goal>
             </goals>
           </configuration>
           <executions>
@@ -117,6 +132,7 @@
               <id>run-tests</id>
               <phase>test</phase>
               <goals>
+                <goal>install</goal>
                 <goal>run</goal>
               </goals>
             </execution>

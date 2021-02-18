@@ -12,9 +12,12 @@
   <artifactId>run-tests-with-build-kogito-runtimes</artifactId>
 
   <properties>
-    <!-- Fail build if there is any issue in tests. This is passed to ${maven.default.command} -->
+    <!-- integration-tests-quarkus-decisions tests depends on src/main/java classes -->
+    <!-- We can not skip src/main/java module compilation -->
+    <maven.main.skip>false</maven.main.skip>
+
+    <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
     <maven.test.failure.ignore>false</maven.test.failure.ignore>
-    <maven.test.error.ignore>false</maven.test.error.ignore>
   </properties>
 
   <build>
@@ -49,15 +52,15 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
+          <!-- kogito-runtimes tests were not designed to run in parallel -->
+          <parallelThreads>1</parallelThreads>
           <pomIncludes>
             <pomInclude>kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/kogito-quarkus-extension/*/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
             <pomExclude>kogito-runtimes*/integration-tests/integration-tests-quarkus-processes/pom.xml</pomExclude>
-            <pomExclude>kogito-runtimes*/kogito-quarkus-extension/deployment/pom.xml</pomExclude>
-            <pomExclude>kogito-runtimes*/kogito-quarkus-extension/integration-test-legacy/pom.xml</pomExclude>
-            <pomExclude>kogito-runtimes*/kogito-quarkus-extension/integration-test/pom.xml</pomExclude>
+            <pomExclude>kogito-runtimes*/integration-tests/integration-tests-springboot/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
