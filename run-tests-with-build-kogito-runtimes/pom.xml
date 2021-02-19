@@ -55,6 +55,23 @@
           <!-- kogito-runtimes tests were not designed to run in parallel -->
           <parallelThreads>1</parallelThreads>
           <pomIncludes>
+            <!-- addons -->
+            <pomInclude>kogito-runtimes*/addons/cloudevents/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/events/knative-eventing-addon/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/events/kogito-event-driven-decisions/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/events/kogito-events-reactive-messaging-addon/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/events/kogito-events-spring-boot-addon/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/explainability-addon/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/jobs/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-core/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-elastic/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-prometheus/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/persistence/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/predictions/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/process-management/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/process-svg/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/tracing/*/pom.xml</pomInclude>
+            
             <!-- api -->
             <pomInclude>kogito-runtimes*/api/kogito-api/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/api/kogito-internal/pom.xml</pomInclude>
@@ -67,6 +84,12 @@
             <pomInclude>kogito-runtimes*/drools/kogito-ruleunits/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/drools/kogito-scenario-simulation/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/drools/kogito-pmml-openapi/pom.xml</pomInclude>
+
+            <!-- grafana-api -->
+            <pomInclude>kogito-runtimes*/grafana-api/pom.xml</pomInclude>
+
+            <!-- integration-tests -->
+            <pomInclude>kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
 
             <!-- jbpm -->
             <pomInclude>kogito-runtimes*/jbpm/jbpm-bpmn2/pom.xml</pomInclude>
@@ -88,15 +111,23 @@
             <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-generator/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-runtime/pom.xml</pomInclude>
 
-            <pomInclude>kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
+            <!-- kogito-quarkus-extension -->
             <pomInclude>kogito-runtimes*/kogito-quarkus-extension/*/pom.xml</pomInclude>
+
+            <!-- kogito-workitems -->
+            <pomInclude>kogito-runtimes*/kogito-workitems/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
-            <!-- java.net.ConnectException: Failed to connect to psi-rhel8-docker-20658/0:0:0:0:0:0:0:1:59491 -->
-            <pomExclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-workitems/pom.xml</pomExclude>
+            <!-- archetypes -->
+            <pomExclude>kogito-runtimes*/archetypes/*/pom.xml</pomExclude>
 
+            <!-- integration-tests -->
             <pomExclude>kogito-runtimes*/integration-tests/integration-tests-kogito-plugin/pom.xml</pomExclude>
             <pomExclude>kogito-runtimes*/integration-tests/integration-tests-springboot/pom.xml</pomExclude>
+
+            <!-- kogito-cloud-services -->
+            <!-- java.net.ConnectException: Failed to connect to psi-rhel8-docker-20658/0:0:0:0:0:0:0:1:59491 -->
+            <pomExclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-workitems/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
