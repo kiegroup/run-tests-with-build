@@ -12,7 +12,7 @@
   <artifactId>run-tests-with-build-kogito-apps</artifactId>
 
   <properties>
-    <!-- integration-tests-quarkus-decisions tests depends on src/main/java classes -->
+    <!-- There are some java classes under src/main/java used during test runtime -->
     <!-- We can not skip src/main/java module compilation -->
     <maven.main.skip>false</maven.main.skip>
 
