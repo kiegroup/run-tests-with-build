@@ -53,7 +53,8 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomInclude>kogito-apps*/apps-integration-tests/*/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/apps-integration-tests/integration-tests-jobs-service/*/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/apps-integration-tests/integration-tests-trusty-service/*/pom.xml</pomInclude>
           </pomIncludes>
         </configuration>
       </plugin>
