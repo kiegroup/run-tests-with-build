@@ -55,6 +55,40 @@
           <!-- kogito-runtimes tests were not designed to run in parallel -->
           <parallelThreads>1</parallelThreads>
           <pomIncludes>
+            <!-- api -->
+            <pomInclude>kogito-runtimes*/api/kogito-api/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/api/kogito-internal/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/api/kogito-services/pom.xml</pomInclude>
+
+            <!-- drools -->
+            <pomInclude>kogito-runtimes*/drools/drools-core-static/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-dmn/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-pmml/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-ruleunits/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-scenario-simulation/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-pmml-openapi/pom.xml</pomInclude>
+
+            <!-- jbpm -->
+            <pomInclude>kogito-runtimes*/jbpm/jbpm-bpmn2/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/jbpm/jbpm-flow-builder/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/jbpm/jbpm-flow/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/jbpm/jbpm-serverless-workflow/pom.xml</pomInclude>
+
+            <!-- kogito-cloud-services -->
+            <pomInclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-kubernetes-client/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-workitems/pom.xml</pomInclude>
+
+            <!-- kogito-codegen-modules -->
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-api/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-core/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-decisions/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-integration-tests/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-predictions/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-processes/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-rules/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-generator/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-runtime/pom.xml</pomInclude>
+
             <pomInclude>kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/kogito-quarkus-extension/*/pom.xml</pomInclude>
           </pomIncludes>
