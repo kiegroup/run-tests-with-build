@@ -12,47 +12,38 @@
   <artifactId>run-tests-with-build-kogito-examples</artifactId>
 
   <properties>
-    <sources.url>${sources.url}</sources.url>
+    <!-- There are some java classes under src/main/java used during test runtime (dmn-listener-quarkus for example) -->
+    <!-- We can not skip src/main/java module compilation -->
+    <maven.main.skip>false</maven.main.skip>
+
+    <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
+    <maven.test.failure.ignore>false</maven.test.failure.ignore>
   </properties>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>com.googlecode.maven-download-plugin</groupId>
-        <artifactId>download-maven-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
         <executions>
           <execution>
-            <id>download-prod-sources</id>
+            <id>unpack</id>
             <phase>generate-sources</phase>
             <goals>
-              <goal>wget</goal>
+              <goal>unpack</goal>
             </goals>
             <configuration>
-              <url>${sources.url}</url>
-              <unpack>true</unpack>
-              <outputDirectory>${sources.directory}</outputDirectory>
-              <outputFileName>kogito-examples.tar.gz</outputFileName>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.kie</groupId>
-        <artifactId>unpack-build-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>download-build-jars</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>unpack-build</goal>
-            </goals>
-            <configuration>
-              <version>${kogito.download.build.version}</version>
-              <excludeDirectories combine.children="append">
-                <excludeDirectory>.*conversion-workflow.*</excludeDirectory>
-                <excludeDirectory>.*subtraction-service.*</excludeDirectory>
-                <excludeDirectory>.*multiplication-service.*</excludeDirectory>
-              </excludeDirectories>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.kie.kogito</groupId>
+                  <artifactId>kogito-examples</artifactId>
+                  <version>${kogito.download.build.version}</version>
+                  <classifier>project-sources</classifier>
+                  <type>tar.gz</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${sources.directory}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
             </configuration>
           </execution>
         </executions>
@@ -61,42 +52,60 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
+          <!-- kogito-examples tests were not designed to run in parallel -->
+          <parallelThreads>1</parallelThreads>
           <pomIncludes>
             <pomInclude>kogito-examples*/*/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
-            <pomExclude>kogito-examples*/decisiontable-springboot-example/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-scripts-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-service-rest-call-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-kafka-quickstart-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-usertasks-with-security-oidc-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/dmn-pmml-springboot-example/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-mongodb-persistence-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/kogito-travel-agency/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/dmn-listener-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/serverless-workflow-functions-events-quarkus/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-springboot-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/serverless-workflow-events-quarkus/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/dmn-tracing-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-tracing-quarkus/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-event-driven-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/dmn-event-driven-quarkus/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/serverless-workflow-temperature-conversion/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/serverless-workflow-greeting-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/pmml-springboot-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-timer-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-mongodb-persistence-quarkus/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-service-calls-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/kogito-quickstarts/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/dmn-springboot-example/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-business-rules-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-kafka-persistence-quarkus/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/decisiontable-springboot-example/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-usertasks-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-quarkus-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-infinispan-persistence-quarkus/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-kafka-quickstart-quarkus/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/flexible-process-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/ruleunit-springboot-example/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/dmn-drools-quarkus-metrics/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-usertasks-with-security-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/serverless-workflow-service-calls-springboot/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-usertasks-with-security-oidc-quarkus/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/serverless-workflow-functions-quarkus/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/serverless-workflow-github-showcase/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-infinispan-persistence-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-optaplanner-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/process-usertasks-custom-lifecycle-springboot/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/onboarding-example/pom.xml</pomExclude>
+            <pomExclude>kogito-examples*/process-knative-quickstart-quarkus/pom.xml</pomExclude>
             <pomExclude>kogito-examples*/dmn-drools-springboot-metrics/pom.xml</pomExclude>
-            <pomExclude>kogito-examples*/dmn-event-driven-springboot/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
     </plugins>
   </build>
-
 
 </project>
