@@ -9,6 +9,8 @@ Execution
 ---------
 Tests are started from a project sources archive. By default, we use latest kogito build version. You can override this using `-Dkogito.download.build.version` property.
 
+For running tests in quarkus native mode use  `-Dnative` property.
+
 Note
 ----
 Module is under development. Not all tests are executed currently. See the exclusions in the pom.xml.
