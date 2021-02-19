@@ -76,7 +76,6 @@
 
             <!-- kogito-cloud-services -->
             <pomInclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-kubernetes-client/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-workitems/pom.xml</pomInclude>
 
             <!-- kogito-codegen-modules -->
             <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-api/pom.xml</pomInclude>
@@ -93,6 +92,9 @@
             <pomInclude>kogito-runtimes*/kogito-quarkus-extension/*/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
+            <!-- java.net.ConnectException: Failed to connect to psi-rhel8-docker-20658/0:0:0:0:0:0:0:1:59491 -->
+            <pomExclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-workitems/pom.xml</pomExclude>
+
             <pomExclude>kogito-runtimes*/integration-tests/integration-tests-kogito-plugin/pom.xml</pomExclude>
             <pomExclude>kogito-runtimes*/integration-tests/integration-tests-springboot/pom.xml</pomExclude>
           </pomExcludes>
