@@ -12,7 +12,7 @@
   <artifactId>run-tests-with-build-kogito-examples</artifactId>
 
   <properties>
-    <!-- integration-tests-quarkus-decisions tests depends on src/main/java classes -->
+    <!-- Tthere are some java classes under src/main/java used during test runtime (dmn-listener-quarkus for example) -->
     <!-- We can not skip src/main/java module compilation -->
     <maven.main.skip>false</maven.main.skip>
 
@@ -52,7 +52,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
-          <!-- kogito-runtimes tests were not designed to run in parallel -->
+          <!-- kogito-examples tests were not designed to run in parallel -->
           <parallelThreads>1</parallelThreads>
           <pomIncludes>
             <pomInclude>kogito-examples*/*/pom.xml</pomInclude>
