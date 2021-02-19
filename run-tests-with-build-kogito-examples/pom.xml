@@ -12,7 +12,7 @@
   <artifactId>run-tests-with-build-kogito-examples</artifactId>
 
   <properties>
-    <!-- Tthere are some java classes under src/main/java used during test runtime (dmn-listener-quarkus for example) -->
+    <!-- There are some java classes under src/main/java used during test runtime (dmn-listener-quarkus for example) -->
     <!-- We can not skip src/main/java module compilation -->
     <maven.main.skip>false</maven.main.skip>
 
