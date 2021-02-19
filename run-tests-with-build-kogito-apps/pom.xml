@@ -53,9 +53,69 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomInclude>kogito-apps*/apps-integration-tests/integration-tests-jobs-service/*/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/apps-integration-tests/integration-tests-trusty-service/*/pom.xml</pomInclude>
+            <!-- task-assigning -->
+            <pomInclude>kogito-apps*/task-assigning/task-assigning-process-service-client/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/task-assigning/task-assigning-core/pom.xml</pomInclude>
+
+            <!-- management-console -->
+            <pomInclude>kogito-apps*/management-console/pom.xml</pomInclude>
+
+            <!-- data-index -->
+            <pomInclude>kogito-apps*/data-index/data-index-service/data-index-service-common/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/data-index/data-index-storage/data-index-storage-infinispan/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/data-index/data-index-storage/data-index-storage-protobuf/pom.xml</pomInclude>
+
+            <!-- persistence-commons -->
+            <pomInclude>kogito-apps*/persistence-commons/persistence-commons-api/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/persistence-commons/persistence-commons-protobuf/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/persistence-commons/persistence-commons-infinispan/pom.xml</pomInclude>
+
+            <!-- trusty -->
+            <pomInclude>kogito-apps*/trusty/trusty-storage/trusty-storage-infinispan/pom.xml</pomInclude>
+
+            <!-- task-console -->
+            <pomInclude>kogito-apps*/task-console/pom.xml</pomInclude>
+
+            <!-- jitexecutor -->
+            <pomInclude>kogito-apps*/jitexecutor/jitexecutor-dmn/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/jitexecutor/jitexecutor-runner/pom.xml</pomInclude>
+
+            <!-- explainability -->
+            <pomInclude>kogito-apps*/explainability/explainability-integrationtests/explainability-integrationtests-dmn/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/explainability/explainability-integrationtests/explainability-integrationtests-opennlp/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/explainability/explainability-integrationtests/explainability-integrationtests-pmml/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/explainability/explainability-core/pom.xml</pomInclude>
+            <pomInclude>kogito-apps*/explainability/explainability-service/pom.xml</pomInclude>
           </pomIncludes>
+          <pomExcludes>
+            <!-- data-index -->
+            <pomExclude>kogito-apps*/data-index/data-index-service/data-index-service-mongodb/pom.xml</pomExclude>
+            <pomExclude>kogito-apps*/data-index/data-index-service/data-index-service-infinispan/pom.xml</pomExclude>
+            <pomExclude>kogito-apps*/data-index/data-index-storage/data-index-storage-mongodb/pom.xml</pomExclude>
+
+            <!-- persistence-commons -->
+            <pomExclude>kogito-apps*/persistence-commons/persistence-commons-mongodb/pom.xml</pomExclude>
+
+            <!-- trusty -->
+            <pomExclude>kogito-apps*/trusty/trusty-service/pom.xml</pomExclude>
+
+            <!-- security-commons -->
+            <pomExclude>kogito-apps*/security-commons/pom.xml</pomExclude>
+
+            <!-- jobs-service -->
+            <pomExclude>kogito-apps*/jobs-service/pom.xml</pomExclude>
+
+            <!-- trusty-ui -->
+            <pomExclude>kogito-apps*/trusty-ui/pom.xml</pomExclude>
+
+            <!-- explainability -->
+            <pomExclude>kogito-apps*/explainability/explainability-service-messaging/pom.xml</pomExclude>
+            <pomExclude>kogito-apps*/explainability/explainability-service-rest/pom.xml</pomExclude>
+
+            <!-- apps-integration-tests -->
+            <pomExclude>kogito-apps*/apps-integration-tests/integration-tests-jobs-service/pom.xml</pomExclude>
+            <pomExclude>kogito-apps*/apps-integration-tests/integration-tests-trusty-service/pom.xml</pomExclude>
+          </pomExcludes>
         </configuration>
       </plugin>
     </plugins>
