@@ -59,6 +59,7 @@
             <pomInclude>kogito-runtimes*/kogito-quarkus-extension/*/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
+            <pomExclude>kogito-runtimes*/integration-tests/integration-tests-kogito-plugin/pom.xml</pomExclude>
             <pomExclude>kogito-runtimes*/integration-tests/integration-tests-quarkus-processes/pom.xml</pomExclude>
             <pomExclude>kogito-runtimes*/integration-tests/integration-tests-springboot/pom.xml</pomExclude>
           </pomExcludes>
