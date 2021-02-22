@@ -21,6 +21,7 @@
     <module>run-tests-with-build-business-central-community</module>
     <module>run-tests-with-build-kogito-examples</module>
     <module>run-tests-with-build-kogito-runtimes</module>
+    <module>run-tests-with-build-kogito-apps</module>
   </modules>
 
   <properties>
