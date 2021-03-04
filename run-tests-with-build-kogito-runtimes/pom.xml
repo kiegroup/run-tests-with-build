@@ -71,7 +71,7 @@
             <pomInclude>kogito-runtimes*/addons/process-management/*/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/addons/process-svg/*/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/addons/tracing/*/pom.xml</pomInclude>
-            
+
             <!-- api -->
             <pomInclude>kogito-runtimes*/api/kogito-api/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/api/kogito-internal/pom.xml</pomInclude>
@@ -111,8 +111,18 @@
             <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-generator/pom.xml</pomInclude>
             <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-runtime/pom.xml</pomInclude>
 
-            <!-- kogito-quarkus-extension -->
-            <pomInclude>kogito-runtimes*/kogito-quarkus-extension/*/pom.xml</pomInclude>
+            <!-- kogito-quarkus-parent -->
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-decisions-extension/kogito-quarkus-decisions-integration-test/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-decisions-extension/kogito-quarkus-decisions-integration-test-hot-reload/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension-common/kogito-quarkus-common-deployment/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-deployment/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-integration-test/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-integration-test-hot-reload/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-predictions-extension/kogito-quarkus-predictions-integration-test/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-hot-reload/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-legacy/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-session/pom.xml</pomInclude>
 
             <!-- kogito-workitems -->
             <pomInclude>kogito-runtimes*/kogito-workitems/pom.xml</pomInclude>
