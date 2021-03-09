@@ -1,9 +1,7 @@
 run-tests-with-build-kogito-runtimes
 ------------------------------------
 
-This module executes [kogito-runtimes](https://github.com/kiegroup/kogito-runtimes) integration tests modules with specific build version.
-  * [kogito-runtimes/integration-tests](https://github.com/kiegroup/kogito-runtimes/tree/master/integration-tests)
-  * [kogito-runtimes/kogito-quarkus-extension](https://github.com/kiegroup/kogito-runtimes/tree/master/kogito-quarkus-extension)
+This module executes [kogito-runtimes](https://github.com/kiegroup/kogito-runtimes) tests. Unfortunately there is no synchronization mechanism. If the **kogito-runtimes** project structure will be changed, it needs to by manually adapted also in this module.
 
 Execution
 ---------
