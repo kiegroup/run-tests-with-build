@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>run-tests-with-build-kogito-runtimes</artifactId>
+
+  <properties>
+    <!-- integration-tests-quarkus-decisions tests depends on src/main/java classes -->
+    <!-- We can not skip src/main/java module compilation -->
+    <maven.main.skip>false</maven.main.skip>
+
+    <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
+    <maven.test.failure.ignore>false</maven.test.failure.ignore>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.kie.kogito</groupId>
+                  <artifactId>kogito-runtimes</artifactId>
+                  <version>${kogito.download.build.version}</version>
+                  <classifier>project-sources</classifier>
+                  <type>tar.gz</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${sources.directory}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <configuration>
+          <!-- kogito-runtimes tests were not designed to run in parallel -->
+          <parallelThreads>1</parallelThreads>
+          <pomIncludes>
+            <!-- addons -->
+            <pomInclude>kogito-runtimes*/addons/cloudevents/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/events/knative-eventing-addon/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/events/kogito-event-driven-decisions/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/events/kogito-events-reactive-messaging-addon/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/events/kogito-events-spring-boot-addon/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/explainability-addon/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/jobs/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-core/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-elastic/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-prometheus/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/persistence/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/predictions/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/process-management/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/process-svg/*/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/addons/tracing/*/pom.xml</pomInclude>
+
+            <!-- api -->
+            <pomInclude>kogito-runtimes*/api/kogito-api/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/api/kogito-internal/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/api/kogito-services/pom.xml</pomInclude>
+
+            <!-- drools -->
+            <pomInclude>kogito-runtimes*/drools/drools-core-static/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-dmn/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-pmml/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-ruleunits/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-scenario-simulation/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/drools/kogito-pmml-openapi/pom.xml</pomInclude>
+
+            <!-- grafana-api -->
+            <pomInclude>kogito-runtimes*/grafana-api/pom.xml</pomInclude>
+
+            <!-- integration-tests -->
+            <pomInclude>kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
+
+            <!-- jbpm -->
+            <pomInclude>kogito-runtimes*/jbpm/jbpm-bpmn2/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/jbpm/jbpm-flow-builder/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/jbpm/jbpm-flow/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/jbpm/jbpm-serverless-workflow/pom.xml</pomInclude>
+
+            <!-- kogito-cloud-services -->
+            <pomInclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-kubernetes-client/pom.xml</pomInclude>
+
+            <!-- kogito-codegen-modules -->
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-api/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-core/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-decisions/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-integration-tests/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-predictions/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-processes/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-rules/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-generator/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-runtime/pom.xml</pomInclude>
+
+            <!-- kogito-quarkus-parent -->
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-decisions-extension/kogito-quarkus-decisions-integration-test/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-decisions-extension/kogito-quarkus-decisions-integration-test-hot-reload/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension-common/kogito-quarkus-common-deployment/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-deployment/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-integration-test/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-integration-test-hot-reload/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-predictions-extension/kogito-quarkus-predictions-integration-test/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-hot-reload/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-legacy/pom.xml</pomInclude>
+            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-session/pom.xml</pomInclude>
+
+            <!-- kogito-workitems -->
+            <pomInclude>kogito-runtimes*/kogito-workitems/pom.xml</pomInclude>
+          </pomIncludes>
+          <pomExcludes>
+            <!-- archetypes -->
+            <pomExclude>kogito-runtimes*/archetypes/*/pom.xml</pomExclude>
+
+            <!-- integration-tests -->
+            <pomExclude>kogito-runtimes*/integration-tests/integration-tests-kogito-plugin/pom.xml</pomExclude>
+            <pomExclude>kogito-runtimes*/integration-tests/integration-tests-springboot/pom.xml</pomExclude>
+
+            <!-- kogito-cloud-services -->
+            <!-- java.net.ConnectException: Failed to connect to psi-rhel8-docker-20658/0:0:0:0:0:0:0:1:59491 -->
+            <pomExclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-workitems/pom.xml</pomExclude>
+          </pomExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <configuration>
+            <profiles>
+              <profile>native</profile>
+            </profiles>
+          </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

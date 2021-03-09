@@ -53,6 +53,8 @@
                                 <excludeDirectory>.*kie-maven-plugin-example.*</excludeDirectory>
                                 <excludeDirectory>.*evaluation.*</excludeDirectory>
                                 <excludeDirectory>.*timer.*</excludeDirectory>
+                                <excludeDirectory>.*notification.*</excludeDirectory>
+                                <excludeDirectory>.*kie-pmml-trusty.*</excludeDirectory>
                             </excludeDirectories>
                         </configuration>
                     </execution>
@@ -77,8 +79,11 @@
                                 <pomInclude>droolsjbpm-integration/kie-spring-boot/kie-spring-boot-samples/kie-server-spring-boot-sample/pom.xml</pomInclude>
                                 <pomInclude>droolsjbpm-integration/kie-spring-boot/kie-spring-boot-samples/jbpm-spring-boot-sample-basic/pom.xml</pomInclude>
                                 <pomInclude>droolsjbpm-integration/kie-spring-boot/kie-spring-boot-samples/keycloak-kie-server-spring-boot-sample/pom.xml</pomInclude>
-                                <pomInclude>droolsjbpm-integration/process-migration-service/pom.xml</pomInclude>
                             </pomIncludes>
+                            <pomExcludes>
+                                <pomExclude>droolsjbpm-integration/process-migration-service/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/kie-spring-boot/pom.xml</pomExclude>
+                            </pomExcludes>
                         </configuration>
                     </execution>
                     <execution>
@@ -103,6 +108,8 @@
                                 <pomExclude>droolsjbpm-integration/drools-examples-android/pom.xml</pomExclude>
                                 <pomExclude>droolsjbpm-integration/kie-maven-plugin-example/pom.xml</pomExclude>
                                 <pomExclude>droolsjbpm-integration/kie-maven-project-example/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/process-migration-service/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/kie-spring-boot/pom.xml</pomExclude>
                             </pomExcludes>
                         </configuration>
                     </execution>

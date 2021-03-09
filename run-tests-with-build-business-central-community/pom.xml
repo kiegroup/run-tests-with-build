@@ -90,6 +90,7 @@
                                 <excludeDirectory>.*optaplanner-wb-ui.*</excludeDirectory>
                                 <excludeDirectory>.*optaplanner-wb-webapp.*</excludeDirectory>
                                 <excludeDirectory>.*drools-wb-webapp.*</excludeDirectory>
+                                <excludeDirectory>.*drools-wb-scenario.*</excludeDirectory>
                             </excludeDirectories>
                         </configuration>
                     </execution>
@@ -133,6 +134,8 @@
                                 <pomExclude>kie-wb-common/kie-wb-common-stunner/pom.xml</pomExclude>
                                 <pomExclude>optaplanner-wb/optaplanner-wb-ui/pom.xml</pomExclude>
                                 <pomExclude>optaplanner-wb/optaplanner-wb-webapp/pom.xml</pomExclude>
+                                <pomExclude>kie-wb-common/kie-wb-common-services/pom.xml</pomExclude>
+                                <pomExclude>kie-wb-common/kie-wb-common-ala/pom.xml</pomExclude>
                             </pomExcludes>
                         </configuration>
                     </execution>

@@ -19,6 +19,9 @@
     <module>run-tests-with-build-camel-container</module>
     <module>run-tests-with-build-integration</module>
     <module>run-tests-with-build-business-central-community</module>
+    <module>run-tests-with-build-kogito-examples</module>
+    <module>run-tests-with-build-kogito-runtimes</module>
+    <module>run-tests-with-build-kogito-apps</module>
   </modules>
 
   <properties>
@@ -28,17 +31,19 @@
     <scm.plugin.version>1.11.1</scm.plugin.version>
     <invoker.plugin.version>3.1.0</invoker.plugin.version>
     <unpack.build.version>1.0-SNAPSHOT</unpack.build.version>
+    <dependency.plugin.version>3.1.2</dependency.plugin.version>
 
-    <download.build.version>7.26.0.Final</download.build.version>
+    <kie.download.build.version>7.48.0.Final</kie.download.build.version>
+    <kogito.download.build.version>2.0.0-SNAPSHOT</kogito.download.build.version>
     <!--TODO - settings.xml-->
     <settings.xml.file>${project.parent.basedir}/settings/settings.xml</settings.xml.file>
     <sources.directory>${project.build.directory}/sources/</sources.directory>
 
-    <maven.unnecessary.plugins.skip>-Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip</maven.unnecessary.plugins.skip>
-    <maven.default.command>verify -Dmaven.main.skip -Dmaven.compiler.useIncrementalCompilation=false -Dmaven.test.redirectTestOutputToFile=true -Djdk.min.version=1.8.0 ${maven.unnecessary.plugins.skip} -Dmaven.test.failure.ignore=true -Dmaven.test.error.ignore=true -Dkie.maven.settings.custom=${settings.xml.file}</maven.default.command>
+    <maven.test.failure.ignore>true</maven.test.failure.ignore>
+    <maven.main.skip>true</maven.main.skip>
 
     <git.server.url>https://github.com/kiegroup</git.server.url>
-    <sources.revision>7.26.0.Final</sources.revision>
+    <kie.sources.revision>7.48.0.Final</kie.sources.revision>
     <sources.revision.type>tag</sources.revision.type>
 
     <drools.repo.url>${git.server.url}/drools</drools.repo.url>
@@ -50,6 +55,7 @@
     <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
     <optaplanner.wb.repo.url>${git.server.url}/optaplanner-wb</optaplanner.wb.repo.url>
+    <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
   </properties>
 
   <build>
@@ -59,77 +65,87 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-scm-plugin</artifactId>
           <version>${scm.plugin.version}</version>
+          <configuration>
+            <scmVersion>${kie.sources.revision}</scmVersion>
+            <scmVersionType>${sources.revision.type}</scmVersionType>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.kie</groupId>
           <artifactId>unpack-build-maven-plugin</artifactId>
           <version>${unpack.build.version}</version>
+          <executions>
+            <execution>
+              <id>download-build-jars</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>unpack-build</goal>
+              </goals>
+              <configuration>
+                <version>${kie.download.build.version}</version>
+                <rootDirectory>${sources.directory}</rootDirectory>
+                <excludeDirectories>
+                  <excludeDirectory>.*-distribution</excludeDirectory>
+                  <excludeDirectory>.*-docs</excludeDirectory>
+                  <excludeDirectory>.*archetype.*</excludeDirectory>
+                  <excludeDirectory>^kjar-.*</excludeDirectory>
+                  <excludeDirectory>.*webapp.*</excludeDirectory>
+                </excludeDirectories>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-invoker-plugin</artifactId>
           <version>${invoker.plugin.version}</version>
+          <configuration>
+            <ignoreFailures>${maven.test.failure.ignore}</ignoreFailures>
+            <projectsDirectory>${sources.directory}</projectsDirectory>
+            <streamLogs>true</streamLogs>
+            <mergeUserSettings>true</mergeUserSettings>
+            <mavenOpts>-Xms1g -Xmx3g</mavenOpts>
+            <parallelThreads>2</parallelThreads>
+            <properties>
+              <!-- maven-compiler-plugin properties -->
+              <maven.main.skip>${maven.main.skip}</maven.main.skip>
+              <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>
+
+              <!-- maven-surefire-plugin properties -->
+              <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+
+              <!-- Used for running kiegroup 7x upstream projects -->
+              <kie.maven.settings.custom>${settings.xml.file}</kie.maven.settings.custom>>
+
+              <!-- skip unnecessary maven plugins -->
+              <enforcer.skip>true</enforcer.skip>
+              <revapi.skip>true</revapi.skip>
+              <source.skip>true</source.skip>
+              <asciidoctor.skip>true</asciidoctor.skip>
+            </properties>
+            <goals>
+              <goal>clean</goal>
+              <goal>verify</goal>
+            </goals>
+          </configuration>
+          <executions>
+            <execution>
+              <id>run-tests</id>
+              <phase>test</phase>
+              <goals>
+                <goal>install</goal>
+                <goal>run</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${dependency.plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-scm-plugin</artifactId>
-        <configuration>
-          <scmVersion>${sources.revision}</scmVersion>
-          <scmVersionType>${sources.revision.type}</scmVersionType>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.kie</groupId>
-        <artifactId>unpack-build-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>download-build-jars</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>unpack-build</goal>
-            </goals>
-            <configuration>
-              <version>${download.build.version}</version>
-              <rootDirectory>${sources.directory}</rootDirectory>
-              <excludeDirectories>
-                <excludeDirectory>.*-distribution</excludeDirectory>
-                <excludeDirectory>.*-docs</excludeDirectory>
-                <excludeDirectory>.*archetype.*</excludeDirectory>
-                <excludeDirectory>^kjar-.*</excludeDirectory>
-                <excludeDirectory>.*webapp.*</excludeDirectory>
-              </excludeDirectories>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-invoker-plugin</artifactId>
-        <version>${invoker.plugin.version}</version>
-        <configuration>
-          <projectsDirectory>${sources.directory}</projectsDirectory>
-          <streamLogs>true</streamLogs>
-          <mergeUserSettings>true</mergeUserSettings>
-          <mavenOpts>-Xms1g -Xmx3g</mavenOpts>
-          <parallelThreads>2</parallelThreads>
-          <goals>
-            <goal>${maven.default.command}</goal>
-          </goals>
-        </configuration>
-        <executions>
-          <execution>
-            <id>run-tests</id>
-            <phase>test</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
   </build>
 
   <repositories>
