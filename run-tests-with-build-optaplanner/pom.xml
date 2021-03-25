@@ -49,41 +49,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
-          <pomIncludes>
-
-            <pomInclude>optaplanner*/optaplanner-benchmark/pom.xml</pomInclude>
-
-            <pomInclude>optaplanner*/optaplanner-core/pom.xml</pomInclude>
-
-            <pomInclude>optaplanner*/optaplanner-persistence/optaplanner-persistence-common/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-persistence/optaplanner-persistence-jackson/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-persistence/optaplanner-persistence-jaxb/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-persistence/optaplanner-persistence-jpa/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-persistence/optaplanner-persistence-jsonb/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-persistence/optaplanner-persistence-xstream/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-persistence/pom.xml</pomInclude>
-
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus-jackson/deployment/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus-jackson/integration-test/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus-jackson/runtime/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus-jackson/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus-jsonb/deployment/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus-jsonb/integration-test/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus-jsonb/runtime/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus-jsonb/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus/deployment/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus/runtime/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus/integration-test/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/optaplanner-quarkus/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-quarkus-integration/pom.xml</pomInclude>
-
-            <pomInclude>optaplanner*/optaplanner-test/pom.xml</pomInclude>
-
-            <pomInclude>optaplanner*/optaplanner-spring-integration/optaplanner-spring-boot-autoconfigure/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-spring-integration/optaplanner-spring-boot-starter/pom.xml</pomInclude>
-            <pomInclude>optaplanner*/optaplanner-spring-integration/pom.xml</pomInclude>
-            <pomExclude>optaplanner*/examples/pom.xml</pomExclude>
-          </pomIncludes>
+          <parallelThreads>1</parallelThreads>
         </configuration>
       </plugin>
     </plugins>
