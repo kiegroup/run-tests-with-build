@@ -11,7 +11,7 @@
         <repository>
           <id>central</id>
           <name>Central Repository</name>
-          <url>http://repo.maven.apache.org/maven2</url>
+          <url>https://repo.maven.apache.org/maven2</url>
           <layout>default</layout>
           <snapshots>
             <enabled>true</enabled>
@@ -19,25 +19,13 @@
           <releases>
             <enabled>true</enabled>
           </releases>
-        </repository>
-        <repository>
-          <id>jboss-public-repository-group</id>
-          <name>JBoss Public Repository Group</name>
-          <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-          <layout>default</layout>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
         </repository>
       </repositories>
       <pluginRepositories>
         <pluginRepository>
           <id>central</id>
           <name>Central Repository</name>
-          <url>http://repo.maven.apache.org/maven2</url>
+          <url>https://repo.maven.apache.org/maven2</url>
           <layout>default</layout>
           <snapshots>
             <enabled>true</enabled>
@@ -45,22 +33,9 @@
           <releases>
             <enabled>true</enabled>
           </releases>
-        </pluginRepository>
-        <pluginRepository>
-          <id>jboss-public-repository-group</id>
-          <name>JBoss Public Repository Group</name>
-          <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-          <layout>default</layout>
-          <releases>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>daily</updatePolicy>
-          </snapshots>
         </pluginRepository>
       </pluginRepositories>
     </profile>
   </profiles>
+
 </settings>
