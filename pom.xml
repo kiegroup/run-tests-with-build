@@ -14,7 +14,6 @@
     <module>run-tests-with-build-drools-turtle</module>
     <module>run-tests-with-build-jbpm</module>
     <module>run-tests-with-build-optaplanner</module>
-    <module>run-tests-with-build-optaplanner-examples</module>
     <module>run-tests-with-build-kie-osgi</module>
     <module>run-tests-with-build-camel-container</module>
     <module>run-tests-with-build-integration</module>
@@ -35,7 +34,7 @@
 
     <kie.download.build.version>7.48.0.Final</kie.download.build.version>
     <kogito.download.build.version>2.0.0-SNAPSHOT</kogito.download.build.version>
-    <optaplanner.download.build.version>8.3.0.redhat-2021032300</optaplanner.download.build.version>
+    <optaplanner.download.build.version>8.4.1.Final</optaplanner.download.build.version>
     <!--TODO - settings.xml-->
     <settings.xml.file>${project.parent.basedir}/settings/settings.xml</settings.xml.file>
     <sources.directory>${project.build.directory}/sources/</sources.directory>

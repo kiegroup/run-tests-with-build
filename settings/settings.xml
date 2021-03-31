@@ -11,7 +11,7 @@
         <repository>
           <id>central</id>
           <name>Central Repository</name>
-          <url>http://repo.maven.apache.org/maven2</url>
+          <url>https://repo.maven.apache.org/maven2</url>
           <layout>default</layout>
           <snapshots>
             <enabled>true</enabled>
@@ -37,7 +37,7 @@
         <pluginRepository>
           <id>central</id>
           <name>Central Repository</name>
-          <url>http://repo.maven.apache.org/maven2</url>
+          <url>https://repo.maven.apache.org/maven2</url>
           <layout>default</layout>
           <snapshots>
             <enabled>true</enabled>
