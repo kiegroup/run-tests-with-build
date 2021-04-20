@@ -21,6 +21,7 @@
     <module>run-tests-with-build-kogito-examples</module>
     <module>run-tests-with-build-kogito-runtimes</module>
     <module>run-tests-with-build-kogito-apps</module>
+    <module>run-tests-with-build-optaplanner-optawebs</module>
   </modules>
 
   <properties>
@@ -34,7 +35,7 @@
 
     <kie.download.build.version>7.48.0.Final</kie.download.build.version>
     <kogito.download.build.version>2.0.0-SNAPSHOT</kogito.download.build.version>
-    <optaplanner.download.build.version>8.4.1.Final</optaplanner.download.build.version>
+    <optaplanner.download.build.version>8.3.0.redhat-2021041404</optaplanner.download.build.version>
     <!--TODO - settings.xml-->
     <settings.xml.file>${project.parent.basedir}/settings/settings.xml</settings.xml.file>
     <sources.directory>${project.build.directory}/sources/</sources.directory>
@@ -54,7 +55,6 @@
     <drools.wb.repo.url>${git.server.url}/drools-wb</drools.wb.repo.url>
     <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
-    <optaplanner.wb.repo.url>${git.server.url}/optaplanner-wb</optaplanner.wb.repo.url>
     <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
   </properties>
 

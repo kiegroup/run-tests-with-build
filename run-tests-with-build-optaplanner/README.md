@@ -1,4 +1,4 @@
-run-tests-with-build-optaplanner
+    run-tests-with-build-optaplanner
 ------------------------------------
 Operates on Optaplanner product build archive
 Does not run turtle tests
