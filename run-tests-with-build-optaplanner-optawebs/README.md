@@ -14,10 +14,7 @@ where
 
 `$OPTAPLANNER_BUILD_VERSION` redhat distribution artifact tar.gz
 
-`-Pintegration-tests` run integration cypress tests on docker
-
-`-Dmaven.integration-tests={true|false}` equal to `-Pintegration-tests`, escape      
-warnings "The requested profile "integration-tests" could not be activated because it does not exist."
+`-Dintegration-tests={true|false}` run integration cypress tests on docker
 
 `-Dcontainer.runtime={docker|podman}` change runtime
 

@@ -13,7 +13,7 @@
     <artifactId>run-tests-with-build-optaplanner-optawebs</artifactId>
 
     <properties>
-        <maven.integration-tests>false</maven.integration-tests>
+        <integration-tests>false</integration-tests>
         <!-- We can not skip src/main/java module compilation -->
         <maven.main.skip>false</maven.main.skip>
         <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
@@ -58,7 +58,8 @@
                         <pomInclude>*/${optaweb.artifact.id}-frontend/pom.xml</pomInclude>
                     </pomIncludes>
                     <properties>
-                        <integration-tests>${maven.integration-tests}</integration-tests>
+                        <integration-tests>${integration-tests}</integration-tests>
+                        <container.runtime>${container.runtime}</container.runtime>
                     </properties>
                 </configuration>
             </plugin>
@@ -89,12 +90,6 @@
             <properties>
                 <optaweb.artifact.id>optaweb-employee-rostering</optaweb.artifact.id>
                 <optaweb.group.id>org.optaweb.employeerostering</optaweb.group.id>
-            </properties>
-        </profile>
-        <profile>
-            <id>integration-tests</id>
-            <properties>
-                <maven.integration-tests>true</maven.integration-tests>
             </properties>
         </profile>
     </profiles>
