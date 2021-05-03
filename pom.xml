@@ -23,8 +23,10 @@
     <module>run-tests-with-build-kogito-apps</module>
     <module>run-tests-with-build-kogito-decision-services-quickstarts</module>
     <module>run-tests-with-build-kogito-decision-services-quickstarts-optawebs</module>
+    <module>run-tests-with-build-kogito-sources</module>
     <module>run-tests-with-build-optaplanner-optawebs</module>
     <module>run-tests-with-build-optaplanner-optawebs-parent</module>
+    <module>run-tests-with-build-kogito-sources-optawebs</module>
   </modules>
 
   <properties>
@@ -63,6 +65,7 @@
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
     <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
     <kogito.decision.services.quickstarts.url>NOT_SET</kogito.decision.services.quickstarts.url>
+    <kogito.sources.url>NOT_SET</kogito.sources.url>
 
     <!-- properties affecting maven modules resolution using resolve-includes.groovy script -->
     <maven.modules.resolution.timeout.ms>600000</maven.modules.resolution.timeout.ms>

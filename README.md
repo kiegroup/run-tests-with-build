@@ -36,7 +36,12 @@ Kogito modules fall into two categories:
 
 2. Tests for zips with project sources
 
-* TBA
+* [run-tests-with-build-kogito-sources](./run-tests-with-build-kogito-sources)
+* [run-tests-with-build-kogito-decision-services-quickstarts](./run-tests-with-build-kogito-decision-services-quickstarts)
+* The two above don't include invocations of optaweb apps, those are handled separately.
+  * [run-tests-with-build-kogito-sources-optawebs](./run-tests-with-build-kogito-sources-optawebs)
+  * [run-tests-with-build-kogito-decision-services-quickstarts-optawebs](./run-tests-with-build-kogito-decision-services-quickstarts-optawebs)
+  * Relying on profiles specified in [run-test-with-build-optaplanner-optawebs-parent](./run-tests-with-build-optaplanner-optawebs-parent)
 
 #### Testing Previously Built Maven Artifacts using the original project tests
 
