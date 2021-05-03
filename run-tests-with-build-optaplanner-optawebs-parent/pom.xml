@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>run-tests-with-build</artifactId>
+        <groupId>org.kie</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>run-tests-with-build-optaplanner-optawebs-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <integration-tests>false</integration-tests>
+        <!-- We can not skip src/main/java module compilation -->
+        <maven.main.skip>false</maven.main.skip>
+        <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
+        <maven.test.failure.ignore>false</maven.test.failure.ignore>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-invoker-plugin</artifactId>
+                <configuration>
+                    <parallelThreads>1</parallelThreads>
+                    <pomIncludes>
+                        <pomInclude>**/*/${optaweb.artifact.id}-backend/pom.xml</pomInclude>
+                        <pomInclude>**/*/${optaweb.artifact.id}-standalone/pom.xml</pomInclude>
+                        <pomInclude>**/*/${optaweb.artifact.id}-frontend/pom.xml</pomInclude>
+                    </pomIncludes>
+                    <properties>
+                        <integration-tests>${integration-tests}</integration-tests>
+                        <container.runtime>${container.runtime}</container.runtime>
+                    </properties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>vehicle-routing</id>
+            <activation>
+                <property>
+                    <name>optaweb</name>
+                    <value>vehicle-routing</value>
+                </property>
+            </activation>
+            <properties>
+                <optaweb.artifact.id>optaweb-vehicle-routing</optaweb.artifact.id>
+                <optaweb.group.id>org.optaweb.vehiclerouting</optaweb.group.id>
+            </properties>
+        </profile>
+        <profile>
+            <id>employee-rostering</id>
+            <activation>
+                <property>
+                    <name>optaweb</name>
+                    <value>employee-rostering</value>
+                </property>
+            </activation>
+            <properties>
+                <optaweb.artifact.id>optaweb-employee-rostering</optaweb.artifact.id>
+                <optaweb.group.id>org.optaweb.employeerostering</optaweb.group.id>
+            </properties>
+        </profile>
+    </profiles>
+</project>

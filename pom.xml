@@ -21,7 +21,10 @@
     <module>run-tests-with-build-kogito-examples</module>
     <module>run-tests-with-build-kogito-runtimes</module>
     <module>run-tests-with-build-kogito-apps</module>
+    <module>run-tests-with-build-kogito-decision-services-quickstarts</module>
+    <module>run-tests-with-build-kogito-decision-services-quickstarts-optawebs</module>
     <module>run-tests-with-build-optaplanner-optawebs</module>
+    <module>run-tests-with-build-optaplanner-optawebs-parent</module>
   </modules>
 
   <properties>
@@ -56,6 +59,7 @@
     <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
     <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
+    <kogito.decision.services.quickstarts.url>NOT_SET</kogito.decision.services.quickstarts.url>
   </properties>
 
   <build>
