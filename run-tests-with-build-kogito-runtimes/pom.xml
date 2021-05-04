@@ -48,96 +48,40 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>resolve-includes</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <!-- kogito-runtimes tests were not designed to run in parallel -->
           <parallelThreads>1</parallelThreads>
+          <!--
+          script deciding if included project is:
+            executed (either script missing or returning true)
+              or
+            skipped (when returns false or throws error) -->
+          <selectorScript>${maven.modules.resolution.selector.script}</selectorScript>
           <pomIncludes>
-            <!-- addons -->
-            <pomInclude>kogito-runtimes*/addons/cloudevents/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/events/knative-eventing-addon/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/events/kogito-event-driven-decisions/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/events/kogito-events-reactive-messaging-addon/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/events/kogito-events-spring-boot-addon/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/explainability-addon/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/jobs/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-core/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-elastic/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/monitoring/monitoring-prometheus/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/persistence/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/predictions/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/process-management/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/process-svg/*/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/addons/tracing/*/pom.xml</pomInclude>
-
-            <!-- api -->
-            <pomInclude>kogito-runtimes*/api/kogito-api/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/api/kogito-internal/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/api/kogito-services/pom.xml</pomInclude>
-
-            <!-- drools -->
-            <pomInclude>kogito-runtimes*/drools/drools-core-static/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/drools/kogito-dmn/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/drools/kogito-pmml/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/drools/kogito-ruleunits/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/drools/kogito-scenario-simulation/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/drools/kogito-pmml-openapi/pom.xml</pomInclude>
-
-            <!-- grafana-api -->
-            <pomInclude>kogito-runtimes*/grafana-api/pom.xml</pomInclude>
-
-            <!-- integration-tests -->
-            <pomInclude>kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
-
-            <!-- jbpm -->
-            <pomInclude>kogito-runtimes*/jbpm/jbpm-bpmn2/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/jbpm/jbpm-flow-builder/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/jbpm/jbpm-flow/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/jbpm/jbpm-serverless-workflow/pom.xml</pomInclude>
-
-            <!-- kogito-cloud-services -->
-            <pomInclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-kubernetes-client/pom.xml</pomInclude>
-
-            <!-- kogito-codegen-modules -->
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-api/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-core/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-decisions/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-integration-tests/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-predictions/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-processes/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-rules/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-generator/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-codegen-modules/kogito-codegen-sample/kogito-codegen-sample-runtime/pom.xml</pomInclude>
-
-            <!-- kogito-quarkus-parent -->
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-decisions-extension/kogito-quarkus-decisions-integration-test/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-decisions-extension/kogito-quarkus-decisions-integration-test-hot-reload/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension-common/kogito-quarkus-common-deployment/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-deployment/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-integration-test/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-extension/kogito-quarkus-integration-test-hot-reload/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-predictions-extension/kogito-quarkus-predictions-integration-test/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-hot-reload/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-legacy/pom.xml</pomInclude>
-            <pomInclude>kogito-runtimes*/kogito-quarkus-parent/kogito-quarkus-rules-extension/kogito-quarkus-rules-integration-test-session/pom.xml</pomInclude>
-
-            <!-- kogito-workitems -->
-            <pomInclude>kogito-runtimes*/kogito-workitems/pom.xml</pomInclude>
+            <!-- includes everything, filtering is done in resolve-includes.groovy script
+            which adds invoker-run.groovy script containing 'return false' near each pom.xml
+            that should be excluded.-->
+            <pomInclude>**/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
-            <!-- archetypes -->
-            <pomExclude>kogito-runtimes*/archetypes/*/pom.xml</pomExclude>
-
-            <!-- integration-tests -->
-            <pomExclude>kogito-runtimes*/integration-tests/integration-tests-kogito-plugin/pom.xml</pomExclude>
-            <pomExclude>kogito-runtimes*/integration-tests/integration-tests-springboot/pom.xml</pomExclude>
-
-            <!-- kogito-cloud-services -->
-            <!-- java.net.ConnectException: Failed to connect to psi-rhel8-docker-20658/0:0:0:0:0:0:0:1:59491 -->
-            <pomExclude>kogito-runtimes*/kogito-cloud-services/kogito-cloud-workitems/pom.xml</pomExclude>
+            <!-- Excludes work still as expected. -->
           </pomExcludes>
         </configuration>
       </plugin>
