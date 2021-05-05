@@ -27,12 +27,8 @@
                 <artifactId>maven-invoker-plugin</artifactId>
                 <configuration>
                     <parallelThreads>1</parallelThreads>
-                    <pomIncludes>
-                        <pomInclude>**/*/${optaweb.artifact.id}-backend/pom.xml</pomInclude>
-                        <pomInclude>**/*/${optaweb.artifact.id}-standalone/pom.xml</pomInclude>
-                        <pomInclude>**/*/${optaweb.artifact.id}-frontend/pom.xml</pomInclude>
-                    </pomIncludes>
                     <properties>
+                        <asciidoctor.skip>false</asciidoctor.skip>
                         <integration-tests>${integration-tests}</integration-tests>
                         <container.runtime>${container.runtime}</container.runtime>
                     </properties>
