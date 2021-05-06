@@ -133,8 +133,8 @@ private void excludeFromInvokerExecution(List toExclude) {
     writeInvokerScripts(toExclude, "false")
 }
 
-Stream<String> productizedPoms = mvnExecute(getMvnCommand())
-List leafProjects = resolveLeafProjects(productizedPoms)
+Stream<String> projectsInReactor = mvnExecute(getMvnCommand())
+List leafProjects = resolveLeafProjects(projectsInReactor)
 List dirsWithPoms = findAllDirsWithPom()
 List toExclude = dirsWithPoms.minus(leafProjects)
 excludeFromInvokerExecution(toExclude)
