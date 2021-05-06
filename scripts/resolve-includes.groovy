@@ -12,7 +12,7 @@ private Stream<String> mvnExecute(String mvnCommand) {
     def out = new StringBuilder(), err = new StringBuilder()
     log.info("Resolving Maven reactor projects for command '$mvnCommand'")
     log.info("Waiting up to $mavenExecutionTimeoutMs ms for resolution to end.")
-    def stdoutLogFile = "mvn-std-out.log"
+    def stdoutLogFile = "mvn-out.log"
     log.info("Standard output will be available in ${Path.of(logdir).resolve(stdoutLogFile).toString()} after the build finishes.")
     def mvnExec = mvnCommand
             .execute(null, new File(basedir)
@@ -21,9 +21,9 @@ private Stream<String> mvnExecute(String mvnCommand) {
     mvnExec.waitForOrKill(Long.valueOf(mavenExecutionTimeoutMs))
     logDebug(stdoutLogFile, out.toString().lines().collect(Collectors.toList()))
     if (mvnExec.exitValue() != 0) {
-        def stderrLogFile = "mvn-std-err.log"
+        def stderrLogFile = "err.log"
         log.error("Maven build unsuccessful with code ${mvnExec.exitValue()}, " +
-                "see ${Path.of(logdir).resolve(stderrLogFile).toString()}.")
+                "see ${Path.of(logdir).resolve(stdoutLogFile).toString()} and/or ${Path.of(logdir).resolve(stderrLogFile).toString()} for details.")
         logDebug(stderrLogFile, err.toString().lines().collect(Collectors.toList()))
         throw new RuntimeException("Mvn command ended with error code ${mvnExec.exitValue()}")
     }
@@ -88,7 +88,7 @@ private List<String> findAllDirsWithPom() {
     File base = new File(basedir)
     List<File> poms = new ArrayList<>()
     base.traverse(type: groovy.io.FileType.FILES, nameFilter: "pom.xml") { it -> poms.add(it) }
-    return poms.stream().map({pom -> trimPrefix(pom.toPath().getParent().toAbsolutePath(), base.toPath())}).collect(Collectors.toList())
+    return poms.stream().map({ pom -> trimPrefix(pom.toPath().getParent().toAbsolutePath(), base.toPath()) }).collect(Collectors.toList())
 }
 
 /**
@@ -106,7 +106,7 @@ private void writeInvokerScripts(List<String> locations, String value) {
 /**
  * Get Maven command string including possible arguments passed from configuration.x`
  * Tailor the mvn command used to inherit settings of the invoking maven build.
- * @return
+ * @return mvn command string
  */
 private String getMvnCommand() {
     String mvnCommandToRun = "mvn -q -am exec:exec -Dexec.executable=pwd"
@@ -127,9 +127,9 @@ private String getMvnCommand() {
  * @param toExclude list of projects to exclude
  */
 private void excludeFromInvokerExecution(List toExclude) {
-    def ingoredLog = "ignored-interim-poms.log"
-    log.info("Ignored projects are logged as ${Path.of(logdir).resolve(ingoredLog).toString()} .")
-    logDebug(ingoredLog, toExclude)
+    def ignoredLog = "ignored-interim-poms.log"
+    log.info("Ignored projects are logged as ${Path.of(logdir).resolve(ignoredLog).toString()} .")
+    logDebug(ignoredLog, toExclude)
     writeInvokerScripts(toExclude, "false")
 }
 

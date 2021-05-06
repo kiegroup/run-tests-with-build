@@ -74,7 +74,7 @@
             executed (either script missing or returning true)
               or
             skipped (when returns false or throws error) -->
-          <selectorScript>${maven.modules.resolution.selector.script}</selectorScript>
+          <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
           <pomIncludes>
             <!-- includes everything, filtering is done in resolve-includes.groovy script
             which adds invoker-run.groovy script containing 'return false' near each pom.xml

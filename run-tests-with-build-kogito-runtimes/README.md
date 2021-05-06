@@ -1,18 +1,24 @@
 run-tests-with-build-kogito-runtimes
 ------------------------------------
 
-This module executes [kogito-runtimes](https://github.com/kiegroup/kogito-runtimes) tests. Unfortunately there is no synchronization mechanism. If the **kogito-runtimes** project structure will be changed, it needs to by manually adapted also in this module.
+This module executes [kogito-runtimes](https://github.com/kiegroup/kogito-runtimes) tests.
+
+This module relies on automatic Maven modules resolution. The goal here is to invoke just so-called
+**leaf** Maven projects to enforce usage of previously built and published maven dependencies from repository. By
+invoking just leaf projects, they are detached from the overall Maven reactor build - when compared to running
+project from the parent.
+
+That's why there might be discrepancy between real structure of repository and what is executed.
+
+More information in parent project [README.md](../README.md).
 
 Execution
 ---------
 Tests are started from a project sources archive. By default, we use latest kogito build version. You can override this using `-Dkogito.download.build.version` property.
+Whole build including modules resolution supports custom Maven settings limited to `-s settings.xml -Dmaven.repo.local=`.
 
 For running tests in quarkus native mode use  `-Dnative` property.
 
 Note
 ----
-Module is under development. Not all tests are executed currently. See the exclusions in the pom.xml.
-
-[KOGTIO-4404](https://issues.redhat.com/browse/KOGITO-4404) is blocking for:
-  * [integration-tests-kogito-plugin](https://github.com/kiegroup/kogito-runtimes/tree/master/integration-tests/integration-tests-kogito-plugin)
-  * [integration-tests-springboot](https://github.com/kiegroup/kogito-runtimes/tree/master/integration-tests/integration-tests-springboot)
+Module executions is based on maven module filtering using maven property `${maven.modules.resolution.reactor.filtering}`.

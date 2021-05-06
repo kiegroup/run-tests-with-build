@@ -33,7 +33,7 @@
     <unpack.build.version>1.0-SNAPSHOT</unpack.build.version>
     <dependency.plugin.version>3.1.2</dependency.plugin.version>
     <gmavenplus.plugin.version>1.12.1</gmavenplus.plugin.version>
-    <groovy.version>2.5.14</groovy.version>
+    <groovy.version>3.0.8</groovy.version>
 
     <kie.download.build.version>7.48.0.Final</kie.download.build.version>
     <kogito.download.build.version>2.0.0-SNAPSHOT</kogito.download.build.version>
@@ -61,9 +61,9 @@
     <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
 
     <!-- properties affecting maven modules resolution using resolve-includes.groovy script -->
-    <maven.modules.resolution.timeout>600000</maven.modules.resolution.timeout>
+    <maven.modules.resolution.timeout.ms>600000</maven.modules.resolution.timeout.ms>
     <maven.modules.resolution.reactor.filtering>-Dproductized</maven.modules.resolution.reactor.filtering>
-    <maven.modules.resolution.selector.script>invoker-run.groovy</maven.modules.resolution.selector.script>
+    <maven.modules.resolution.selector.script.name>invoker-run.groovy</maven.modules.resolution.selector.script.name>
   </properties>
 
   <dependencyManagement>
@@ -191,8 +191,8 @@
                   <basedir>${sources.directory}</basedir>
                   <logdir>${project.build.directory}</logdir>
                   <mavenReactorFiltering>${maven.modules.resolution.reactor.filtering}</mavenReactorFiltering>
-                  <mavenExecutionTimeoutMs>${maven.modules.resolution.timeout}</mavenExecutionTimeoutMs>
-                  <invokerScriptName>${maven.modules.resolution.selector.script}</invokerScriptName>
+                  <mavenExecutionTimeoutMs>${maven.modules.resolution.timeout.ms}</mavenExecutionTimeoutMs>
+                  <invokerScriptName>${maven.modules.resolution.selector.script.name}</invokerScriptName>
                   <mavenRepoLocal>${session.request.localRepositoryPath.path}</mavenRepoLocal>
                   <mavenSettings>${session.request.userSettingsFile.path}</mavenSettings>
                 </properties>
