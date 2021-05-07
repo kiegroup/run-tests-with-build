@@ -32,12 +32,15 @@
     <invoker.plugin.version>3.1.0</invoker.plugin.version>
     <unpack.build.version>1.0-SNAPSHOT</unpack.build.version>
     <dependency.plugin.version>3.1.2</dependency.plugin.version>
+    <gmavenplus.plugin.version>1.12.1</gmavenplus.plugin.version>
+    <groovy.version>3.0.8</groovy.version>
 
     <kie.download.build.version>7.48.0.Final</kie.download.build.version>
     <kogito.download.build.version>2.0.0-SNAPSHOT</kogito.download.build.version>
     <optaplanner.download.build.version>8.3.0.redhat-2021041404</optaplanner.download.build.version>
     <!--TODO - settings.xml-->
-    <settings.xml.file>${project.parent.basedir}/settings/settings.xml</settings.xml.file>
+    <main.basedir>${maven.multiModuleProjectDirectory}</main.basedir>
+    <settings.xml.file>${main.basedir}/settings/settings.xml</settings.xml.file>
     <sources.directory>${project.build.directory}/sources/</sources.directory>
 
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
@@ -56,7 +59,31 @@
     <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
     <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
+
+    <!-- properties affecting maven modules resolution using resolve-includes.groovy script -->
+    <maven.modules.resolution.timeout.ms>600000</maven.modules.resolution.timeout.ms>
+    <maven.modules.resolution.reactor.filtering>-Dproductized</maven.modules.resolution.reactor.filtering>
+    <maven.modules.resolution.selector.script.name>invoker-run.groovy</maven.modules.resolution.selector.script.name>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-all</artifactId>
+        <version>${groovy.version}</version>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <type>pom</type>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
 
   <build>
     <pluginManagement>
@@ -143,6 +170,35 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
           <version>${dependency.plugin.version}</version>
+        </plugin>
+        <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
+        <plugin>
+          <groupId>org.codehaus.gmavenplus</groupId>
+          <artifactId>gmavenplus-plugin</artifactId>
+          <version>${gmavenplus.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>resolve-includes</id>
+              <phase>none</phase>
+              <goals>
+                <goal>execute</goal>
+              </goals>
+              <configuration>
+                <scripts>
+                  <script>file://${main.basedir}/scripts/resolve-includes.groovy</script>
+                </scripts>
+                <properties>
+                  <basedir>${sources.directory}</basedir>
+                  <logdir>${project.build.directory}</logdir>
+                  <mavenReactorFiltering>${maven.modules.resolution.reactor.filtering}</mavenReactorFiltering>
+                  <mavenExecutionTimeoutMs>${maven.modules.resolution.timeout.ms}</mavenExecutionTimeoutMs>
+                  <invokerScriptName>${maven.modules.resolution.selector.script.name}</invokerScriptName>
+                  <mavenRepoLocal>${session.request.localRepositoryPath.path}</mavenRepoLocal>
+                  <mavenSettings>${session.request.userSettingsFile.path}</mavenSettings>
+                </properties>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

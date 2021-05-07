@@ -18,6 +18,8 @@
 
     <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
     <maven.test.failure.ignore>false</maven.test.failure.ignore>
+    <!-- override from parent, no productized profile for now -->
+    <maven.modules.resolution.reactor.filtering></maven.modules.resolution.reactor.filtering>
   </properties>
   <build>
     <plugins>
@@ -47,66 +49,40 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>resolve-includes</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
+          <!-- kogito-apps tests were not designed to run in parallel -->
           <parallelThreads>1</parallelThreads>
+          <!--
+          script deciding if included project is:
+            executed (either script missing or returning true)
+              or
+            skipped (when returns false or throws error) -->
+          <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
           <pomIncludes>
-            <!-- apps-integration-tests -->
-            <pomInclude>kogito-apps*/apps-integration-tests/integration-tests-jobs-service/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/apps-integration-tests/integration-tests-trusty-service/pom.xml</pomInclude>
-
-            <!-- data-index -->
-            <pomInclude>kogito-apps*/data-index/data-index-service/data-index-service-common/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/data-index/data-index-service/data-index-service-infinispan/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/data-index/data-index-service/data-index-service-mongodb/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/data-index/data-index-storage/data-index-storage-infinispan/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/data-index/data-index-storage/data-index-storage-mongodb/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/data-index/data-index-storage/data-index-storage-protobuf/pom.xml</pomInclude>
-
-            <!-- explainability -->
-            <pomInclude>kogito-apps*/explainability/explainability-integrationtests/explainability-integrationtests-dmn/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/explainability/explainability-integrationtests/explainability-integrationtests-opennlp/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/explainability/explainability-integrationtests/explainability-integrationtests-pmml/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/explainability/explainability-core/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/explainability/explainability-service/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/explainability/explainability-service-messaging/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/explainability/explainability-service-rest/pom.xml</pomInclude>
-
-            <!-- jitexecutor -->
-            <pomInclude>kogito-apps*/jitexecutor/jitexecutor-dmn/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/jitexecutor/jitexecutor-runner/pom.xml</pomInclude>
-
-            <!-- jobs-service -->
-            <pomInclude>kogito-apps*/jobs-service/pom.xml</pomInclude>
-
-            <!-- management-console -->
-            <pomInclude>kogito-apps*/management-console/pom.xml</pomInclude>
-
-            <!-- persistence-commons -->
-            <pomInclude>kogito-apps*/persistence-commons/persistence-commons-api/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/persistence-commons/persistence-commons-infinispan/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/persistence-commons/persistence-commons-mongodb/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/persistence-commons/persistence-commons-protobuf/pom.xml</pomInclude>
-
-            <!-- security-commons -->
-            <pomInclude>kogito-apps*/security-commons/pom.xml</pomInclude>
-
-            <!-- task-assigning -->
-            <pomInclude>kogito-apps*/task-assigning/task-assigning-process-service-client/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/task-assigning/task-assigning-core/pom.xml</pomInclude>
-
-            <!-- task-console -->
-            <pomInclude>kogito-apps*/task-console/pom.xml</pomInclude>
-
-            <!-- trusty -->
-            <pomInclude>kogito-apps*/trusty/trusty-storage/trusty-storage-infinispan/pom.xml</pomInclude>
-            <pomInclude>kogito-apps*/trusty/trusty-service/pom.xml</pomInclude>
+            <!-- includes everything, filtering is done in resolve-includes.groovy script
+            which adds invoker-run.groovy script containing 'return false' near each pom.xml
+            that should be excluded.-->
+            <pomInclude>**/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
-            <!-- trusty-ui -->
-            <pomExclude>kogito-apps*/trusty-ui/pom.xml</pomExclude>
+            <!-- Excludes work still as expected. -->
           </pomExcludes>
         </configuration>
       </plugin>
