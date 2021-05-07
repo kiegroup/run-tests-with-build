@@ -16,6 +16,29 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-property</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules combine.children="append">
+                <requireProperty>
+                  <property>kogito.sources.url</property>
+                  <message>Property kogito.sources.url is not set!</message>
+                  <regex>.*</regex>
+                  <regexMessage>Property kogito.sources.url is not set.</regexMessage>
+                </requireProperty>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>com.googlecode.maven-download-plugin</groupId>
         <artifactId>download-maven-plugin</artifactId>
         <executions>
