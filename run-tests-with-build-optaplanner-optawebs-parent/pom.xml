@@ -24,6 +24,29 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-property</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireProperty>
+                                    <property>optaweb</property>
+                                    <message>Property optaweb is not set!</message>
+                                    <regex>^(vehicle-routing|employee-rostering)$</regex>
+                                    <regexMessage>Property optaweb needs to contain one of pre-defined values (vehicle-routing|employee-rostering).</regexMessage>
+                                </requireProperty>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-invoker-plugin</artifactId>
                 <configuration>
                     <parallelThreads>1</parallelThreads>

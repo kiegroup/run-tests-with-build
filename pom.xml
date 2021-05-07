@@ -24,9 +24,9 @@
     <module>run-tests-with-build-kogito-decision-services-quickstarts</module>
     <module>run-tests-with-build-kogito-decision-services-quickstarts-optawebs</module>
     <module>run-tests-with-build-kogito-sources</module>
+    <module>run-tests-with-build-kogito-sources-optawebs</module>
     <module>run-tests-with-build-optaplanner-optawebs</module>
     <module>run-tests-with-build-optaplanner-optawebs-parent</module>
-    <module>run-tests-with-build-kogito-sources-optawebs</module>
   </modules>
 
   <properties>
@@ -39,6 +39,8 @@
     <dependency.plugin.version>3.1.2</dependency.plugin.version>
     <gmavenplus.plugin.version>1.12.1</gmavenplus.plugin.version>
     <groovy.version>3.0.8</groovy.version>
+    <enforcer.plugin.version>3.0.0-M2</enforcer.plugin.version>
+    <download.plugin.version>1.6.3</download.plugin.version>
 
     <kie.download.build.version>7.48.0.Final</kie.download.build.version>
     <kogito.download.build.version>2.0.0-SNAPSHOT</kogito.download.build.version>
@@ -178,6 +180,11 @@
           <artifactId>maven-dependency-plugin</artifactId>
           <version>${dependency.plugin.version}</version>
         </plugin>
+        <plugin>
+          <groupId>com.googlecode.maven-download-plugin</groupId>
+          <artifactId>download-maven-plugin</artifactId>
+          <version>${download.plugin.version}</version>
+        </plugin>
         <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
         <plugin>
           <groupId>org.codehaus.gmavenplus</groupId>
@@ -206,6 +213,11 @@
               </configuration>
             </execution>
           </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${enforcer.plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
