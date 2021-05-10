@@ -15,6 +15,9 @@
   <properties>
     <maven.main.skip>false</maven.main.skip>
     <maven.test.failure.ignore>false</maven.test.failure.ignore>
+    <!-- just for enforcer activation section of profiles does not interpolate properties -->
+    <activation.property.name>test.type</activation.property.name>
+    <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources})$</enforcer.regex.activation.property>
   </properties>
 
   <build>
@@ -31,10 +34,11 @@
             <configuration>
               <rules combine.children="append">
                 <requireProperty>
-                  <property>kogito.runtimes.test</property>
-                  <message>Property kogito.runtimes.test is not set!</message>
-                  <regex>^(sources-zip|project-sources)$</regex>
-                  <regexMessage>Property kogito.runtimes.test is not set.</regexMessage>
+                  <property>${activation.property.name}</property>
+                  <message>Property ${activation.property.name} is not set!</message>
+                  <regex>${enforcer.regex.activation.property}</regex>
+                  <regexMessage>Property ${activation.property.name} does not contain expected value
+                    ${enforcer.regex.activation.property}.</regexMessage>
                 </requireProperty>
               </rules>
               <fail>true</fail>
@@ -50,7 +54,7 @@
       <id>kogito-runtimes-sources-zip</id>
       <activation>
         <property>
-          <name>kogito.runtimes.test</name>
+          <name>test.type</name>
           <value>sources-zip</value>
         </property>
       </activation>
@@ -67,7 +71,7 @@
       <id>kogito-runtimes-project-sources</id>
       <activation>
         <property>
-          <name>kogito.runtimes.test</name>
+          <name>test.type</name>
           <value>project-sources</value>
         </property>
       </activation>

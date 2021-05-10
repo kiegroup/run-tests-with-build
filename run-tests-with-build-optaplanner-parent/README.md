@@ -10,14 +10,14 @@ Download of artifacts is provided by means described in [Module structure](#modu
 ### Project-sources testing
 ```
 mvn clean verify \
--Doptaplanner.test=project-sources \
+-Dtest.type=project-sources \
 -Dproject.sources.artifact=optaplanner \
 -Doptaplanner.download.build.version=<VERSION>
 ```
 ### Sources-zip testing
 ```
 mvn clean verify \
--Doptaplanner.test=sources-zip \
+-Dtest.type=sources-zip \
 -Ddownload.source.url=http://link.to/source.zip
 ```
 

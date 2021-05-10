@@ -10,14 +10,14 @@ Download of artifacts is provided by means described in [Module structure](#modu
 ### Project-sources testing
 ```
 mvn clean verify \
--Dkogito.runtimes.test=project-sources \
+-Dtest.type=project-sources \
 -Dproject.sources.artifact=kogito-runtimes \
 -Dkogito.download.build.version=<VERSION>
 ```
 ### Sources-zip testing
 ```
 mvn clean verify \
--Dkogito.runtimes.test=sources-zip \
+-Dtest.type=sources-zip \
 -Ddownload.source.url=http://link.to/source.zip
 ```
 

@@ -75,6 +75,11 @@
     <maven.modules.resolution.timeout.ms>600000</maven.modules.resolution.timeout.ms>
     <maven.modules.resolution.reactor.filtering>-Dproductized</maven.modules.resolution.reactor.filtering>
     <maven.modules.resolution.selector.script.name>invoker-run.groovy</maven.modules.resolution.selector.script.name>
+
+    <!-- enforcer test type properties -->
+    <enforcer.test.type.project.sources>project-sources</enforcer.test.type.project.sources>
+    <enforcer.test.type.sources.zip>sources-zip</enforcer.test.type.sources.zip>
+    <enforcer.test.type.quickstarts.zip>quickstarts-zip</enforcer.test.type.quickstarts.zip>
   </properties>
 
   <dependencyManagement>

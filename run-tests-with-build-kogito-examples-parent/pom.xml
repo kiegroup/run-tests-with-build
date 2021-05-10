@@ -19,6 +19,9 @@
 
     <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
     <maven.test.failure.ignore>false</maven.test.failure.ignore>
+    <!-- just for enforcer activation section of profiles does not interpolate properties -->
+    <activation.property.name>test.type</activation.property.name>
+    <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources}|${enforcer.test.type.quickstarts.zip})$</enforcer.regex.activation.property>
   </properties>
 
   <build>
@@ -35,10 +38,11 @@
             <configuration>
               <rules combine.children="append">
                 <requireProperty>
-                  <property>kogito.examples.test</property>
-                  <message>Property kogito.examples.test is not set!</message>
-                  <regex>^(sources-zip|project-sources|quickstarts-zip)$</regex>
-                  <regexMessage>Property kogito.examples.test does not contained allow value (sources-zip|project-sources|quickstarts-zip).</regexMessage>
+                  <property>${activation.property.name}</property>
+                  <message>Property ${activation.property.name} is not set!</message>
+                  <regex>${enforcer.regex.activation.property}</regex>
+                  <regexMessage>Property ${activation.property.name} does not contain expected value
+                    ${enforcer.regex.activation.property}.</regexMessage>
                 </requireProperty>
               </rules>
               <fail>true</fail>
@@ -54,7 +58,7 @@
       <id>kogito-examples-sources-zip</id>
       <activation>
         <property>
-          <name>kogito.examples.test</name>
+          <name>test.type</name>
           <value>sources-zip</value>
         </property>
       </activation>
@@ -71,7 +75,7 @@
       <id>kogito-examples-project-quickstarts-zip</id>
       <activation>
         <property>
-          <name>kogito.examples.test</name>
+          <name>test.type</name>
           <value>quickstarts-zip</value>
         </property>
       </activation>
@@ -88,7 +92,7 @@
       <id>kogito-examples-project-sources</id>
       <activation>
         <property>
-          <name>kogito.examples.test</name>
+          <name>test.type</name>
           <value>project-sources</value>
         </property>
       </activation>

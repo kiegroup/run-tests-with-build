@@ -25,13 +25,13 @@ Download of artifacts is provided by means described in [Module structure](#modu
 ### Sources-zip testing
 ```
 mvn clean verify \
--Doptawebs.test=sources-zip \
+-Dtest.type=sources-zip \
 -Ddownload.source.url=http://link.to/source.zip
 ```
 ### Quickstarts-zip testing
 ```
 mvn clean verify \
--Doptawebs.test=quickstarts-zip \
+-Dtest.type=quickstarts-zip \
 -Ddownload.source.url=http://link.to/quickstarts.zip
 ```
 ### Additional configuration

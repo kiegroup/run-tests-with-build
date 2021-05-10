@@ -17,7 +17,9 @@
 
     <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
     <maven.test.failure.ignore>false</maven.test.failure.ignore>
-    <enforcer.regex.optaplanner.quickstarts.test>^(sources-zip|project-sources|quickstarts-zip)$</enforcer.regex.optaplanner.quickstarts.test>
+    <!-- just for enforcer activation section of profiles does not interpolate properties -->
+    <activation.property.name>test.type</activation.property.name>
+    <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources}|${enforcer.test.type.quickstarts.zip})$</enforcer.regex.activation.property>
   </properties>
 
   <build>
@@ -34,10 +36,11 @@
             <configuration>
               <rules combine.children="append">
                 <requireProperty>
-                  <property>optaplanner.quickstarts.test</property>
-                  <message>Property optaplanner.quickstarts.test is not set!</message>
-                  <regex>${enforcer.regex.optaplanner.quickstarts.test}</regex>
-                  <regexMessage>Property optaplanner.quickstarts.test does not contain expected value ${enforcer.regex.optaplanner.quickstarts.test}.</regexMessage>
+                  <property>${activation.property.name}</property>
+                  <message>Property ${activation.property.name} is not set!</message>
+                  <regex>${enforcer.regex.activation.property}</regex>
+                  <regexMessage>Property ${activation.property.name} does not contain expected value
+                    ${enforcer.regex.activation.property}.</regexMessage>
                 </requireProperty>
               </rules>
               <fail>true</fail>
@@ -53,7 +56,7 @@
       <id>optaplanner-quickstarts-sources-zip</id>
       <activation>
         <property>
-          <name>optaplanner.quickstarts.test</name>
+          <name>test.type</name>
           <value>sources-zip</value>
         </property>
       </activation>
@@ -70,7 +73,7 @@
       <id>optaplanner-quickstarts-quickstarts-zip</id>
       <activation>
         <property>
-          <name>optaplanner.quickstarts.test</name>
+          <name>test.type</name>
           <value>quickstarts-zip</value>
         </property>
       </activation>
@@ -87,7 +90,7 @@
       <id>optaplanner-quickstarts-project-sources</id>
       <activation>
         <property>
-          <name>optaplanner.quickstarts.test</name>
+          <name>test.type</name>
           <value>project-sources</value>
         </property>
       </activation>

@@ -17,14 +17,14 @@ mvn clean verify \
 ### Sources-zip testing
 ```
 mvn clean verify \
--Doptaplanner.quickstarts.test=sources-zip \
+-Dtest.type=sources-zip \
 -Ddownload.source.url=http://link.to/source.zip
 ```
 
 ### Quickstarts-zip testing
 ```
 mvn clean verify \
--Doptaplanner.quickstarts.test=quickstarts-zip \
+-Dtest.type=quickstarts-zip \
 -Ddownload.source.url=http://link.to/quickstarts.zip
 ```
 
