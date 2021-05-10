@@ -34,9 +34,6 @@
           <pomIncludes>
             <pomInclude>kogito-*/*kogito-examples*/pom.xml</pomInclude>
           </pomIncludes>
-          <pomExcludes>
-            <pomExclude>kogito-*/org.kie.rhba-kogito-rhba*/pom.xml</pomExclude>
-          </pomExcludes>
         </configuration>
       </plugin>
     </plugins>

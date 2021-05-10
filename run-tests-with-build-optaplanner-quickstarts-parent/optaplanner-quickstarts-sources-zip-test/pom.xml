@@ -30,13 +30,10 @@
         <configuration>
           <!-- kogito-runtimes tests were not designed to run in parallel -->
           <parallelThreads>1</parallelThreads>
-          <profiles>productized</profiles>
+          <profiles><!-- no productized profile in optaplanner-quickstarts --></profiles>
           <pomIncludes>
-            <pomInclude>kogito-*/*optaplanner*/pom.xml</pomInclude>
+            <pomInclude>kogito-*/*optaplanner-quickstarts*/pom.xml</pomInclude>
           </pomIncludes>
-          <pomExcludes>
-            <pomExclude>kogito-*/*optaplanner-quickstarts*/pom.xml</pomExclude>
-          </pomExcludes>
         </configuration>
       </plugin>
     </plugins>
