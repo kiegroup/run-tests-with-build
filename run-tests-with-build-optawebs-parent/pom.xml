@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>run-tests-with-build</artifactId>
+        <groupId>org.kie</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>run-tests-with-build-optawebs-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <integration-tests>false</integration-tests>
+        <!-- We can not skip src/main/java module compilation -->
+        <maven.main.skip>false</maven.main.skip>
+        <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
+        <maven.test.failure.ignore>false</maven.test.failure.ignore>
+        <enforcer.regex.optawebs.test>^(sources-zip|project-sources|quickstarts-zip)$</enforcer.regex.optawebs.test>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-property</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules combine.children="append">
+                                <requireProperty>
+                                    <property>optawebs.test</property>
+                                    <message>Property optawebs.test is not set!</message>
+                                    <regex>${enforcer.regex.optawebs.test}</regex>
+                                    <regexMessage>Property optawebs.test does not contain expected value ${enforcer.regex.optawebs.test}.</regexMessage>
+                                </requireProperty>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-invoker-plugin</artifactId>
+                    <configuration>
+                        <parallelThreads>1</parallelThreads>
+                        <properties>
+                            <asciidoctor.skip>false</asciidoctor.skip>
+                            <integration-tests>${integration-tests}</integration-tests>
+                            <container.runtime>${container.runtime}</container.runtime>
+                        </properties>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <profiles>
+        <profile>
+            <id>optawebs-sources-zip</id>
+            <activation>
+                <property>
+                    <name>optawebs.test</name>
+                    <value>sources-zip</value>
+                </property>
+            </activation>
+            <properties>
+                <!-- Invoker expecting sources.directory property to point at sources -->
+                <sources.directory>${sources.directory.module.sources.download}</sources.directory>
+            </properties>
+            <modules>
+                <module>../run-tests-with-build-sources-zip-download</module>
+                <module>optawebs-sources-zip-test</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>optawebs-quickstarts-zip</id>
+            <activation>
+                <property>
+                    <name>optawebs.test</name>
+                    <value>quickstarts-zip</value>
+                </property>
+            </activation>
+            <properties>
+                <!-- Invoker expecting sources.directory property to point at sources -->
+                <sources.directory>${sources.directory.module.sources.download}</sources.directory>
+            </properties>
+            <modules>
+                <module>../run-tests-with-build-sources-zip-download</module>
+                <module>optawebs-quickstarts-zip-test</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>optawebs-project-sources</id>
+            <activation>
+                <property>
+                    <name>optawebs.test</name>
+                    <value>project-sources</value>
+                </property>
+            </activation>
+            <properties>
+                <!-- Invoker expecting sources.directory property to point at sources -->
+                <sources.directory>${sources.directory.module.project.sources.dependency.get}</sources.directory>
+            </properties>
+            <modules>
+                <module>../run-tests-with-build-project-sources-dependency-get</module>
+                <module>optawebs-project-sources-test</module>
+            </modules>
+        </profile>
+    </profiles>
+</project>

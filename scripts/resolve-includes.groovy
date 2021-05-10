@@ -79,7 +79,11 @@ private List<String> resolveLeafProjects(Stream<String> projects) {
  * @param projectList list of paths
  */
 private void logDebug(String fileName, ArrayList<String> projectList) {
-    new File(logdir + "/" + fileName).write projectList.stream().map({ it ->
+    def logdirPath = Path.of(logdir)
+    if (!Files.isDirectory(logdirPath)) {
+        Files.createDirectory(logdirPath)
+    }
+    logdirPath.resolve(fileName).toFile().write projectList.stream().map({ it ->
         it + System.lineSeparator()
     }).collect(Collectors.joining())
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build-optaplanner-parent</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+
+  <artifactId>optaplanner-project-sources-test</artifactId>
+
+  <dependencies>
+    <!-- define as dependency to assure reactor order -->
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>run-tests-with-build-project-sources-dependency-get</artifactId>
+      <type>pom</type>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>resolve-includes</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <configuration>
+          <!-- kogito-runtimes tests were not designed to run in parallel -->
+          <parallelThreads>1</parallelThreads>
+          <!--
+          script deciding if included project is:
+            executed (either script missing or returning true)
+              or
+            skipped (when returns false or throws error) -->
+          <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
+          <pomIncludes>
+            <!-- includes everything, filtering is done in resolve-includes.groovy script
+            which adds invoker-run.groovy script containing 'return false' near each pom.xml
+            that should be excluded.-->
+            <pomInclude>**/pom.xml</pomInclude>
+          </pomIncludes>
+          <pomExcludes>
+            <!-- Excludes work still as expected. -->
+          </pomExcludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

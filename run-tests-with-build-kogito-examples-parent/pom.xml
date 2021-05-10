@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+
+  <artifactId>run-tests-with-build-kogito-examples-parent</artifactId>
+
+  <properties>
+    <!-- There are some java classes under src/main/java used during test runtime (dmn-listener-quarkus for example) -->
+    <!-- We can not skip src/main/java module compilation -->
+    <maven.main.skip>false</maven.main.skip>
+
+    <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
+    <maven.test.failure.ignore>false</maven.test.failure.ignore>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-property</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules combine.children="append">
+                <requireProperty>
+                  <property>kogito.examples.test</property>
+                  <message>Property kogito.examples.test is not set!</message>
+                  <regex>^(sources-zip|project-sources|quickstarts-zip)$</regex>
+                  <regexMessage>Property kogito.examples.test does not contained allow value (sources-zip|project-sources|quickstarts-zip).</regexMessage>
+                </requireProperty>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>kogito-examples-sources-zip</id>
+      <activation>
+        <property>
+          <name>kogito.examples.test</name>
+          <value>sources-zip</value>
+        </property>
+      </activation>
+      <properties>
+        <!-- Invoker expecting sources.directory property to point at sources -->
+        <sources.directory>${sources.directory.module.sources.download}</sources.directory>
+      </properties>
+      <modules>
+        <module>../run-tests-with-build-sources-zip-download</module>
+        <module>kogito-examples-sources-zip-test</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>kogito-examples-project-quickstarts-zip</id>
+      <activation>
+        <property>
+          <name>kogito.examples.test</name>
+          <value>quickstarts-zip</value>
+        </property>
+      </activation>
+      <properties>
+        <!-- Invoker expecting sources.directory property to point at sources -->
+        <sources.directory>${sources.directory.module.sources.download}</sources.directory>
+      </properties>
+      <modules>
+        <module>../run-tests-with-build-sources-zip-download</module>
+        <module>kogito-examples-quickstarts-zip-test</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>kogito-examples-project-sources</id>
+      <activation>
+        <property>
+          <name>kogito.examples.test</name>
+          <value>project-sources</value>
+        </property>
+      </activation>
+      <properties>
+        <!-- Invoker expecting sources.directory property to point at sources -->
+        <sources.directory>${sources.directory.module.project.sources.dependency.get}</sources.directory>
+      </properties>
+      <modules>
+        <module>../run-tests-with-build-project-sources-dependency-get</module>
+        <module>kogito-examples-project-sources-test</module>
+      </modules>
+    </profile>
+  </profiles>
+
+</project>
