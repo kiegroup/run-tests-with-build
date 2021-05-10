@@ -29,7 +29,6 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
-          <profiles>productized</profiles>
           <pomIncludes>
             <pomInclude>optaweb*/*/pom.xml</pomInclude>
           </pomIncludes>
