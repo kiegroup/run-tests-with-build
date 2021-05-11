@@ -14,8 +14,12 @@ private Stream<String> mvnExecute(String mvnCommand) {
     log.info("Waiting up to $mavenExecutionTimeoutMs ms for resolution to end.")
     def stdoutLogFile = "mvn-out.log"
     log.info("Standard output will be available in ${Path.of(logdir).resolve(stdoutLogFile).toString()} after the build finishes.")
+    // combine session.userProperties and System.getenv and pass into the process
+    Closure<Map.Entry> formatProp = { it -> "$it.key=$it.value" }
+    List envPropsList = session.userProperties.collect(formatProp) + System.getenv().collect(formatProp)
+    log.debug("Passing env properties: ${envPropsList.toString()}")
     def mvnExec = mvnCommand
-            .execute(null, new File(basedir)
+            .execute(envPropsList, new File(basedir)
                     .listFiles({ d, f -> d.isDirectory() } as FilenameFilter)[0])
     mvnExec.consumeProcessOutput(out, err)
     mvnExec.waitForOrKill(Long.valueOf(mavenExecutionTimeoutMs))
