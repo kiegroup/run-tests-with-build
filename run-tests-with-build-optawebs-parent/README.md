@@ -11,28 +11,28 @@ Download of artifacts is provided by means described in [Module structure](#modu
 * optaweb-employee-rostering
   ```
   mvn clean verify \
-  -Doptawebs.test=project-sources \
+  -Dtest.type=project-sources \
   -Dproject.sources.artifact=optaweb-employee-rostering \
-  -Doptaplanner.download.build.version=<VERSION>
+  -Ddownload.sources.version=<VERSION>
   ```
 * optaweb-vehicle-routing
   ```
   mvn clean verify \
-  -Doptawebs.test=project-sources \
+  -Dtest.type=project-sources \
   -Dproject.sources.artifact=optaweb-vehicle-routing \
-  -Doptaplanner.download.build.version=<VERSION>
+  -Ddownload.sources.version=<VERSION>
   ```
 ### Sources-zip testing
 ```
 mvn clean verify \
 -Dtest.type=sources-zip \
--Ddownload.source.url=http://link.to/source.zip
+-Ddownload.sources.url=http://link.to/source.zip
 ```
 ### Quickstarts-zip testing
 ```
 mvn clean verify \
 -Dtest.type=quickstarts-zip \
--Ddownload.source.url=http://link.to/quickstarts.zip
+-Ddownload.sources.url=http://link.to/quickstarts.zip
 ```
 ### Additional configuration
 * `-Dintegration-tests={true|false}` run integration cypress tests on docker

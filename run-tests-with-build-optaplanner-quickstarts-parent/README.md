@@ -10,22 +10,22 @@ Download of artifacts is provided by means described in [Module structure](#modu
 ### Project-sources testing
 ```
 mvn clean verify \
--Doptaplanner.quickstarts.test=project-sources \
+-Dtest.type=project-sources \
 -Dproject.sources.artifact=optaplanner-quickstarts \
--Doptaplanner.download.build.version=<VERSION>
+-Ddownload.sources.version=<VERSION>
 ```
 ### Sources-zip testing
 ```
 mvn clean verify \
 -Dtest.type=sources-zip \
--Ddownload.source.url=http://link.to/source.zip
+-Ddownload.sources.url=http://link.to/source.zip
 ```
 
 ### Quickstarts-zip testing
 ```
 mvn clean verify \
 -Dtest.type=quickstarts-zip \
--Ddownload.source.url=http://link.to/quickstarts.zip
+-Ddownload.sources.url=http://link.to/quickstarts.zip
 ```
 
 ## Module structure

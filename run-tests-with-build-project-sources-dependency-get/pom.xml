@@ -34,6 +34,12 @@
             <configuration>
               <rules combine.children="append">
                 <requireProperty>
+                  <property>download.sources.version</property>
+                  <message>Property download.sources.version is not set!</message>
+                  <regex>.+</regex>
+                  <regexMessage>Property download.sources.version is not set.</regexMessage>
+                </requireProperty>
+                <requireProperty>
                   <property>project.sources.artifact</property>
                   <regex>${enforcer.regex.project.sources.artifact}</regex>
                   <regexMessage>Property project.sources.artifact does not contain expected value ${enforcer.regex.project.sources.artifact}.</regexMessage>
@@ -99,7 +105,7 @@
       <properties>
         <group.id>org.kie.kogito</group.id>
         <artifact.id>kogito-runtimes</artifact.id>
-        <version>${kogito.download.build.version}</version>
+        <version>${download.sources.version}</version>
       </properties>
     </profile>
     <profile>
@@ -113,7 +119,7 @@
       <properties>
         <group.id>org.kie.kogito</group.id>
         <artifact.id>kogito-examples</artifact.id>
-        <version>${kogito.download.build.version}</version>
+        <version>${download.sources.version}</version>
       </properties>
     </profile>
     <profile>
@@ -127,7 +133,7 @@
       <properties>
         <group.id>org.optaplanner</group.id>
         <artifact.id>optaplanner</artifact.id>
-        <version>${optaplanner.download.build.version}</version>
+        <version>${download.sources.version}</version>
       </properties>
     </profile>
     <profile>
@@ -141,7 +147,7 @@
       <properties>
         <group.id>org.optaplanner</group.id>
         <artifact.id>optaplanner-quickstarts-parent</artifact.id>
-        <version>${optaplanner.download.build.version}</version>
+        <version>${download.sources.version}</version>
       </properties>
     </profile>
     <profile>
@@ -155,7 +161,7 @@
       <properties>
         <group.id>org.optaweb.vehiclerouting</group.id>
         <artifact.id>optaweb-vehicle-routing</artifact.id>
-        <version>${optaplanner.download.build.version}</version>
+        <version>${download.sources.version}</version>
       </properties>
     </profile>
     <profile>
@@ -169,7 +175,7 @@
       <properties>
         <group.id>org.optaweb.employeerostering</group.id>
         <artifact.id>optaweb-employee-rostering</artifact.id>
-        <version>${optaplanner.download.build.version}</version>
+        <version>${download.sources.version}</version>
       </properties>
     </profile>
   </profiles>

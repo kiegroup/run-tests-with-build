@@ -50,7 +50,7 @@ Kogito modules fall into two categories regarding what is tested and how downloa
   <artifactItem>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-runtimes</artifactId>
-    <version>${kogito.download.build.version}</version>
+    <version>${download.sources.version}</version>
     <classifier>project-sources</classifier>
     <type>tar.gz</type>
   </artifactItem>
