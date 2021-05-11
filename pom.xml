@@ -45,7 +45,15 @@
     <!--TODO - settings.xml-->
     <main.basedir>${maven.multiModuleProjectDirectory}</main.basedir>
     <settings.xml.file>${main.basedir}/settings/settings.xml</settings.xml.file>
+
+    <!-- Property where invoker expects the sources to be downloaded into -->
     <sources.directory>${project.build.directory}/sources/</sources.directory>
+
+    <!--
+    Properties used by respective modules that provide sources download support.
+    These values should replace sources.directory value when using those particular modules.
+    Used in profiles within kogito-runtimes-parent, kogito-examples-parent,...
+    -->
     <sources.directory.module.sources.download>
       ${main.basedir}/run-tests-with-build-sources-download/target/sources
     </sources.directory.module.sources.download>
