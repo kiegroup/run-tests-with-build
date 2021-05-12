@@ -132,7 +132,7 @@
       </activation>
       <properties>
         <group.id>org.optaplanner</group.id>
-        <artifact.id>optaplanner</artifact.id>
+        <artifact.id>optaplanner-parent</artifact.id>
         <version>${download.sources.version}</version>
       </properties>
     </profile>

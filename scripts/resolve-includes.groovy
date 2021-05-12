@@ -117,7 +117,7 @@ private void writeInvokerScripts(List<String> locations, String value) {
  * @return mvn command string
  */
 private String getMvnCommand() {
-    String mvnCommandToRun = "mvn -q -am exec:exec -Dexec.executable=pwd"
+    String mvnCommandToRun = "mvn -q -am exec:exec -Dexec.executable=pwd -Dexec.args=\"\""
     if (mavenReactorFiltering) {
         mvnCommandToRun = mvnCommandToRun + " $mavenReactorFiltering"
     }
