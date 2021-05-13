@@ -38,7 +38,9 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
-          <profiles>productized</profiles>
+          <properties>
+            <productized>true</productized>
+          </properties>
           <!-- path relative from the pom.xml location below -->
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
