@@ -40,6 +40,7 @@
     <groovy.version>3.0.8</groovy.version>
     <enforcer.plugin.version>3.0.0-M2</enforcer.plugin.version>
     <download.plugin.version>1.6.3</download.plugin.version>
+    <resources.plugin.version>3.1.0</resources.plugin.version>
 
     <kie.download.build.version>7.48.0.Final</kie.download.build.version>
     <!--TODO - settings.xml-->
@@ -240,7 +241,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.1.0</version>
+          <version>${resources.plugin.version}</version>
           <executions>
             <execution>
               <id>copy-invoker-properties</id>
