@@ -237,6 +237,31 @@
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>${enforcer.plugin.version}</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.1.0</version>
+          <executions>
+            <execution>
+              <id>copy-invoker-properties</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${sources.directory}</outputDirectory>
+                <resources>
+                  <resource>
+                    <directory>${main.basedir}/config-files</directory>
+                    <includes>
+                      <include>invoker.properties</include>
+                    </includes>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>

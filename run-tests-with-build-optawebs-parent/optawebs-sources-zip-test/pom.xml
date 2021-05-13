@@ -26,8 +26,19 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-invoker-properties</id>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
+          <!-- path relative from the pom.xml location below -->
+          <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
             <!-- relying here that which particular of the optaweb apps is tested is decided in run-tests-with-build-sources-zip-download -->
             <pomInclude>kogito-*/*optaweb*/pom.xml</pomInclude>

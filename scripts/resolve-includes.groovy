@@ -20,7 +20,7 @@ private Stream<String> mvnExecute(String mvnCommand) {
     log.debug("Passing env properties: ${envPropsList.toString()}")
     def mvnExec = mvnCommand
             .execute(envPropsList, new File(basedir)
-                    .listFiles({ d, f -> d.isDirectory() } as FilenameFilter)[0])
+                    .listFiles({ d, f -> Files.isDirectory(d.toPath().resolve(f)) } as FilenameFilter)[0])
     mvnExec.consumeProcessOutput(out, err)
     mvnExec.waitForOrKill(Long.valueOf(mavenExecutionTimeoutMs))
     logDebug(stdoutLogFile, out.toString().lines().collect(Collectors.toList()))
@@ -141,8 +141,25 @@ private void excludeFromInvokerExecution(List toExclude) {
     writeInvokerScripts(toExclude, "false")
 }
 
+/**
+ * Copy invoker.properties into each project dir provided.
+ * @param projects list of relative paths to particular projects
+ */
+private void copyInvokerPropertiesToProjects(List<String> projects) {
+    def basedirPath = Path.of(basedir)
+    def invokerPropertiesFileName = "invoker.properties"
+    Path invokerPropertiesFile = basedirPath.resolve(invokerPropertiesFileName)
+    if (Files.exists(invokerPropertiesFile)) {
+        log.info("Copying invoker.properties file into all leaf projects. (from ${invokerPropertiesFile.toString()})")
+        projects.each { relativePath -> Files.copy(invokerPropertiesFile, basedirPath.resolve(relativePath).resolve(invokerPropertiesFileName)) }
+    } else {
+        log.info("Not using invoker.properties. No invoker.properties file found in ${invokerPropertiesFile.toString()}")
+    }
+}
+
 Stream<String> projectsInReactor = mvnExecute(getMvnCommand())
 List leafProjects = resolveLeafProjects(projectsInReactor)
+copyInvokerPropertiesToProjects(leafProjects)
 List dirsWithPoms = findAllDirsWithPom()
 List toExclude = dirsWithPoms.minus(leafProjects)
 excludeFromInvokerExecution(toExclude)

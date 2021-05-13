@@ -26,9 +26,20 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-invoker-properties</id>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
+          <!-- path relative from the pom.xml location below -->
+          <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
             <pomInclude>optaweb*/*/pom.xml</pomInclude>
           </pomIncludes>

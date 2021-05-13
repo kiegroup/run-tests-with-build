@@ -26,10 +26,21 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-invoker-properties</id>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
           <profiles>productized</profiles>
+          <!-- path relative from the pom.xml location below -->
+          <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
             <!-- Use kogito-examples*/pom.xml -->
             <!-- once https://issues.redhat.com/browse/RHPAM-3649 is resolved -->

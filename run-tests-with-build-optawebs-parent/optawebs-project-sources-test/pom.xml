@@ -23,6 +23,15 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-invoker-properties</id>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
