@@ -221,7 +221,7 @@
                 </scripts>
                 <properties>
                   <basedir>${sources.directory}</basedir>
-                  <logdir>${sources.directory}/resolve-includes-log</logdir>
+                  <logdir>${project.build.directory}</logdir>
                   <mavenReactorFiltering>${maven.modules.resolution.reactor.filtering}</mavenReactorFiltering>
                   <mavenExecutionTimeoutMs>${maven.modules.resolution.timeout.ms}</mavenExecutionTimeoutMs>
                   <invokerScriptName>${maven.modules.resolution.selector.script.name}</invokerScriptName>
