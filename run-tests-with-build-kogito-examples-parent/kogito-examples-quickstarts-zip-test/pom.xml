@@ -42,19 +42,10 @@
             <productized>true</productized>
           </properties>
           <!-- path relative from the pom.xml location below -->
-          <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
+          <invokerPropertiesFile>../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
-            <!-- Use kogito-examples*/pom.xml -->
-            <!-- once https://issues.redhat.com/browse/RHPAM-3649 is resolved -->
-            <pomInclude>kogito-examples*/*/pom.xml</pomInclude>
+            <pomInclude>kogito-examples*/pom.xml</pomInclude>
           </pomIncludes>
-          <pomExcludes>
-            <!-- https://issues.redhat.com/browse/RHDM-1727 -->
-            <pomExclude>kogito-examples*/dmn-pmml-quarkus-example/pom.xml</pomExclude>
-            <pomExclude>kogito-examples*/dmn-pmml-springboot-example/pom.xml</pomExclude>
-            <pomExclude>kogito-examples*/pmml-quarkus-example/pom.xml</pomExclude>
-            <pomExclude>kogito-examples*/pmml-springboot-example/pom.xml</pomExclude>
-          </pomExcludes>
         </configuration>
       </plugin>
     </plugins>
