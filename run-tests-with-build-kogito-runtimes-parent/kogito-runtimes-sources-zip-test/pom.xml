@@ -62,14 +62,15 @@
             </goals>
             <configuration>
               <!-- path relative to the poms included below -->
-              <invokerPropertiesFile>../../../../invoker.properties</invokerPropertiesFile>
+              <invokerPropertiesFile>../../../invoker.properties</invokerPropertiesFile>
+              <goals>
+                <goal>clean verify -pl !integration-tests-quarkus-processes,!integration-tests-springboot,!integration-tests-kogito-plugin</goal>
+              </goals>
               <pomIncludes>
-                <pomInclude>kogito-*/*kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
+                <pomInclude>kogito-*/*kogito-runtimes*/integration-tests/pom.xml</pomInclude>
               </pomIncludes>
               <pomExcludes>
-                <pomExclude>**/integration-tests-quarkus-processes/pom.xml</pomExclude>
-                <pomExclude>**/integration-tests/integration-tests-springboot/pom.xml</pomExclude>
-                <pomExclude>**/integration-tests/integration-tests-kogito-plugin/pom.xml</pomExclude>
+                <!-- specified using -pl !module-to-exclude above -->
               </pomExcludes>
             </configuration>
           </execution>
