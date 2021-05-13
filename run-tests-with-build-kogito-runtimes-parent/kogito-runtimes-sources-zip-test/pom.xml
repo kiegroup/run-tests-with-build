@@ -38,15 +38,42 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
-          <properties>
-            <productized>true</productized>
-          </properties>
-          <!-- path relative from the pom.xml location below -->
-          <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
-          <pomIncludes>
-            <pomInclude>kogito-*/*kogito-runtimes*/pom.xml</pomInclude>
-          </pomIncludes>
         </configuration>
+        <executions>
+          <execution>
+            <id>run-tests</id>
+            <configuration>
+              <properties>
+                <productized>true</productized>
+              </properties>
+              <!-- path relative to the poms included below -->
+              <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
+              <pomIncludes>
+                <pomInclude>kogito-*/*kogito-runtimes*/pom.xml</pomInclude>
+              </pomIncludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>run-explicitly-integration-tests</id>
+            <phase>test</phase>
+            <goals>
+              <goal>install</goal>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <!-- path relative to the poms included below -->
+              <invokerPropertiesFile>../../../../invoker.properties</invokerPropertiesFile>
+              <pomIncludes>
+                <pomInclude>kogito-*/*kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
+              </pomIncludes>
+              <pomExcludes>
+                <pomExclude>**/integration-tests-quarkus-processes/pom.xml</pomExclude>
+                <pomExclude>**/integration-tests/integration-tests-springboot/pom.xml</pomExclude>
+                <pomExclude>**/integration-tests/integration-tests-kogito-plugin/pom.xml</pomExclude>
+              </pomExcludes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
