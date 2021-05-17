@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+
+  <artifactId>run-tests-with-build-optaplanner-parent</artifactId>
+  <properties>
+    <!-- We can not skip src/main/java module compilation -->
+    <maven.main.skip>false</maven.main.skip>
+
+    <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
+    <maven.test.failure.ignore>false</maven.test.failure.ignore>
+    <!-- just for enforcer activation section of profiles does not interpolate properties -->
+    <activation.property.name>test.type</activation.property.name>
+    <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources})$</enforcer.regex.activation.property>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-property</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules combine.children="append">
+                <requireProperty>
+                  <property>${activation.property.name}</property>
+                  <message>Property ${activation.property.name} is not set!</message>
+                  <regex>${enforcer.regex.activation.property}</regex>
+                  <regexMessage>Property ${activation.property.name} does not contain expected value
+                    ${enforcer.regex.activation.property}.</regexMessage>
+                </requireProperty>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>optaplanner-sources-zip</id>
+      <activation>
+        <property>
+          <name>test.type</name>
+          <value>sources-zip</value>
+        </property>
+      </activation>
+      <properties>
+        <!-- Invoker expecting sources.directory property to point at sources -->
+        <sources.directory>${sources.directory.module.sources.download}</sources.directory>
+      </properties>
+      <modules>
+        <module>../run-tests-with-build-sources-zip-download</module>
+        <module>optaplanner-sources-zip-test</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>optaplanner-project-sources</id>
+      <activation>
+        <property>
+          <name>test.type</name>
+          <value>project-sources</value>
+        </property>
+      </activation>
+      <properties>
+        <!-- Invoker expecting sources.directory property to point at sources -->
+        <sources.directory>${sources.directory.module.project.sources.dependency.get}</sources.directory>
+      </properties>
+      <modules>
+        <module>../run-tests-with-build-project-sources-dependency-get</module>
+        <module>optaplanner-project-sources-test</module>
+      </modules>
+    </profile>
+  </profiles>
+</project>

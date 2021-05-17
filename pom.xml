@@ -13,20 +13,19 @@
     <module>run-tests-with-build-drools</module>
     <module>run-tests-with-build-drools-turtle</module>
     <module>run-tests-with-build-jbpm</module>
-    <module>run-tests-with-build-optaplanner</module>
     <module>run-tests-with-build-kie-osgi</module>
     <module>run-tests-with-build-camel-container</module>
     <module>run-tests-with-build-integration</module>
     <module>run-tests-with-build-business-central-community</module>
-    <module>run-tests-with-build-kogito-examples</module>
-    <module>run-tests-with-build-kogito-runtimes</module>
-    <module>run-tests-with-build-kogito-apps</module>
-    <module>run-tests-with-build-kogito-decision-services-quickstarts</module>
-    <module>run-tests-with-build-kogito-decision-services-quickstarts-optawebs</module>
-    <module>run-tests-with-build-kogito-sources</module>
-    <module>run-tests-with-build-kogito-sources-optawebs</module>
-    <module>run-tests-with-build-optaplanner-optawebs</module>
-    <module>run-tests-with-build-optaplanner-optawebs-parent</module>
+    <!-- Not a module on purpose, invoke using -f or from that folder:
+    <module>run-tests-with-build-sources-zip-download</module>
+    <module>run-tests-with-build-project-sources-dependency-get</module>
+    <module>run-tests-with-build-kogito-runtimes-parent</module>
+    <module>run-tests-with-build-kogito-examples-parent</module>
+    <module>run-tests-with-build-optaplanner-parent</module>
+    <module>run-tests-with-build-optaplanner-quickstarts-parent</module>
+    <module>run-tests-with-build-optawebs-parent</module>
+    -->
   </modules>
 
   <properties>
@@ -41,14 +40,27 @@
     <groovy.version>3.0.8</groovy.version>
     <enforcer.plugin.version>3.0.0-M2</enforcer.plugin.version>
     <download.plugin.version>1.6.3</download.plugin.version>
+    <resources.plugin.version>3.1.0</resources.plugin.version>
 
     <kie.download.build.version>7.48.0.Final</kie.download.build.version>
-    <kogito.download.build.version>2.0.0-SNAPSHOT</kogito.download.build.version>
-    <optaplanner.download.build.version>8.3.0.redhat-2021041404</optaplanner.download.build.version>
     <!--TODO - settings.xml-->
     <main.basedir>${maven.multiModuleProjectDirectory}</main.basedir>
     <settings.xml.file>${main.basedir}/settings/settings.xml</settings.xml.file>
+
+    <!-- Property where invoker expects the sources to be downloaded into -->
     <sources.directory>${project.build.directory}/sources/</sources.directory>
+
+    <!--
+    Properties used by respective modules that provide sources download support.
+    These values should replace sources.directory value when using those particular modules.
+    Used in profiles within kogito-runtimes-parent, kogito-examples-parent,...
+    -->
+    <sources.directory.module.sources.download>
+      ${main.basedir}/run-tests-with-build-sources-download/target/sources
+    </sources.directory.module.sources.download>
+    <sources.directory.module.project.sources.dependency.get>
+      ${main.basedir}/run-tests-with-build-project-sources-dependency-get/target/sources
+    </sources.directory.module.project.sources.dependency.get>
 
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
     <maven.main.skip>true</maven.main.skip>
@@ -66,13 +78,20 @@
     <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
     <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
-    <kogito.decision.services.quickstarts.url>NOT_SET</kogito.decision.services.quickstarts.url>
-    <kogito.sources.url>NOT_SET</kogito.sources.url>
+
+    <!-- Properties used by source-downloading modules (*-project-sources-dependency-get, *-sources-zip-download) -->
+    <download.sources.url></download.sources.url> <!-- keep empty to be able to check by enforcer -->
+    <download.sources.version></download.sources.version> <!-- keep empty to be able to check by enforcer -->
 
     <!-- properties affecting maven modules resolution using resolve-includes.groovy script -->
     <maven.modules.resolution.timeout.ms>600000</maven.modules.resolution.timeout.ms>
     <maven.modules.resolution.reactor.filtering>-Dproductized</maven.modules.resolution.reactor.filtering>
     <maven.modules.resolution.selector.script.name>invoker-run.groovy</maven.modules.resolution.selector.script.name>
+
+    <!-- enforcer test type properties -->
+    <enforcer.test.type.project.sources>project-sources</enforcer.test.type.project.sources>
+    <enforcer.test.type.sources.zip>sources-zip</enforcer.test.type.sources.zip>
+    <enforcer.test.type.quickstarts.zip>quickstarts-zip</enforcer.test.type.quickstarts.zip>
   </properties>
 
   <dependencyManagement>
@@ -218,6 +237,31 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
           <version>${enforcer.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${resources.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>copy-invoker-properties</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${sources.directory}</outputDirectory>
+                <resources>
+                  <resource>
+                    <directory>${main.basedir}/config-files</directory>
+                    <includes>
+                      <include>invoker.properties</include>
+                    </includes>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

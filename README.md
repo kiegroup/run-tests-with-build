@@ -21,27 +21,23 @@ FUSE_VERSIONS_PROPERTY_FILE ... Property file with Fuse versions and binaries
 eap.url ... URL with EAP distribution file
 ```
 
-### Kogito modules
-
+### Kogito and OptaPlanner modules
+There is a specific parent module for the repositories:
+* [run-tests-with-build-kogito-runtimes-parent](./run-tests-with-build-kogito-runtimes-parent)
+* [run-tests-with-build-kogito-examples-parent](./run-tests-with-build-kogito-examples-parent)
+* [run-tests-with-build-optaplanner-parent](./run-tests-with-build-optaplanner-parent)
+* [run-tests-with-build-optaplanner-quickstarts-parent](./run-tests-with-build-optaplanner-quickstarts-parent)
+* [run-tests-with-build-optawebs-parent](./run-tests-with-build-optawebs-parent)
 #### Approach
 
-Kogito modules fall into two categories:
+Kogito modules fall into two categories regarding what is tested and how downloaded:
 
-1. Tests for already built and published maven artifacts
+1. Tests for already built and published maven artifacts covered in modules:
+* **\*\*/\*-project-sources-test**
 
-* [run-tests-with-build-kogito-runtimes](./run-tests-with-build-kogito-runtimes/README.md)
-* [run-tests-with-build-kogito-examples](./run-tests-with-build-kogito-examples/README.md)
-* [run-tests-with-build-kogito-apps](./run-tests-with-build-kogito-apps/README.md) - no yet readily available, just
-  config in place.
-
-2. Tests for zips with project sources
-
-* [run-tests-with-build-kogito-sources](./run-tests-with-build-kogito-sources)
-* [run-tests-with-build-kogito-decision-services-quickstarts](./run-tests-with-build-kogito-decision-services-quickstarts)
-* The two above don't include invocations of optaweb apps, those are handled separately.
-  * [run-tests-with-build-kogito-sources-optawebs](./run-tests-with-build-kogito-sources-optawebs)
-  * [run-tests-with-build-kogito-decision-services-quickstarts-optawebs](./run-tests-with-build-kogito-decision-services-quickstarts-optawebs)
-  * Relying on profiles specified in [run-test-with-build-optaplanner-optawebs-parent](./run-tests-with-build-optaplanner-optawebs-parent)
+2. Tests for zips with project sources covered in modules:
+* **\*\*/\*-sources-zip-test**
+* **\*\*/\*-quickstarts-zip-test**
 
 #### Testing Previously Built Maven Artifacts using the original project tests
 
@@ -54,7 +50,7 @@ Kogito modules fall into two categories:
   <artifactItem>
     <groupId>org.kie.kogito</groupId>
     <artifactId>kogito-runtimes</artifactId>
-    <version>${kogito.download.build.version}</version>
+    <version>${download.sources.version}</version>
     <classifier>project-sources</classifier>
     <type>tar.gz</type>
   </artifactItem>
@@ -66,7 +62,7 @@ Kogito modules fall into two categories:
 * For this purpose the [resolve-includes groovy script](#resolve-includes-groovy-script) is provided. This script is
   supposed to be invoked after sources download, but before Maven invoker invocation.
 
-#### Testing zips with project sources
+#### Testing zips with sources
 
 * In this case the main focus is on building the project as a whole, thus checking the build itself, not anything else.
 * Approach here is to download and extract the archive with sources and pass respective pom.xml into Invoker.
