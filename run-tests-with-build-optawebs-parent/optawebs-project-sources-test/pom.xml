@@ -12,6 +12,15 @@
 
     <artifactId>optawebs-project-sources-test</artifactId>
 
+    <properties>
+        <sources.directory>${sources.directory.module.project.sources.dependency.get}</sources.directory>
+        <openshift.api-url>https://api.production.rhba.openshift-aws.rhocf-dev.com:6443</openshift.api-url>
+        <openshift.user>admin</openshift.user>
+        <openshift.password>admin</openshift.password>
+        <version.cypress.docker>3.6.0</version.cypress.docker>
+        <vrp.osm-test-data-url>https://github.com/kiegroup/optaweb-vehicle-routing/raw/master/optaweb-vehicle-routing-standalone/data/openstreetmap/planet_12.032%2C53.0171_12.1024%2C53.0491.osm.pbf</vrp.osm-test-data-url>
+    </properties>
+
     <dependencies>
         <!-- define as dependency to assure reactor order -->
         <dependency>
@@ -70,4 +79,42 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>openshift</id>
+            <activation>
+                <property>
+                    <name>openshift</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <executions>
+                            <execution>
+                                <id>deploy-to-openshift-and-test</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${project.basedir}/${project.sources.artifact}-test-script-openshift.sh</executable>
+                                    <arguments>
+                                        <argument>${sources.directory.module.project.sources.dependency.get}/${project.sources.artifact}-${download.sources.version}</argument>
+                                        <argument>${version.cypress.docker}</argument>
+                                        <argument>${openshift.api-url}</argument>
+                                        <argument>${openshift.user}</argument>
+                                        <argument>${openshift.password}</argument>
+                                        <argument>${vrp.osm-test-data-url}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
