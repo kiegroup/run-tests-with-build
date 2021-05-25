@@ -117,7 +117,7 @@
         </property>
       </activation>
       <properties>
-        <group.id>org.kie.kogito</group.id>
+        <group.id>org.kie.kogito.examples</group.id>
         <artifact.id>kogito-examples</artifact.id>
         <version>${download.sources.version}</version>
       </properties>
