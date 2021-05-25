@@ -48,8 +48,9 @@ oc new-project "${openshift_project}"
 oc get project "${openshift_project}"
 
 chmod u+x "${project_basedir}"/runOnOpenShift.sh
-sed '/mvn*/s/$/ -Denforcer.skip -s '$settings_file'/g' "${project_basedir}"/runOnOpenShift.sh
-sed -i '/mvn*/s/$/ -Denforcer.skip -s '$settings_file'/g' "${project_basedir}"/runOnOpenShift.sh
+
+sed 's#mvn clean install -DskipTests -Dquarkus.profile=postgres#mvn clean install -DskipTests -Dquarkus.profile=postgres -Denforcer.skip -s '$settings_file'#g' "${project_basedir}"/runOnOpenShift.sh
+sed -i 's#mvn clean install -DskipTests -Dquarkus.profile=postgres#mvn clean install -DskipTests -Dquarkus.profile=postgres -Denforcer.skip -s '$settings_file'#g' "${project_basedir}"/runOnOpenShift.sh
 
 
 yes | "${project_basedir}"/runOnOpenShift.sh || {
@@ -68,14 +69,14 @@ readonly frontend_directory=$(find "${project_basedir}" -maxdepth 1 -name "*fron
 
 readonly application_url="http://$(oc get route standalone -o custom-columns=:spec.host | tr -d '\n')"
 # wait for the application to become available
-wait_for_url "${application_url}" 60
-
-# run the cypress test
-readonly cypress_image_version=$2
-run_cypress "${application_url}" "${frontend_directory}" "${cypress_image_version}"
-
-# store logs from all pods in the project
-store_logs_from_pods "target"
-
-# delete the project after the test run
-oc delete project "${openshift_project}"
+#wait_for_url "${application_url}" 60
+#
+## run the cypress test
+#readonly cypress_image_version=$2
+#run_cypress "${application_url}" "${frontend_directory}" "${cypress_image_version}"
+#
+## store logs from all pods in the project
+#store_logs_from_pods "target"
+#
+## delete the project after the test run
+#oc delete project "${openshift_project}"
