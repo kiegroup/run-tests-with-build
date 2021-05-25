@@ -35,6 +35,7 @@ readonly project_basedir=$1
 readonly openshift_api_url=$3
 readonly openshift_user=$4
 readonly openshift_password=$5
+readonly settings_file=$6
 
 oc login -u "${openshift_user}" -p "${openshift_password}" "${openshift_api_url}" --insecure-skip-tls-verify=true
 
@@ -47,9 +48,9 @@ oc new-project "${openshift_project}"
 oc get project "${openshift_project}"
 
 chmod u+x "${project_basedir}"/runOnOpenShift.sh
+sed '/mvn*/s/$/ -Denforcer.skip -s '$settings_file'/g' "${project_basedir}"/runOnOpenShift.sh
+sed -i '/mvn*/s/$/ -Denforcer.skip -s '$settings_file'/g' "${project_basedir}"/runOnOpenShift.sh
 
-#changes maven command to skip enforcer during standalone rebuild
-sed -i '/mvn*/s/$/ -Denforcer.skip/g' "${project_basedir}"/runOnOpenShift.sh
 
 yes | "${project_basedir}"/runOnOpenShift.sh || {
   echo "runOnOpenShift.sh failed!"
