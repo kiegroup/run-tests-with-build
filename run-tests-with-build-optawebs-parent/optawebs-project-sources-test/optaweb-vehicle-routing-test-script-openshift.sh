@@ -48,6 +48,7 @@ oc get project "${openshift_project}"
 
 readonly test_osm_data_url=$6
 chmod u+x "${project_basedir}"/runOnOpenShift.sh
+
 yes | "${project_basedir}"/runOnOpenShift.sh test.osm.pbf DE "${test_osm_data_url}" || {
   echo "runOnOpenShift.sh failed!"
   echo "Saving logs and exiting."

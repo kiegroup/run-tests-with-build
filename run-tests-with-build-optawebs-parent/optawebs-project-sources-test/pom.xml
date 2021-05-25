@@ -102,7 +102,7 @@
                                 <configuration>
                                     <executable>${project.basedir}/${project.sources.artifact}-test-script-openshift.sh</executable>
                                     <arguments>
-                                        <argument>${sources.directory.module.project.sources.dependency.get}/${project.sources.artifact}-${download.sources.version}</argument>
+                                        <argument>${sources.directory.module.project.sources.dependency.get}/target/sources/${project.sources.artifact}-${download.sources.version}</argument>
                                         <argument>${version.cypress.docker}</argument>
                                         <argument>${openshift.api-url}</argument>
                                         <argument>${openshift.user}</argument>

@@ -47,6 +47,10 @@ oc new-project "${openshift_project}"
 oc get project "${openshift_project}"
 
 chmod u+x "${project_basedir}"/runOnOpenShift.sh
+
+#changes maven command to skip enforcer during standalone rebuild
+sed -i '/mvn*/s/$/ -Denforcer.skip/g' "${project_basedir}"/runOnOpenShift.sh
+
 yes | "${project_basedir}"/runOnOpenShift.sh || {
   echo "runOnOpenShift.sh failed!"
   echo "Saving logs and exiting."
@@ -61,7 +65,7 @@ readonly frontend_directory=$(find "${project_basedir}" -maxdepth 1 -name "*fron
   exit 1
 }
 
-readonly application_url="http://$(oc get route frontend -o custom-columns=:spec.host | tr -d '\n')"
+readonly application_url="http://$(oc get route standalone -o custom-columns=:spec.host | tr -d '\n')"
 # wait for the application to become available
 wait_for_url "${application_url}" 60
 
