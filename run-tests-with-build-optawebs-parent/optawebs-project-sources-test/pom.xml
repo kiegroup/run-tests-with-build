@@ -18,7 +18,6 @@
         <openshift.user>admin</openshift.user>
         <openshift.password>admin</openshift.password>
         <version.cypress.docker>3.6.0</version.cypress.docker>
-        <vrp.osm-test-data-url>https://github.com/kiegroup/optaweb-vehicle-routing/raw/master/optaweb-vehicle-routing-standalone/data/openstreetmap/planet_12.032%2C53.0171_12.1024%2C53.0491.osm.pbf</vrp.osm-test-data-url>
     </properties>
 
     <dependencies>
@@ -108,7 +107,6 @@
                                         <argument>${openshift.user}</argument>
                                         <argument>${openshift.password}</argument>
                                         <argument>${settings.xml.file}</argument>
-                                        <argument>${vrp.osm-test-data-url}</argument>
                                     </arguments>
                                 </configuration>
                             </execution>

@@ -31,6 +31,8 @@ readonly project_basedir=$1
   exit 1
 }
 
+readonly test_osm_data_url="https://github.com/kiegroup/optaweb-vehicle-routing/raw/master/optaweb-vehicle-routing-standalone/data/openstreetmap/planet_12.032%2C53.0171_12.1024%2C53.0491.osm.pbf"
+
 # login to OpenShift
 readonly openshift_api_url=$3
 readonly openshift_user=$4
@@ -46,7 +48,6 @@ oc new-project "${openshift_project}"
 # make sure the project is ready
 oc get project "${openshift_project}"
 
-readonly test_osm_data_url=$6
 chmod u+x "${project_basedir}"/runOnOpenShift.sh
 
 yes | "${project_basedir}"/runOnOpenShift.sh test.osm.pbf DE "${test_osm_data_url}" || {
