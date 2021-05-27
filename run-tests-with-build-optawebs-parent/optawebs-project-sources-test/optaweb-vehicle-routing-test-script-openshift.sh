@@ -31,6 +31,7 @@ readonly project_basedir=$1
   exit 1
 }
 
+#open street map git url
 readonly test_osm_data_url="https://github.com/kiegroup/optaweb-vehicle-routing/raw/master/optaweb-vehicle-routing-standalone/data/openstreetmap/planet_12.032%2C53.0171_12.1024%2C53.0491.osm.pbf"
 
 # login to OpenShift
