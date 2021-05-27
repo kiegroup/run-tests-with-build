@@ -8,8 +8,9 @@ function run_cypress() {
   local _application_url=$1
   local _frontend_directory=$2
   local _cypress_image_version=$3
+  local _container_runtime=$4
 
-  podman run \
+  "${_container_runtime}" run \
       --network=host \
       --volume "${_frontend_directory}":/e2e:Z \
       --workdir /e2e \

@@ -17,6 +17,7 @@
         <openshift.user>admin</openshift.user>
         <openshift.password>admin</openshift.password>
         <version.cypress.docker>3.6.0</version.cypress.docker>
+        <container.runtime>podman</container.runtime>
     </properties>
 
     <dependencies>
@@ -112,6 +113,7 @@
                                         <argument>${openshift.user}</argument>
                                         <argument>${openshift.password}</argument>
                                         <argument>${settings.xml.file}</argument>
+                                        <argument>${container.runtime}</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
