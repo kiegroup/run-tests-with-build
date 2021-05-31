@@ -22,6 +22,19 @@ Download of artifacts is provided by means described in [Module structure](#modu
   -Dproject.sources.artifact=optaweb-vehicle-routing \
   -Ddownload.sources.version=<VERSION>
   ```
+* openshift certification
+  ```
+  mvn clean verify \
+  -DskipTests -Dtest.type=project-sources \
+  -Dproject.sources.artifact={optaweb-employee-rostering|optaweb-vehicle-routing} \
+  -Ddownload.sources.version=<VERSION> \
+  -Dopenshift 
+  -Dopenshift.api-url=https://api.crc.testing:6443\
+  -Dopenshift.user=developer
+  -Dopenshift.password=developer
+  -Dsettings.xml.file=../settings/settings.xml
+  -Dcontainer.runtime={podman|docker}
+  ```
 ### Sources-zip testing
 ```
 mvn clean verify \
