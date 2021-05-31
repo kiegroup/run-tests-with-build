@@ -33,6 +33,7 @@ Download of artifacts is provided by means described in [Module structure](#modu
   -Dopenshift.user=developer
   -Dopenshift.password=developer
   -Dsettings.xml.file=../settings/settings.xml
+  -Dcontainer.runtime={podman|docker}
   ```
 ### Sources-zip testing
 ```

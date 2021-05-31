@@ -86,6 +86,8 @@
         <profile>
             <id>openshift</id>
             <properties>
+                <!-- Relying on profile activation property from run-tests-with-build-project-sources-dependency-get module.
+                Enforcer of that module assures that the value is set properly.-->
                 <optaweb.project.name>${project.sources.artifact}</optaweb.project.name>
             </properties>
             <activation>
