@@ -19,6 +19,7 @@
         <openshift.password>developer</openshift.password>
         <version.cypress.docker>3.6.0</version.cypress.docker>
         <container.runtime>podman</container.runtime>
+        <skip.component.tests>false</skip.component.tests>
     </properties>
 
     <dependencies>
@@ -59,10 +60,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-invoker-plugin</artifactId>
                 <configuration>
-                    <properties>
-                        <maven.test.skip>true</maven.test.skip>
-                    </properties>
                     <parallelThreads>1</parallelThreads>
+                    <properties>
+                        <maven.test.skip>${skip.component.tests}</maven.test.skip>
+                    </properties>
                     <!--
                     script deciding if included project is:
                       executed (either script missing or returning true)
@@ -89,6 +90,7 @@
                 <!-- Relying on profile activation property from run-tests-with-build-project-sources-dependency-get module.
                 Enforcer of that module assures that the value is set properly.-->
                 <optaweb.project.name>${project.sources.artifact}</optaweb.project.name>
+                <skip.component.tests>true</skip.component.tests>
             </properties>
             <activation>
                 <property>
