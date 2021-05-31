@@ -13,9 +13,10 @@
     <artifactId>optawebs-project-sources-test</artifactId>
 
     <properties>
-            <openshift.api-url>https://api.production.rhba.openshift-psi.rhocf-dev.net:6443</openshift.api-url>
-        <openshift.user>admin</openshift.user>
-        <openshift.password>admin</openshift.password>
+        <sources.directory>${sources.directory.module.project.sources.dependency.get}</sources.directory>
+        <openshift.api-url>https://api.crc.testing:6443</openshift.api-url>
+        <openshift.user>developer</openshift.user>
+        <openshift.password>developer</openshift.password>
         <version.cypress.docker>3.6.0</version.cypress.docker>
         <container.runtime>podman</container.runtime>
     </properties>
@@ -105,9 +106,13 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>${main.basedir}/run-tests-with-build-optawebs-parent/optawebs-project-sources-test/${optaweb.project.name}-test-script-openshift.sh</executable>
+                                    <executable>
+                                        ${main.basedir}/run-tests-with-build-optawebs-parent/optawebs-project-sources-test/${optaweb.project.name}-test-script-openshift.sh
+                                    </executable>
                                     <arguments>
-                                        <argument>${sources.directory.module.project.sources.dependency.get}/${project.sources.artifact}-${download.sources.version}</argument>
+                                        <argument>
+                                            ${sources.directory.module.project.sources.dependency.get}/${project.sources.artifact}-${download.sources.version}
+                                        </argument>
                                         <argument>${version.cypress.docker}</argument>
                                         <argument>${openshift.api-url}</argument>
                                         <argument>${openshift.user}</argument>
