@@ -60,7 +60,7 @@
                 <artifactId>maven-invoker-plugin</artifactId>
                 <configuration>
                     <properties>
-                        <skipTests>true</skipTests>
+                        <maven.test.skip>true</maven.test.skip>
                     </properties>
                     <parallelThreads>1</parallelThreads>
                     <!--
