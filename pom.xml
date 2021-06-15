@@ -46,6 +46,7 @@
     <!--TODO - settings.xml-->
     <main.basedir>${maven.multiModuleProjectDirectory}</main.basedir>
     <settings.xml.file>${main.basedir}/settings/settings.xml</settings.xml.file>
+    <invoker.settings.xml.file>${main.basedir}/settings/invoker/settings.xml</invoker.settings.xml.file>
 
     <!-- Property where invoker expects the sources to be downloaded into -->
     <sources.directory>${project.build.directory}/sources/</sources.directory>
@@ -161,6 +162,7 @@
             <mergeUserSettings>true</mergeUserSettings>
             <mavenOpts>-Xms1g -Xmx3g</mavenOpts>
             <parallelThreads>2</parallelThreads>
+            <settingsFile>${invoker.settings.xml.file}</settingsFile>
             <properties>
               <!-- maven-compiler-plugin properties -->
               <maven.main.skip>${maven.main.skip}</maven.main.skip>
@@ -170,7 +172,7 @@
               <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
 
               <!-- Used for running kiegroup 7x upstream projects -->
-              <kie.maven.settings.custom>${settings.xml.file}</kie.maven.settings.custom>>
+              <kie.maven.settings.custom>${settings.xml.file}</kie.maven.settings.custom>
 
               <!-- skip unnecessary maven plugins -->
               <enforcer.skip>true</enforcer.skip>
