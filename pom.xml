@@ -46,7 +46,7 @@
     <!--TODO - settings.xml-->
     <main.basedir>${maven.multiModuleProjectDirectory}</main.basedir>
     <settings.xml.file>${main.basedir}/settings/settings.xml</settings.xml.file>
-    <invoker.settings.xml.file>${main.basedir}/settings/invoker/settings.xml</invoker.settings.xml.file>
+    <invoker.settings.xml.file>${session.request.userSettingsFile.path}</invoker.settings.xml.file>
 
     <!-- Property where invoker expects the sources to be downloaded into -->
     <sources.directory>${project.build.directory}/sources/</sources.directory>
