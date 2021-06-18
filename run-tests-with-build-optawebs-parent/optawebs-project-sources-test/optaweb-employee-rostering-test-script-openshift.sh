@@ -53,7 +53,7 @@ chmod u+x "${project_basedir}"/runOnOpenShift.sh
 # pass settings file and skip enforcer to be able to test artifacts from bxms-qe
 sed -i 's#mvn clean install -DskipTests -Dquarkus.profile=postgres#mvn clean install -DskipTests -Dquarkus.profile=postgres -Denforcer.skip -s '$settings_file'#g' "${project_basedir}"/runOnOpenShift.sh
 # increase possible postgresql memory consumption
-sed -i 's/oc new-app --name postgresql postgresql-persistent/oc new-app --name postgresql postgresql-persistent -p MAX_MEMORY=2GiB/' "${project_basedir}"/runOnOpenShift.sh
+sed -i 's/oc new-app --name postgresql postgresql-persistent/oc new-app --name postgresql postgresql-persistent -p MEMORY_LIMIT=2Gi/' "${project_basedir}"/runOnOpenShift.sh
 
 readonly frontend_directory=$(find "${project_basedir}" -maxdepth 1 -name "*frontend")
 [[ -d ${frontend_directory} ]] || {
