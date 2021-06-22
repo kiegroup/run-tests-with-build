@@ -14,7 +14,7 @@ function display_help() {
 
   echo "This script tests deployment of Optaweb Vehicle Routing on OpenShift."
   echo "Usage:"
-  echo "  ${script_name} PROJECT_BASEDIR CYPRESS_IMAGE_VERSION OPENSHIFT_API_URL OPENSHIFT_USER OPENSHIFT_PASSWORD"
+  echo "  ${script_name} PROJECT_BASEDIR CYPRESS_IMAGE_VERSION"
   echo "  ${script_name} --help"
 }
 
@@ -38,6 +38,8 @@ readonly test_osm_data_url="https://github.com/kiegroup/optaweb-vehicle-routing/
 readonly openshift_api_url=$3
 readonly openshift_user=$4
 readonly openshift_password=$5
+readonly settings_file=$6
+readonly container_engine=$7
 
 oc login -u "${openshift_user}" -p "${openshift_password}" "${openshift_api_url}" --insecure-skip-tls-verify=true
 
@@ -51,13 +53,6 @@ oc get project "${openshift_project}"
 
 chmod u+x "${project_basedir}"/runOnOpenShift.sh
 
-yes | "${project_basedir}"/runOnOpenShift.sh test.osm.pbf DE "${test_osm_data_url}" || {
-  echo "runOnOpenShift.sh failed!"
-  echo "Saving logs and exiting."
-  store_logs_from_pods "target"
-  exit 1
-}
-
 readonly frontend_directory=$(find "${project_basedir}" -maxdepth 1 -name "*frontend")
 [[ -d ${frontend_directory} ]] || {
   echo "No frontend module was found in ${project_basedir} as ${frontend_directory}!"
@@ -65,13 +60,25 @@ readonly frontend_directory=$(find "${project_basedir}" -maxdepth 1 -name "*fron
   exit 1
 }
 
+# replace image by digest so openshift doesn't download new image, avoids docker pulling limitation
+# additionally edit mirror configuration on the Openshift
+sed -i 's;FROM docker.io/library/nginx:1.17.5;FROM docker.io/library/nginx@sha256:922c815aa4df050d4df476e92daed4231f466acc8ee90e0e774951b0fd7195a4;' "${frontend_directory}/docker/Dockerfile"
+
+yes | "${project_basedir}"/runOnOpenShift.sh test.osm.pbf DE "${test_osm_data_url}" || {
+  echo "runOnOpenShift.sh failed!"
+  echo "Saving logs and exiting."
+  store_logs_from_pods "target"
+  exit 1
+}
+
+
 readonly application_url="http://$(oc get route frontend -o custom-columns=:spec.host | tr -d '\n')"
 # wait for the application to become available
 wait_for_url "${application_url}" 60
 
 # run the cypress test
 readonly cypress_image_version=$2
-run_cypress "${application_url}" "${frontend_directory}" "${cypress_image_version}"
+run_cypress "${application_url}" "${frontend_directory}" "${cypress_image_version}" "${container_engine}"
 
 # store logs from pods in the target folder
 store_logs_from_pods "target"
