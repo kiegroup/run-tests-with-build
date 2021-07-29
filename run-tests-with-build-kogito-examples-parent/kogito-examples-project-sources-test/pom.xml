@@ -12,6 +12,11 @@
 
   <artifactId>kogito-examples-project-sources-test</artifactId>
 
+  <properties>
+    <invoker.pom.include>**/pom.xml</invoker.pom.include>
+    <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.1-java11</quarkus.native.builder-image>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -58,10 +63,11 @@
             skipped (when returns false or throws error) -->
           <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
           <pomIncludes>
-            <!-- includes everything, filtering is done in resolve-includes.groovy script
+            <!-- includes everything unless overriden the property 'invoker.pom.include',
+            filtering is done in resolve-includes.groovy script
             which adds invoker-run.groovy script containing 'return false' near each pom.xml
             that should be excluded.-->
-            <pomInclude>**/pom.xml</pomInclude>
+            <pomInclude>${invoker.pom.include}</pomInclude>
           </pomIncludes>
           <pomExcludes>
             <!-- Excludes work still as expected. -->
@@ -70,4 +76,35 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <!-- native builds make sense just for quarkus examples -->
+        <invoker.pom.include>**/*quarkus*/pom.xml</invoker.pom.include>
+      </properties>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-invoker-plugin</artifactId>
+              <configuration>
+                <properties combine.children="append">
+                  <native>true</native>
+                  <quarkus.native.container-build>true</quarkus.native.container-build>
+                  <quarkus.native.builder-image>${quarkus.native.builder-image}</quarkus.native.builder-image>
+                </properties>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
 </project>
