@@ -14,6 +14,9 @@
 
   <properties>
     <invoker.pom.include>**/pom.xml</invoker.pom.include>
+    <quarkus.profile></quarkus.profile>
+    <quarkus.native.container-build>true</quarkus.native.container-build>
+    <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
     <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.1-java11</quarkus.native.builder-image>
   </properties>
 
@@ -97,7 +100,9 @@
               <configuration>
                 <properties combine.children="append">
                   <native>true</native>
-                  <quarkus.native.container-build>true</quarkus.native.container-build>
+                  <quarkus.profile>${quarkus.profile}</quarkus.profile>
+                  <quarkus.native.container-build>${quarkus.native.container-build}</quarkus.native.container-build>
+                  <quarkus.native.container-runtime>${quarkus.native.container-runtime}</quarkus.native.container-runtime>
                   <quarkus.native.builder-image>${quarkus.native.builder-image}</quarkus.native.builder-image>
                 </properties>
               </configuration>
