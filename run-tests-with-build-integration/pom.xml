@@ -51,6 +51,7 @@
                                 <excludeDirectory>.*kie-maven-project-example.*</excludeDirectory>
                                 <excludeDirectory>.*drools-examples-android.*</excludeDirectory>
                                 <excludeDirectory>.*kie-maven-plugin-example.*</excludeDirectory>
+                                <excludeDirectory>.*kie-maven-plugin-test-kjar.*</excludeDirectory>
                                 <excludeDirectory>.*evaluation.*</excludeDirectory>
                                 <excludeDirectory>.*timer.*</excludeDirectory>
                                 <excludeDirectory>.*notification.*</excludeDirectory>
@@ -87,11 +88,6 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>run-tests</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
                         <configuration>
                             <pomIncludes>
                                 <pomInclude>droolsjbpm-integration/*/pom.xml</pomInclude>
@@ -99,17 +95,7 @@
                             <pomExcludes>
                                 <pomExclude>droolsjbpm-integration/drools-examples-android/roboguice-*.*xml</pomExclude>
                                 <pomExclude>droolsjbpm-integration/kie-maven-plugin-.*xml</pomExclude>
-
-                                <pomExclude>droolsjbpm-integration-tests/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/kie-karaf-itests/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/drools-simulator/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/kie-maven-plugin-tests/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/test-suite/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/drools-examples-android/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/kie-maven-plugin-example/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/kie-maven-project-example/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/process-migration-service/pom.xml</pomExclude>
-                                <pomExclude>droolsjbpm-integration/kie-spring-boot/pom.xml</pomExclude>
+                                <pomExclude>droolsjbpm-integration/kie-osgi/kie-karaf-itests/pom.xml</pomExclude>
                             </pomExcludes>
                         </configuration>
                     </execution>

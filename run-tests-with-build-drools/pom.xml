@@ -52,9 +52,11 @@
               <goal>unpack-build</goal>
             </goals>
             <configuration>
+              <rootDirectory>${sources.directory}/drools</rootDirectory>
               <excludeDirectories combine.children="append">
                 <excludeDirectory>.*drools-persistence.*</excludeDirectory>
                 <excludeDirectory>.*drools-impact.*</excludeDirectory>
+                <excludeDirectory>.*test-integration-nomvel.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>
@@ -71,6 +73,7 @@
           <pomExcludes>
             <pomExclude>drools/drools-persistence/pom.xml</pomExclude>
             <pomExclude>drools/drools-impact-analysis/pom.xml</pomExclude>
+            <pomExclude>drools/test-integration-nomvel/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
