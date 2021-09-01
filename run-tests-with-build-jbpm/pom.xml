@@ -42,7 +42,6 @@
             </goals>
             <configuration>
               <excludeDirectories combine.children="append">
-
                 <excludeDirectory>.*jbpm-audit.*</excludeDirectory>
                 <excludeDirectory>.*jbpm-bpmn2.*</excludeDirectory>
                 <excludeDirectory>.*jbpm-persistence-jpa.*</excludeDirectory>
