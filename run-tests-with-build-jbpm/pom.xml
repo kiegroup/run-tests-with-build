@@ -77,29 +77,9 @@
           <pomIncludes>
             <pomInclude>jbpm/pom.xml</pomInclude>
           </pomIncludes>
-          <pomExcludes>
-            <pomExclude>jbpm/jbpm-audit/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-bpmn2/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-persistence/jbpm-persistence-jpa/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-human-task/jbpm-human-task-core/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-db-scripts/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-xes/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-case-mgmt/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-services/jbpm-services-ejb/jbpm-executor-ejb/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-services/jbpm-services-ejb/jbpm-services-ejb-impl/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-test/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-in-container-test/jbpm-container-test-suite/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-in-container-test/shrinkwrap-war-profiles/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-remote-ejb-test/jbpm-remote-ejb-test-suite/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-in-container-test/jbpm-container-integration-deps/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-remote-ejb-test/jbpm-remote-ejb-test-app/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-remote-ejb-test/jbpm-remote-ejb-test-domain/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-remote-ejb-test/jbpm-remote-ejb-test-suite/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-remote-ejb-test/test-kjar-parent/test-kjar-evaluation/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-remote-ejb-test/test-kjar-parent/test-kjar-integration/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-container-test/jbpm-remote-ejb-test/test-kjar-parent/test-kjar-bpmn-build/pom.xml</pomExclude>
-            <pomExclude>jbpm/jbpm-installer/pom.xml</pomExclude>
-          </pomExcludes>
+          <goals>
+            <goal>${maven.default.command} -pl !:jbpm-audit,!:jbpm-bpmn2,!:jbpm-case-mgmt,!:jbpm-executor-ejb,!:jbpm-human-task-core,!:jbpm-installer,!:jbpm-persistence-jpa,!:jbpm-services-ejb-impl,!:jbpm-services-ejb-timer,!:jbpm-test,!:jbpm-container-test-suite,!:jbpm-remote-ejb-test-suite</goal>
+          </goals>
         </configuration>
       </plugin>
     </plugins>

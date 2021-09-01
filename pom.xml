@@ -62,6 +62,24 @@
       ${main.basedir}/run-tests-with-build-project-sources-dependency-get/target/sources
     </sources.directory.module.project.sources.dependency.get>
 
+    <maven.test.failure.ignore>true</maven.test.failure.ignore>
+    <maven.main.skip>false</maven.main.skip>
+    <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>
+    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+    <jdk.min.version>1.8.0</jdk.min.version>
+    <maven.test.error.ignore>true</maven.test.error.ignore>
+
+    <maven.unnecessary.plugins.skip>-Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip</maven.unnecessary.plugins.skip>
+    <maven.default.command>verify \
+      -Dmaven.main.skip=${maven.main.skip} \
+      -Dmaven.compiler.useIncrementalCompilation=${maven.compiler.useIncrementalCompilation} \
+      -Dmaven.test.redirectTestOutputToFile=${maven.test.redirectTestOutputToFile} \
+      -Djdk.min.version=${jdk.min.version} \
+      ${maven.unnecessary.plugins.skip} \
+      -Dmaven.test.failure.ignore=${maven.test.failure.ignore} \
+      -Dmaven.test.error.ignore=${maven.test.error.ignore}
+    </maven.default.command>
+
     <git.server.url>https://github.com/kiegroup</git.server.url>
     <kie.sources.revision>main</kie.sources.revision>
     <sources.revision.type>tag</sources.revision.type>
@@ -161,10 +179,10 @@
             <parallelThreads>2</parallelThreads>
             <properties>
               <!-- maven-compiler-plugin properties -->
-              <maven.main.skip>false</maven.main.skip>
-              <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>-->
-              <maven.test.failure.ignore>true</maven.test.failure.ignore>
-              <maven.test.error.ignore>true</maven.test.error.ignore>
+              <maven.main.skip>${maven.main.skip}</maven.main.skip>
+              <maven.compiler.useIncrementalCompilation>${maven.compiler.useIncrementalCompilation}</maven.compiler.useIncrementalCompilation>
+              <maven.test.failure.ignore>${maven.test.failure.ignore}</maven.test.failure.ignore>
+              <maven.test.error.ignore>${maven.test.error.ignore}</maven.test.error.ignore>
 
               <!-- maven-surefire-plugin properties -->
               <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
