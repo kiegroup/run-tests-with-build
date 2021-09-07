@@ -121,7 +121,7 @@ private String getMvnCommand() {
     if (mavenReactorFiltering) {
         mvnCommandToRun = mvnCommandToRun + " $mavenReactorFiltering"
     }
-    if (mavenRepoLocal && Files.exists(Path.of(mavenRepoLocal))) {
+    if (mavenRepoLocal) {
         mvnCommandToRun = mvnCommandToRun + " -Dmaven.repo.local=$mavenRepoLocal"
     }
     if (mavenSettings && Files.exists(Path.of(mavenSettings))) {
