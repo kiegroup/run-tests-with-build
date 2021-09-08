@@ -43,6 +43,10 @@
           <execution>
             <id>run-tests</id>
             <configuration>
+              <goals>
+                <goal>clean</goal>
+                <goal>install</goal> <!-- ok to install, will build full project from parent - all is taken from reactor anyway -->
+              </goals>
               <properties>
                 <productized>true</productized>
               </properties>
