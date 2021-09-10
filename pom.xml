@@ -46,7 +46,6 @@
     <!--TODO - settings.xml-->
     <main.basedir>${maven.multiModuleProjectDirectory}</main.basedir>
     <settings.xml.file>${main.basedir}/settings/settings.xml</settings.xml.file>
-    <invoker.settings.xml.file>${session.request.userSettingsFile.path}</invoker.settings.xml.file>
 
     <!-- Property where invoker expects the sources to be downloaded into -->
     <sources.directory>${project.build.directory}/sources/</sources.directory>
@@ -162,7 +161,6 @@
             <mergeUserSettings>true</mergeUserSettings>
             <mavenOpts>-Xms1g -Xmx3g</mavenOpts>
             <parallelThreads>2</parallelThreads>
-            <settingsFile>${invoker.settings.xml.file}</settingsFile>
             <properties>
               <!-- maven-compiler-plugin properties -->
               <maven.main.skip>${maven.main.skip}</maven.main.skip>

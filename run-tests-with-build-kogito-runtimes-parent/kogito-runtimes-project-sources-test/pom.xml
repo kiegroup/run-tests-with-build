@@ -12,6 +12,14 @@
 
   <artifactId>kogito-runtimes-project-sources-test</artifactId>
 
+  <properties>
+    <!--
+      Ideally just -Dproductized should be here, the excluded modules lack some dependencies that are not yet productized,
+      thus unavailable in productized build as (not only) test dependencies.
+    -->
+    <maven.modules.resolution.reactor.filtering>-Dproductized -pl -:kogito-addons-springboot-rest-exception-handler,-:kogito-addons-springboot-process-svg,-:kogito-addons-springboot-process-management,-:kogito-addons-springboot-task-management,-:kogito-addons-quarkus-process-svg,-:kogito-addons-quarkus-rest-exception-handler,-:kogito-addons-quarkus-process-management,-:kogito-addons-quarkus-task-management,-:integration-tests-quarkus-processes,-:integration-tests-springboot,-:integration-tests-kogito-plugin</maven.modules.resolution.reactor.filtering>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -68,43 +76,6 @@
               </pomIncludes>
               <pomExcludes>
                 <!-- Excludes work still as expected. -->
-              </pomExcludes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>install-integration-tests-parent-before-invocation</id>
-            <phase>test</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <!-- path relative to the poms included below -->
-              <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
-              <goals>
-                <goal>clean install --non-recursive</goal>
-              </goals>
-              <pomIncludes>
-                <pomInclude>kogito-runtimes*/integration-tests/pom.xml</pomInclude>
-              </pomIncludes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>run-explicitly-integration-tests</id>
-            <phase>test</phase>
-            <goals>
-              <goal>install</goal>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <!-- path relative to the poms included below -->
-              <invokerPropertiesFile>../../../invoker.properties</invokerPropertiesFile>
-              <pomIncludes>
-                <pomInclude>kogito-runtimes*/integration-tests/*/pom.xml</pomInclude>
-              </pomIncludes>
-              <pomExcludes>
-                <pomExclude>**/integration-tests-quarkus-processes/pom.xml</pomExclude>
-                <pomExclude>**/integration-tests-springboot/pom.xml</pomExclude>
-                <pomExclude>**/integration-tests-kogito-plugin/pom.xml</pomExclude>
               </pomExcludes>
             </configuration>
           </execution>
