@@ -42,25 +42,28 @@
             </goals>
             <configuration>
               <excludeDirectories combine.children="append">
-                <excludeDirectory>.*jbpm-audit</excludeDirectory>
-                <excludeDirectory>.*jbpm-bpmn2</excludeDirectory>
-                <excludeDirectory>.*jbpm-executor-ejb</excludeDirectory>
-                <excludeDirectory>.*jbpm-executor-ejb-timer</excludeDirectory>
-                <excludeDirectory>.*jbpm-human-task-core</excludeDirectory>
-                <excludeDirectory>.*jbpm-installer</excludeDirectory>
-                <excludeDirectory>.*jbpm-persistence-jpa</excludeDirectory>
-                <excludeDirectory>.*jbpm-services-ejb-impl</excludeDirectory>
-                <excludeDirectory>.*jbpm-services-ejb-timer</excludeDirectory>
-                <excludeDirectory>.*jbpm-test</excludeDirectory>
-                <excludeDirectory>.*jbpm-container-test-suite</excludeDirectory>
+                <excludeDirectory>.*jbpm-audit.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-bpmn2.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-persistence-jpa.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-human-task-core.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-db-scripts.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-xes.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-case-mgmt.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-executor-ejb.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-executor-ejb-timer.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-services-ejb-impl.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-test.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-container-test-suite.*</excludeDirectory>
                 <excludeDirectory>.*jbpm-container-integration-deps.*</excludeDirectory>
+                <excludeDirectory>.*shrinkwrap-war-profiles.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-remote-ejb-test-suite.*</excludeDirectory>
                 <excludeDirectory>.*jbpm-remote-ejb-test-app.*</excludeDirectory>
                 <excludeDirectory>.*jbpm-remote-ejb-test-domain.*</excludeDirectory>
-                <excludeDirectory>.*jbpm-remote-ejb-test-suite</excludeDirectory>
-                <excludeDirectory>.*shrinkwrap-war-profiles.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-remote-ejb-test-suite.*</excludeDirectory>
                 <excludeDirectory>.*test-kjar-evaluation.*</excludeDirectory>
                 <excludeDirectory>.*test-kjar-integration.*</excludeDirectory>
                 <excludeDirectory>.*test-kjar-bpmn-build.*</excludeDirectory>
+                <excludeDirectory>.*jbpm-installer.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>

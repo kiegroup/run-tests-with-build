@@ -42,7 +42,7 @@
     <download.plugin.version>1.6.3</download.plugin.version>
     <resources.plugin.version>3.1.0</resources.plugin.version>
 
-    <kie.download.build.version>7.48.0.Final</kie.download.build.version>
+    <kie.download.build.version>7.60.0-SNAPSHOT</kie.download.build.version>
     <!--TODO - settings.xml-->
     <main.basedir>${maven.multiModuleProjectDirectory}</main.basedir>
     <settings.xml.file>${main.basedir}/settings/settings.xml</settings.xml.file>
@@ -63,10 +63,25 @@
     </sources.directory.module.project.sources.dependency.get>
 
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
-    <maven.main.skip>true</maven.main.skip>
+    <maven.main.skip>false</maven.main.skip>
+    <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>
+    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+    <jdk.min.version>1.8.0</jdk.min.version>
+    <maven.test.error.ignore>true</maven.test.error.ignore>
+
+    <maven.unnecessary.plugins.skip>-Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip</maven.unnecessary.plugins.skip>
+    <maven.default.command>verify \
+      -Dmaven.main.skip=${maven.main.skip} \
+      -Dmaven.compiler.useIncrementalCompilation=${maven.compiler.useIncrementalCompilation} \
+      -Dmaven.test.redirectTestOutputToFile=${maven.test.redirectTestOutputToFile} \
+      -Djdk.min.version=${jdk.min.version} \
+      ${maven.unnecessary.plugins.skip} \
+      -Dmaven.test.failure.ignore=${maven.test.failure.ignore} \
+      -Dmaven.test.error.ignore=${maven.test.error.ignore}
+    </maven.default.command>
 
     <git.server.url>https://github.com/kiegroup</git.server.url>
-    <kie.sources.revision>7.48.0.Final</kie.sources.revision>
+    <kie.sources.revision>main</kie.sources.revision>
     <sources.revision.type>tag</sources.revision.type>
 
     <drools.repo.url>${git.server.url}/drools</drools.repo.url>
@@ -77,6 +92,7 @@
     <drools.wb.repo.url>${git.server.url}/drools-wb</drools.wb.repo.url>
     <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
+    <optaplanner.wb.repo.url>${git.server.url}/optaplanner-wb</optaplanner.wb.repo.url>
     <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
 
     <!-- Properties used by source-downloading modules (*-project-sources-dependency-get, *-sources-zip-download) -->
@@ -164,7 +180,9 @@
             <properties>
               <!-- maven-compiler-plugin properties -->
               <maven.main.skip>${maven.main.skip}</maven.main.skip>
-              <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>
+              <maven.compiler.useIncrementalCompilation>${maven.compiler.useIncrementalCompilation}</maven.compiler.useIncrementalCompilation>
+              <maven.test.failure.ignore>${maven.test.failure.ignore}</maven.test.failure.ignore>
+              <maven.test.error.ignore>${maven.test.error.ignore}</maven.test.error.ignore>
 
               <!-- maven-surefire-plugin properties -->
               <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>

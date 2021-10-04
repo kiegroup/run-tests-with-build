@@ -61,6 +61,7 @@
                 <excludeDirectory>.*kie-test-util.*</excludeDirectory>
                 <excludeDirectory>.*standalone.*</excludeDirectory>
                 <excludeDirectory>.*drools-impact.*</excludeDirectory>
+                <excludeDirectory>.*test-integration-nomvel.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>
@@ -75,6 +76,9 @@
             <pomInclude>drools/*/test-suite/pom.xml</pomInclude>
             <pomInclude>drools/*/test-compiler-integration/pom.xml</pomInclude>
           </pomIncludes>
+          <pomExcludes>
+            <pomExclude>drools/test-integration-nomvel/pom.xml</pomExclude>
+          </pomExcludes>
           <profiles>
             <profile>runTurtleTests</profile>
           </profiles>
