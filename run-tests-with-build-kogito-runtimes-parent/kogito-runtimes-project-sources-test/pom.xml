@@ -12,14 +12,6 @@
 
   <artifactId>kogito-runtimes-project-sources-test</artifactId>
 
-  <properties>
-    <!--
-      Ideally just -Dproductized should be here, the excluded modules lack some dependencies that are not yet productized,
-      thus unavailable in productized build as (not only) test dependencies.
-    -->
-    <maven.modules.resolution.reactor.filtering>-Dproductized -pl -:kogito-addons-springboot-rest-exception-handler,-:kogito-addons-springboot-process-svg,-:kogito-addons-springboot-process-management,-:kogito-addons-springboot-task-management,-:kogito-addons-quarkus-process-svg,-:kogito-addons-quarkus-rest-exception-handler,-:kogito-addons-quarkus-process-management,-:kogito-addons-quarkus-task-management,-:integration-tests-quarkus-processes,-:integration-tests-springboot,-:integration-tests-kogito-plugin</maven.modules.resolution.reactor.filtering>
-  </properties>
-
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
