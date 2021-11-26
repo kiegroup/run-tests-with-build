@@ -17,7 +17,7 @@
         <openshift.api-url>https://api.crc.testing:6443</openshift.api-url>
         <openshift.user>developer</openshift.user>
         <openshift.password>developer</openshift.password>
-        <version.cypress.docker>3.6.0</version.cypress.docker>
+        <version.cypress.docker>7.0.1</version.cypress.docker>
         <container.runtime>podman</container.runtime>
     </properties>
 
