@@ -95,7 +95,6 @@
     <jbpm.wb.repo.url>${git.server.url}/jbpm-wb</jbpm.wb.repo.url>
     <kie.wb.common.repo.url>${git.server.url}/kie-wb-common</kie.wb.common.repo.url>
     <optaplanner.wb.repo.url>${git.server.url}/optaplanner-wb</optaplanner.wb.repo.url>
-    <kogito.examples.repo.url>${git.server.url}/kogito-examples</kogito.examples.repo.url>
     <kogito.editors.java.repo.url>${git.server.url}/kogito-editors-java</kogito.editors.java.repo.url>
 
     <!-- Properties used by source-downloading modules (*-project-sources-dependency-get, *-sources-zip-download) -->
