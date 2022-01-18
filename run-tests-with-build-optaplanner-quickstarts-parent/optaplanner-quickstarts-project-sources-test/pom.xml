@@ -67,7 +67,9 @@
     <profile>
       <id>non-native</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>!native</name>
+        </property>
       </activation>
       <build>
         <pluginManagement>
@@ -76,9 +78,6 @@
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-invoker-plugin</artifactId>
               <configuration>
-                <properties combine.children="append">
-                  <skipTests>true</skipTests>
-                </properties>
                 <!--
                 script deciding if included project is:
                   executed (either script missing or returning true)
