@@ -12,6 +12,14 @@
 
   <artifactId>optaplanner-quickstarts-project-sources-test</artifactId>
 
+  <properties>
+    <invoker.pom.include>**/pom.xml</invoker.pom.include>
+    <quarkus.profile></quarkus.profile>
+    <quarkus.native.container-build>true</quarkus.native.container-build>
+    <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
+    <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11</quarkus.native.builder-image>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -51,23 +59,78 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
-          <!--
-          script deciding if included project is:
-            executed (either script missing or returning true)
-              or
-            skipped (when returns false or throws error) -->
-          <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
-          <pomIncludes>
-            <!-- includes everything, filtering is done in resolve-includes.groovy script
-            which adds invoker-run.groovy script containing 'return false' near each pom.xml
-            that should be excluded.-->
-            <pomInclude>**/pom.xml</pomInclude>
-          </pomIncludes>
-          <pomExcludes>
-            <!-- Excludes work still as expected. -->
-          </pomExcludes>
         </configuration>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>non-native</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-invoker-plugin</artifactId>
+              <configuration>
+                <properties combine.children="append">
+                  <skipTests>true</skipTests>
+                </properties>
+                <!--
+                script deciding if included project is:
+                  executed (either script missing or returning true)
+                    or
+                  skipped (when returns false or throws error) -->
+                <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
+                <pomIncludes>
+                  <include>${invoker.pom.include}</include>
+                </pomIncludes>
+                <pomExcludes>
+                  <!-- Excludes work still as expected. -->
+                </pomExcludes>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <!-- native builds make sense just for quarkus examples -->
+      </properties>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-invoker-plugin</artifactId>
+              <configuration>
+                <properties combine.children="append">
+                  <native>true</native>
+                  <quarkus.profile>${quarkus.profile}</quarkus.profile>
+                  <quarkus.native.container-build>${quarkus.native.container-build}</quarkus.native.container-build>
+                  <quarkus.native.container-runtime>${quarkus.native.container-runtime}</quarkus.native.container-runtime>
+                  <quarkus.native.builder-image>${quarkus.native.builder-image}</quarkus.native.builder-image>
+                </properties>
+                <pomIncludes>
+                  <include>**/technology/kotlin-quarkus/pom.xml</include>
+                  <include>**/technology/java-activemq-quarkus/pom.xml</include>
+                  <include>**/use-cases/*/pom.xml</include>
+                </pomIncludes>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
 </project>

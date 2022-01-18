@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>run-tests-with-build-optaplanner-parent</artifactId>
@@ -11,6 +11,9 @@
   <packaging>pom</packaging>
 
   <artifactId>optaplanner-project-sources-test</artifactId>
+  <properties>
+    <invoker.pom.include>**/pom.xml</invoker.pom.include>
+  </properties>
 
   <dependencies>
     <!-- define as dependency to assure reactor order -->
@@ -61,7 +64,7 @@
             <!-- includes everything, filtering is done in resolve-includes.groovy script
             which adds invoker-run.groovy script containing 'return false' near each pom.xml
             that should be excluded.-->
-            <pomInclude>**/pom.xml</pomInclude>
+            <include>${invoker.pom.include}</include>
           </pomIncludes>
           <pomExcludes>
             <!-- Excludes work still as expected. -->
@@ -70,4 +73,37 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <!-- native builds make sense just for quarkus examples -->
+        <invoker.pom.include>**/optaplanner-quarkus-integration/*/integration-test/pom.xml</invoker.pom.include>
+      </properties>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-invoker-plugin</artifactId>
+              <configuration>
+                <properties combine.children="append">
+                  <native>true</native>
+                  <quarkus.profile>${quarkus.profile}</quarkus.profile>
+                  <quarkus.native.container-build>${quarkus.native.container-build}</quarkus.native.container-build>
+                  <quarkus.native.container-runtime>${quarkus.native.container-runtime}</quarkus.native.container-runtime>
+                  <quarkus.native.builder-image>${quarkus.native.builder-image}</quarkus.native.builder-image>
+                </properties>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
 </project>
