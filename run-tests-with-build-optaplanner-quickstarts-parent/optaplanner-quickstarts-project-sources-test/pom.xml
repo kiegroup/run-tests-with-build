@@ -104,9 +104,6 @@
           <name>native</name>
         </property>
       </activation>
-      <properties>
-        <!-- native builds make sense just for quarkus examples -->
-      </properties>
       <build>
         <pluginManagement>
           <plugins>
