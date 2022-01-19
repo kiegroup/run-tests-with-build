@@ -59,43 +59,23 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
+          <!--
+          script deciding if included project is:
+            executed (either script missing or returning true)
+              or
+            skipped (when returns false or throws error) -->
+          <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
+          <pomIncludes>
+            <include>${invoker.pom.include}</include>
+          </pomIncludes>
+          <pomExcludes>
+            <!-- Excludes work still as expected. -->
+          </pomExcludes>
         </configuration>
       </plugin>
     </plugins>
   </build>
   <profiles>
-    <profile>
-      <id>non-native</id>
-      <activation>
-        <property>
-          <name>!native</name>
-        </property>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-invoker-plugin</artifactId>
-              <configuration>
-                <!--
-                script deciding if included project is:
-                  executed (either script missing or returning true)
-                    or
-                  skipped (when returns false or throws error) -->
-                <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
-                <pomIncludes>
-                  <include>${invoker.pom.include}</include>
-                </pomIncludes>
-                <pomExcludes>
-                  <!-- Excludes work still as expected. -->
-                </pomExcludes>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
     <profile>
       <id>native</id>
       <activation>
@@ -104,7 +84,6 @@
         </property>
       </activation>
       <build>
-        <pluginManagement>
           <plugins>
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -125,7 +104,6 @@
               </configuration>
             </plugin>
           </plugins>
-        </pluginManagement>
       </build>
     </profile>
   </profiles>
