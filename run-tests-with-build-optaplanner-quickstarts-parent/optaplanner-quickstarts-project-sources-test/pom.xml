@@ -40,20 +40,6 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
-      <plugin>
-        <groupId>org.codehaus.gmavenplus</groupId>
-        <artifactId>gmavenplus-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>resolve-includes</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
@@ -85,19 +71,6 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.codehaus.gmavenplus</groupId>
-            <artifactId>gmavenplus-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>resolve-includes</id>
-                <phase>none</phase>
-                <goals>
-                  <goal>execute</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-invoker-plugin</artifactId>
