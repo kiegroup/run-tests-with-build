@@ -15,6 +15,7 @@
   <properties>
     <invoker.pom.include>**/pom.xml</invoker.pom.include>
     <quarkus.profile></quarkus.profile>
+    <maven.modules.resolution.selector.script.name></maven.modules.resolution.selector.script.name>
     <quarkus.native.container-build>true</quarkus.native.container-build>
     <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
     <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11</quarkus.native.builder-image>
