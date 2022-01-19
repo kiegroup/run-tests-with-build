@@ -41,7 +41,9 @@
           <!-- path relative from the pom.xml location below -->
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
-            <pomInclude>kogito-*/*drools*/pom.xml</pomInclude>
+            <pomInclude>rhba-*/*drools-drools-7*/pom.xml</pomInclude>
+          <!-- temporary filter to avoid drools-whatever modules - this path needs to be reviewed
+          when the kogito build with drools is available-->
           </pomIncludes>
           <pomExcludes>
             <!-- nothing for now-->
@@ -50,5 +52,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
