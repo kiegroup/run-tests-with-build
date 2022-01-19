@@ -20,6 +20,7 @@
     <module>run-tests-with-build-drools-db</module>
     <module>run-tests-with-build-kogito-editors-java</module>
     <!-- Not a module on purpose, invoke using -f or from that folder:
+    <module>run-tests-with-build-drools-parent</module>
     <module>run-tests-with-build-sources-zip-download</module>
     <module>run-tests-with-build-project-sources-dependency-get</module>
     <module>run-tests-with-build-kogito-runtimes-parent</module>
