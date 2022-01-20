@@ -12,6 +12,14 @@
 
   <artifactId>optaplanner-quickstarts-project-sources-test</artifactId>
 
+  <properties>
+    <invoker.pom.include>**/pom.xml</invoker.pom.include>
+    <quarkus.profile></quarkus.profile>
+    <quarkus.native.container-build>true</quarkus.native.container-build>
+    <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
+    <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11</quarkus.native.builder-image>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -32,36 +40,13 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
-      <plugin>
-        <groupId>org.codehaus.gmavenplus</groupId>
-        <artifactId>gmavenplus-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>resolve-includes</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
-          <!--
-          script deciding if included project is:
-            executed (either script missing or returning true)
-              or
-            skipped (when returns false or throws error) -->
-          <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
           <pomIncludes>
-            <!-- includes everything, filtering is done in resolve-includes.groovy script
-            which adds invoker-run.groovy script containing 'return false' near each pom.xml
-            that should be excluded.-->
-            <pomInclude>**/pom.xml</pomInclude>
+            <include>${invoker.pom.include}</include>
           </pomIncludes>
           <pomExcludes>
             <!-- Excludes work still as expected. -->
@@ -70,4 +55,37 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-invoker-plugin</artifactId>
+            <configuration>
+              <properties combine.children="append">
+                <native>true</native>
+                <quarkus.profile>${quarkus.profile}</quarkus.profile>
+                <quarkus.native.container-build>${quarkus.native.container-build}</quarkus.native.container-build>
+                <quarkus.native.container-runtime>${quarkus.native.container-runtime}</quarkus.native.container-runtime>
+                <quarkus.native.builder-image>${quarkus.native.builder-image}</quarkus.native.builder-image>
+              </properties>
+              <pomExcludes>
+                <exclude>pom.xml</exclude>
+                <exclude>*/build/quickstarts-showcase/pom.xml</exclude>
+                <exclude>*/technology/java-spring-boot/pom.xml</exclude>
+                <exclude>*/hello-world/pom.xml</exclude>
+              </pomExcludes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
