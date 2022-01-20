@@ -41,40 +41,14 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
-            <plugin>
-                <groupId>org.codehaus.gmavenplus</groupId>
-                <artifactId>gmavenplus-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>resolve-includes</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>execute</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-invoker-plugin</artifactId>
                 <configuration>
                     <parallelThreads>1</parallelThreads>
-                    <!--
-                    script deciding if included project is:
-                      executed (either script missing or returning true)
-                        or
-                      skipped (when returns false or throws error) -->
-                    <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
                     <pomIncludes>
-                        <!-- includes everything, filtering is done in resolve-includes.groovy script
-                        which adds invoker-run.groovy script containing 'return false' near each pom.xml
-                        that should be excluded.-->
                         <pomInclude>**/pom.xml</pomInclude>
                     </pomIncludes>
-                    <pomExcludes>
-                        <!-- Excludes work still as expected. -->
-                    </pomExcludes>
                 </configuration>
             </plugin>
         </plugins>
