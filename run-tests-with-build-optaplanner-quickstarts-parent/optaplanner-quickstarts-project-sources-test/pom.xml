@@ -45,11 +45,6 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
-          <!--
-          script deciding if included project is:
-            executed (either script missing or returning true)
-              or
-            skipped (when returns false or throws error) -->
           <pomIncludes>
             <include>${invoker.pom.include}</include>
           </pomIncludes>
