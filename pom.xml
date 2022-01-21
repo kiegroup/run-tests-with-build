@@ -105,6 +105,14 @@
     <!-- properties affecting maven modules resolution using resolve-includes.groovy script -->
     <maven.modules.resolution.timeout.ms>600000</maven.modules.resolution.timeout.ms>
     <maven.modules.resolution.reactor.filtering>-Dproductized</maven.modules.resolution.reactor.filtering>
+
+    <!-- explicit filtering to run tests only for selected modules: module1,module2,module... -->
+    <maven.modules.explicit.filtering></maven.modules.explicit.filtering>
+    <!-- must be used in connection with the maven.modules.explicit.filtering property
+      to specify if listed modules are going to be selected for testing or filtered out
+      possible values: in,out -->
+    <maven.modules.explicit.filtering.type></maven.modules.explicit.filtering.type>
+
     <maven.modules.resolution.selector.script.name>invoker-run.groovy</maven.modules.resolution.selector.script.name>
 
     <!-- enforcer test type properties -->
@@ -245,6 +253,8 @@
                   <basedir>${sources.directory}</basedir>
                   <logdir>${project.build.directory}</logdir>
                   <mavenReactorFiltering>${maven.modules.resolution.reactor.filtering}</mavenReactorFiltering>
+                  <mavenProjectExplicitFiltering>${maven.modules.explicit.filtering}</mavenProjectExplicitFiltering>
+                  <mavenProjectExplicitFilteringType>${maven.modules.explicit.filtering.type}</mavenProjectExplicitFilteringType>
                   <mavenExecutionTimeoutMs>${maven.modules.resolution.timeout.ms}</mavenExecutionTimeoutMs>
                   <invokerScriptName>${maven.modules.resolution.selector.script.name}</invokerScriptName>
                   <mavenRepoLocal>${session.request.localRepositoryPath.path}</mavenRepoLocal>

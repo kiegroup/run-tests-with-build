@@ -157,9 +157,44 @@ private void copyInvokerPropertiesToProjects(List<String> projects) {
     }
 }
 
+private List<String> resolveProjectExplicitFiltering(ArrayList<String> leafProjects) {
+    List<String> projects = mavenProjectExplicitFiltering.split(',')
+    List<String> filteredLeafProjects = new ArrayList<>()
+    def logFile = "filter-projects.log"
+    log.info("Starting explicit filtering projects resolution, results will be in ${Path.of(logdir).resolve(logFile).toString()}")
+
+    if (projects && !projects.empty) {
+        for (int i = 0; i < leafProjects.size(); i++) {
+            String current = leafProjects[i]
+            for (int j = 0; j < projects.size(); j++) {
+                String filter = projects[j]
+
+                if (Path.of(current).endsWith(filter)) {
+                    filteredLeafProjects.add(current)
+                    if (mavenProjectExplicitFilteringType == "in") {
+                        log.debug("Adding $current as a selected project for tests")
+                    } else if (mavenProjectExplicitFilteringType == "out") {
+                        log.debug("Skipping '$current' project, cause it has been filtered out")
+                    }
+                }
+            }
+        }
+    }
+
+    logDebug(logFile, filteredLeafProjects)
+    if (mavenProjectExplicitFilteringType == "in") {
+        return filteredLeafProjects
+    } else if (mavenProjectExplicitFilteringType == "out") {
+        return leafProjects.minus(filteredLeafProjects)
+    } else {
+        return leafProjects
+    }
+}
+
 Stream<String> projectsInReactor = mvnExecute(getMvnCommand())
 List leafProjects = resolveLeafProjects(projectsInReactor)
 copyInvokerPropertiesToProjects(leafProjects)
 List dirsWithPoms = findAllDirsWithPom()
-List toExclude = dirsWithPoms.minus(leafProjects)
+List filteredLeafProjects = resolveProjectExplicitFiltering(leafProjects)
+List toExclude = dirsWithPoms.minus(filteredLeafProjects)
 excludeFromInvokerExecution(toExclude)
