@@ -22,6 +22,8 @@
     <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources})$</enforcer.regex.activation.property>
     <maven.modules.explicit.filtering>drools-compiler,drools-test-coverage/test-suite,drools-test-coverage/test-compiler-integration</maven.modules.explicit.filtering>
     <maven.modules.explicit.filtering.type>in</maven.modules.explicit.filtering.type>
+
+    <maven.modules.resolution.reactor.filtering>-Dproductized -pl !drools-examples,!kie-pmml</maven.modules.resolution.reactor.filtering>
   </properties>
 
   <build>

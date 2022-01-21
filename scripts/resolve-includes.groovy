@@ -160,6 +160,9 @@ private void copyInvokerPropertiesToProjects(List<String> projects) {
 private List<String> resolveProjectExplicitFiltering(ArrayList<String> leafProjects) {
     List<String> projects = mavenProjectExplicitFiltering.split(',')
     List<String> filteredLeafProjects = new ArrayList<>()
+    List<String> filteredOutLeafProjects = new ArrayList<>()
+    String filteringTYpe = mavenProjectExplicitFilteringType
+
     def logFile = "filter-projects.log"
     log.info("Starting explicit filtering projects resolution, results will be in ${Path.of(logdir).resolve(logFile).toString()}")
 
@@ -170,10 +173,11 @@ private List<String> resolveProjectExplicitFiltering(ArrayList<String> leafProje
                 String filter = projects[j]
 
                 if (Path.of(current).endsWith(filter)) {
-                    filteredLeafProjects.add(current)
-                    if (mavenProjectExplicitFilteringType == "in") {
+                    if (filteringTYpe.equals("in")) {
+                        filteredLeafProjects.add(current)
                         log.debug("Adding $current as a selected project for tests")
-                    } else if (mavenProjectExplicitFilteringType == "out") {
+                    } else if (filteringTYpe.equals("out")) {
+                        filteredOutLeafProjects.add(current)
                         log.debug("Skipping '$current' project, cause it has been filtered out")
                     }
                 }
@@ -181,12 +185,14 @@ private List<String> resolveProjectExplicitFiltering(ArrayList<String> leafProje
         }
     }
 
-    logDebug(logFile, filteredLeafProjects)
-    if (mavenProjectExplicitFilteringType == "in") {
+    if (filteringTYpe.equals("in")) {
+        logDebug(logFile, filteredLeafProjects)
         return filteredLeafProjects
-    } else if (mavenProjectExplicitFilteringType == "out") {
-        return leafProjects.minus(filteredLeafProjects)
+    } else if (filteringTYpe.equals("out")) {
+        logDebug(logFile, filteredOutLeafProjects)
+        return leafProjects.minus(filteredOutLeafProjects)
     } else {
+        logDebug(logFile, filteredOutLeafProjects)
         return leafProjects
     }
 }
