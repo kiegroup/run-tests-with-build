@@ -20,7 +20,11 @@
     <!-- just for enforcer activation section of profiles does not interpolate properties -->
     <activation.property.name>test.type</activation.property.name>
     <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources})$</enforcer.regex.activation.property>
-    <maven.modules.explicit.filtering>drools-compiler,drools-test-coverage/test-suite,drools-test-coverage/test-compiler-integration</maven.modules.explicit.filtering>
+
+    <filter1>drools-compiler</filter1>
+    <filter2>drools-test-coverage/test-suite</filter2>
+    <filter3>drools-test-coverage/test-compiler-integration</filter3>
+    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3}</maven.modules.explicit.filtering>
     <maven.modules.explicit.filtering.type>in</maven.modules.explicit.filtering.type>
 
     <maven.modules.resolution.reactor.filtering>-Dproductized -pl !drools-examples,!kie-pmml</maven.modules.resolution.reactor.filtering>
