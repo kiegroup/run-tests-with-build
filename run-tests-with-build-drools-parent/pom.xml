@@ -20,6 +20,8 @@
     <!-- just for enforcer activation section of profiles does not interpolate properties -->
     <activation.property.name>test.type</activation.property.name>
     <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources})$</enforcer.regex.activation.property>
+
+    <maven.modules.resolution.reactor.filtering>-Dproductized -pl !drools-examples,!kie-pmml</maven.modules.resolution.reactor.filtering>
   </properties>
 
   <build>
