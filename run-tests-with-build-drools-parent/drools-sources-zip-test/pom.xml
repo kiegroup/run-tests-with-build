@@ -42,11 +42,13 @@
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
             <pomInclude>rhba-*/*drools-drools-7*/pom.xml</pomInclude>
-          <!-- temporary filter to avoid drools-whatever modules - this path needs to be reviewed
-          when the kogito build with drools is available-->
+            <!-- temporary filter to avoid drools-whatever modules - this path needs to be reviewed
+            when the kogito build with drools is available-->
           </pomIncludes>
           <pomExcludes>
-            <!-- nothing for now-->
+            <pomExclude>rhba-*/*drools-drools-7*/drools-persistence/pom.xml</pomExclude>
+            <pomExclude>rhba-*/*drools-drools-7*/*/drools-impact-analysis/pom.xml</pomExclude>
+            <pomExclude>rhba-*/*drools-drools-7*/*/test-integration-nomvel/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>

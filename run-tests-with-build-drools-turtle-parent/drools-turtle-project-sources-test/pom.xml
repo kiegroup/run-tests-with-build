@@ -12,6 +12,18 @@
 
   <artifactId>drools-turtle-project-sources-test</artifactId>
 
+  <properties>
+    <filter1>drools-compiler</filter1>
+    <filter2>drools-test-coverage/test-suite</filter2>
+    <filter3>drools-test-coverage/test-compiler-integration</filter3>
+    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3}</maven.modules.explicit.filtering>
+    <maven.modules.explicit.filtering.type>in</maven.modules.explicit.filtering.type>
+
+    <project1>!drools-examples</project1>
+    <project2>!kie-pmml</project2>
+    <maven.modules.resolution.reactor.filtering>-Dproductized -pl ${project1},${project2}</maven.modules.resolution.reactor.filtering>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>

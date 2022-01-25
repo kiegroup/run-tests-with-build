@@ -20,19 +20,6 @@
     <!-- just for enforcer activation section of profiles does not interpolate properties -->
     <activation.property.name>test.type</activation.property.name>
     <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources})$</enforcer.regex.activation.property>
-
-    <filter1>drools-persistence/drools-persistence-jpa</filter1>
-    <filter2>drools-persistence/drools-persistence-api</filter2>
-    <filter3>drools-test-coverage/test-integration-nomvel</filter3>
-    <filter4>drools-impact-analysis/drools-impact-analysis-itests</filter4>
-    <filter5>drools-impact-analysis/drools-impact-analysis-parser</filter5>
-    <filter6>drools-impact-analysis/drools-impact-analysis-model</filter6>
-    <filter7>drools-impact-analysis/drools-impact-analysis-graph/drools-impact-analysis-graph-common</filter7>
-    <filter8>drools-impact-analysis/drools-impact-analysis-graph/drools-impact-analysis-graph-graphviz</filter8>
-    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3},${filter4},${filter5},${filter6},${filter7},${filter8}</maven.modules.explicit.filtering>
-    <maven.modules.explicit.filtering.type>out</maven.modules.explicit.filtering.type>
-
-    <maven.modules.resolution.reactor.filtering>-Dproductized -pl !drools-examples,!kie-pmml</maven.modules.resolution.reactor.filtering>
   </properties>
 
   <build>

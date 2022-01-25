@@ -41,12 +41,11 @@
           <!-- path relative from the pom.xml location below -->
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
-            <pomInclude>rhba-*/*drools-drools-7*/pom.xml</pomInclude>
-          <!-- temporary filter to avoid drools-whatever modules - this path needs to be reviewed
-          when the kogito build with drools is available-->
+            <pomInclude>rhba-*/*drools-drools-7*/drools-compiler/pom.xml</pomInclude>
+            <pomInclude>rhba-*/*drools-drools-7*/*/test-suite/pom.xml</pomInclude>
+            <pomInclude>rhba-*/*drools-drools-7*/*/test-compiler-integration/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
-            <!-- nothing for now-->
           </pomExcludes>
           <profiles>
             <profile>runTurtleTests</profile>

@@ -12,6 +12,23 @@
 
   <artifactId>drools-project-sources-test</artifactId>
 
+  <properties>
+    <filter1>drools-persistence/drools-persistence-jpa</filter1>
+    <filter2>drools-persistence/drools-persistence-api</filter2>
+    <filter3>drools-test-coverage/test-integration-nomvel</filter3>
+    <filter4>drools-impact-analysis/drools-impact-analysis-itests</filter4>
+    <filter5>drools-impact-analysis/drools-impact-analysis-parser</filter5>
+    <filter6>drools-impact-analysis/drools-impact-analysis-model</filter6>
+    <filter7>drools-impact-analysis/drools-impact-analysis-graph/drools-impact-analysis-graph-common</filter7>
+    <filter8>drools-impact-analysis/drools-impact-analysis-graph/drools-impact-analysis-graph-graphviz</filter8>
+    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3},${filter4},${filter5},${filter6},${filter7},${filter8}</maven.modules.explicit.filtering>
+    <maven.modules.explicit.filtering.type>out</maven.modules.explicit.filtering.type>
+
+    <project1>!drools-examples</project1>
+    <project2>!kie-pmml</project2>
+    <maven.modules.resolution.reactor.filtering>-Dproductized -pl ${project1},${project2}</maven.modules.resolution.reactor.filtering>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
