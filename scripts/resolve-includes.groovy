@@ -127,6 +127,9 @@ private String getMvnCommand() {
     if (mavenSettings && Files.exists(Path.of(mavenSettings))) {
         mvnCommandToRun = mvnCommandToRun + " -s $mavenSettings"
     }
+    if (mavenAdditionalOptions) {
+        mvnCommandToRun = mvnCommandToRun + " $mavenAdditionalOptions"
+    }
     return mvnCommandToRun
 }
 

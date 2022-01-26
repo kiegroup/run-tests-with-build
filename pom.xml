@@ -106,6 +106,9 @@
     <maven.modules.resolution.timeout.ms>600000</maven.modules.resolution.timeout.ms>
     <maven.modules.resolution.reactor.filtering>-Dproductized</maven.modules.resolution.reactor.filtering>
 
+    <!-- additional maven options necessary for specific tests -->
+    <maven.additional.options></maven.additional.options>
+
     <!-- explicit filtering to run tests only for selected modules: module1,module2,module... -->
     <maven.modules.explicit.filtering></maven.modules.explicit.filtering>
     <!-- must be used in connection with the maven.modules.explicit.filtering property
@@ -253,6 +256,7 @@
                   <basedir>${sources.directory}</basedir>
                   <logdir>${project.build.directory}</logdir>
                   <mavenReactorFiltering>${maven.modules.resolution.reactor.filtering}</mavenReactorFiltering>
+                  <mavenAdditionalOptions>${maven.additional.options}</mavenAdditionalOptions>
                   <mavenProjectExplicitFiltering>${maven.modules.explicit.filtering}</mavenProjectExplicitFiltering>
                   <mavenProjectExplicitFilteringType>${maven.modules.explicit.filtering.type}</mavenProjectExplicitFilteringType>
                   <mavenExecutionTimeoutMs>${maven.modules.resolution.timeout.ms}</mavenExecutionTimeoutMs>

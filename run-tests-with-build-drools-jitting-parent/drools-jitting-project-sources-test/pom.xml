@@ -15,7 +15,7 @@
   <properties>
     <project1>!drools-examples</project1>
     <project2>!kie-pmml</project2>
-    <maven.modules.resolution.reactor.filtering>-Dproductized -Ddrools.jittingThreshold=0 -pl ${project1},${project2}</maven.modules.resolution.reactor.filtering>
+    <maven.additional.options>-Ddrools.jittingThreshold=0 -pl ${project1},${project2}</maven.additional.options>
   </properties>
 
   <dependencies>

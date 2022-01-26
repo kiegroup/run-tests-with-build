@@ -15,7 +15,7 @@
   <properties>
     <project1>org.kie:kie-api</project1>
     <project2>org.kie:kie-internal</project2>
-    <maven.modules.resolution.reactor.filtering>-Dproductized -pl ${project1},${project2}</maven.modules.resolution.reactor.filtering>
+    <maven.additional.options>-pl ${project1},${project2}</maven.additional.options>
   </properties>
 
   <dependencies>
