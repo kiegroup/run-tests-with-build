@@ -13,8 +13,8 @@
   <artifactId>droolsjbpm-knowledge-project-sources-test</artifactId>
 
   <properties>
-    <project1>org.kie:kie-api</project1>
-    <project2>org.kie:kie-internal</project2>
+    <project1>kie-api</project1>
+    <project2>kie-internal</project2>
     <maven.additional.options>-pl ${project1},${project2}</maven.additional.options>
   </properties>
 

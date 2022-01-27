@@ -193,11 +193,11 @@
       </properties>
     </profile>
     <profile>
-      <id>droolsjbpm-knowlege</id>
+      <id>droolsjbpm-knowledge</id>
       <activation>
         <property>
           <name>project.sources.artifact</name>
-          <value>droolsjbpm-knowlege</value>
+          <value>droolsjbpm-knowledge</value>
         </property>
       </activation>
       <properties>
