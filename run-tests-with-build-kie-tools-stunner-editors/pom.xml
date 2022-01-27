@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>run-tests-with-build-kogito-tooling-stunner-editors</artifactId>
+  <artifactId>run-tests-with-build-kie-tools-stunner-editors</artifactId>
 
   <build>
     <plugins>
@@ -44,14 +44,14 @@
         </configuration>
         <executions>
           <execution>
-            <id>checkout-kogito-tooling</id>
+            <id>checkout-kie-tools</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>checkout</goal>
             </goals>
             <configuration>
-              <connectionUrl>scm:git:${kogito.tooling.repo.url}</connectionUrl>
-              <checkoutDirectory>${sources.directory}/kogito-tooling</checkoutDirectory>
+              <connectionUrl>scm:git:${kie.tools.repo.url}</connectionUrl>
+              <checkoutDirectory>${sources.directory}/kie-tools</checkoutDirectory>
             </configuration>
           </execution>
         </executions>
@@ -61,7 +61,7 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <pomIncludes>
-            <pomInclude>kogito-tooling/packages/stunner-editors/pom.xml</pomInclude>
+            <pomInclude>kie-tools/packages/stunner-editors/pom.xml</pomInclude>
           </pomIncludes>
         </configuration>
       </plugin>
