@@ -10,13 +10,13 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
 
-  <artifactId>kogito-examples-quickstarts-zip-test</artifactId>
+  <artifactId>kogito-examples-scm-checkout-test</artifactId>
 
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
       <groupId>org.kie</groupId>
-      <artifactId>run-tests-with-build-sources-zip-download</artifactId>
+      <artifactId>run-tests-with-build-scm-checkout</artifactId>
       <type>pom</type>
       <version>${project.version}</version>
     </dependency>
@@ -42,9 +42,10 @@
             <productized>true</productized>
           </properties>
           <!-- path relative from the pom.xml location below -->
-          <invokerPropertiesFile>../invoker.properties</invokerPropertiesFile>
+          <invokerPropertiesFile>invoker.properties</invokerPropertiesFile>
           <pomIncludes>
-            <pomInclude>kogito-examples*/pom.xml</pomInclude>
+            <!-- Building the gitrepo from root pom.xml -->
+            <pomInclude>pom.xml</pomInclude>
           </pomIncludes>
         </configuration>
       </plugin>

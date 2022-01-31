@@ -63,6 +63,9 @@
     <sources.directory.module.project.sources.dependency.get>
       ${main.basedir}/run-tests-with-build-project-sources-dependency-get/target/sources
     </sources.directory.module.project.sources.dependency.get>
+    <sources.directory.module.scm.checkout>
+      ${main.basedir}/run-tests-with-build-scm-checkout/target/sources
+    </sources.directory.module.scm.checkout>
 
     <maven.test.failure.ignore>true</maven.test.failure.ignore>
     <maven.main.skip>false</maven.main.skip>
@@ -110,6 +113,7 @@
     <enforcer.test.type.project.sources>project-sources</enforcer.test.type.project.sources>
     <enforcer.test.type.sources.zip>sources-zip</enforcer.test.type.sources.zip>
     <enforcer.test.type.quickstarts.zip>quickstarts-zip</enforcer.test.type.quickstarts.zip>
+    <enforcer.test.type.scm.checkout>scm-checkout</enforcer.test.type.scm.checkout>
   </properties>
 
   <dependencyManagement>

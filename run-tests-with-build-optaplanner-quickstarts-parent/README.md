@@ -27,6 +27,13 @@ mvn clean verify \
 -Dtest.type=quickstarts-zip \
 -Ddownload.sources.url=http://link.to/quickstarts.zip
 ```
+### Scm-checkout testing
+```
+mvn clean verify \
+-Dtest.type=scm-checkout \
+-Drepository.url=https://github.com/kiegroup/optaplanner-quickstarts \
+-Dsources.revision=8.11.x
+```
 
 ## Module structure
 Each of sub-modules contains configuration for Maven Invoker related settings.
@@ -36,3 +43,5 @@ Download configuration of particular deliverable is provided by modules
   * Used for downloads from arbitrary url.
 * [run-tests-with-build-project-sources-dependency-get](../run-tests-with-build-project-sources-dependency-get)
   * Used for tar.gz archives with the classifier project-sources from nexus repository.
+* [run-tests-with-build-scm-checkout](../run-tests-with-build-scm-checkout)
+  * Used for git repo checkout using repository URL and revision.

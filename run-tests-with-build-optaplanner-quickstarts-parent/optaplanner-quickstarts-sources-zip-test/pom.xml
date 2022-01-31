@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
   <packaging>pom</packaging>
 
-  <artifactId>optaplanner-sources-zip-test</artifactId>
+  <artifactId>optaplanner-quickstarts-sources-zip-test</artifactId>
 
   <dependencies>
     <!-- define as dependency to assure reactor order -->
