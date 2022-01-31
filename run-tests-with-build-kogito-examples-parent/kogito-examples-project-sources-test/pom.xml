@@ -18,6 +18,24 @@
     <quarkus.native.container-build>true</quarkus.native.container-build>
     <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
     <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.1-java11</quarkus.native.builder-image>
+    <!-- Following are being passed to invoked projects as system properties using testPropertiesFile in invoker.
+     The entry in properties file is created only when the value for given property is passed using `-D` to the
+     overall maven build. -->
+    <invoker.test.properties.list>
+      quarkus.platform.group-id,
+      quarkus.platform.artifact-id,
+      quarkus.platform.version,
+      kogito.bom.group-id,
+      kogito.bom.artifact-id,
+      kogito.bom.version,
+      optaplanner.bom.group-id,
+      optaplanner.bom.artifact-id,
+      optaplanner.bom.version,
+      container.image.infinispan,
+      container.image.keycloak,
+      container.image.kafka,
+      container.image.mongodb
+    </invoker.test.properties.list>
   </properties>
 
   <dependencies>
@@ -40,6 +58,19 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>write-test-properties-file-for-invoker</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
       <plugin>
         <groupId>org.codehaus.gmavenplus</groupId>
@@ -59,6 +90,8 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
+          <!-- this file is created by write-test-properties-file-for-invoker execution above -->
+          <testPropertiesFile>test.properties</testPropertiesFile>
           <!--
           script deciding if included project is:
             executed (either script missing or returning true)
