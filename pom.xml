@@ -114,6 +114,9 @@
     <enforcer.test.type.sources.zip>sources-zip</enforcer.test.type.sources.zip>
     <enforcer.test.type.quickstarts.zip>quickstarts-zip</enforcer.test.type.quickstarts.zip>
     <enforcer.test.type.scm.checkout>scm-checkout</enforcer.test.type.scm.checkout>
+
+    <!-- Property used to filter contents of dynamically collected invoker test.properties. -->
+    <invoker.test.properties.list></invoker.test.properties.list>
   </properties>
 
   <dependencyManagement>
@@ -252,6 +255,23 @@
                   <invokerScriptName>${maven.modules.resolution.selector.script.name}</invokerScriptName>
                   <mavenRepoLocal>${session.request.localRepositoryPath.path}</mavenRepoLocal>
                   <mavenSettings>${session.request.userSettingsFile.path}</mavenSettings>
+                </properties>
+              </configuration>
+            </execution>
+            <execution>
+              <id>write-test-properties-file-for-invoker</id>
+              <phase>none</phase>
+              <goals>
+                <goal>execute</goal>
+              </goals>
+              <configuration>
+                <scripts>
+                  <script>file://${main.basedir}/scripts/write-test-properties-file-for-invoker.groovy</script>
+                </scripts>
+                <properties>
+                  <basedir>${sources.directory}</basedir>
+                  <testPropertiesFileName>test.properties</testPropertiesFileName>
+                  <listedProperties>${invoker.test.properties.list}</listedProperties>
                 </properties>
               </configuration>
             </execution>
