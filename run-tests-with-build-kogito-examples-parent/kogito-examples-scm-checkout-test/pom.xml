@@ -12,6 +12,23 @@
 
   <artifactId>kogito-examples-scm-checkout-test</artifactId>
 
+  <properties>
+    <!-- Following are being passed to invoked projects as system properties using testPropertiesFile in invoker.
+         The entry in properties file is created only when the value for given property is passed using `-D` to the
+         overall maven build. -->
+    <invoker.test.properties.list>
+      quarkus.platform.group-id,
+      quarkus.platform.artifact-id,
+      quarkus.platform.version,
+      kogito.bom.group-id,
+      kogito.bom.artifact-id,
+      kogito.bom.version,
+      optaplanner.bom.group-id,
+      optaplanner.bom.artifact-id,
+      optaplanner.bom.version
+    </invoker.test.properties.list>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -34,6 +51,19 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>write-test-properties-file-for-invoker</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
@@ -41,6 +71,7 @@
           <properties>
             <productized>true</productized>
           </properties>
+          <testPropertiesFile>test.properties</testPropertiesFile>
           <!-- path relative from the pom.xml location below -->
           <invokerPropertiesFile>invoker.properties</invokerPropertiesFile>
           <pomIncludes>
