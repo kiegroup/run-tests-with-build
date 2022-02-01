@@ -18,6 +18,7 @@
     <quarkus.native.container-build>true</quarkus.native.container-build>
     <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
     <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11</quarkus.native.builder-image>
+    <quarkus.native.native-image-xmx>8g</quarkus.native.native-image-xmx>
   </properties>
 
   <dependencies>
@@ -75,6 +76,7 @@
                 <quarkus.native.container-build>${quarkus.native.container-build}</quarkus.native.container-build>
                 <quarkus.native.container-runtime>${quarkus.native.container-runtime}</quarkus.native.container-runtime>
                 <quarkus.native.builder-image>${quarkus.native.builder-image}</quarkus.native.builder-image>
+                <quarkus.native.native-image-xmx>${quarkus.native.native-image-xmx}</quarkus.native.native-image-xmx>
               </properties>
               <pomExcludes>
                 <exclude>pom.xml</exclude>
