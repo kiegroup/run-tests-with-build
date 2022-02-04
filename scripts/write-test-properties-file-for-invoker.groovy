@@ -11,7 +11,7 @@ private String getTestPropertiesFileContents(String inputListAsString) {
     Properties systemProperties = session.userProperties
     Set<String> resultingProperties = systemProperties.keySet()
 
-    def listOfPropertiesToWrite = inputListAsString.split(',').toList()
+    def listOfPropertiesToWrite = inputListAsString.split(',').toList().collect { it.trim() }
     if (listOfPropertiesToWrite.size() > 0) {
         resultingProperties.removeIf({ it -> !listOfPropertiesToWrite.contains(it) })
     }
