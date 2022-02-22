@@ -25,6 +25,7 @@
       quarkus.platform.group-id,
       quarkus.platform.artifact-id,
       quarkus.platform.version,
+      quarkus-plugin.version,
       kogito.bom.group-id,
       kogito.bom.artifact-id,
       kogito.bom.version,
