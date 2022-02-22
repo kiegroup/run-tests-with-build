@@ -20,6 +20,7 @@
       quarkus.platform.group-id,
       quarkus.platform.artifact-id,
       quarkus.platform.version,
+      quarkus-plugin.version,
       optaplanner.bom.group-id,
       optaplanner.bom.artifact-id,
       optaplanner.bom.version
