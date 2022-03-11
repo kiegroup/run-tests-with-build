@@ -202,8 +202,8 @@ private List<String> resolveProjectExplicitFiltering(ArrayList<String> leafProje
 
 Stream<String> projectsInReactor = mvnExecute(getMvnCommand())
 List leafProjects = resolveLeafProjects(projectsInReactor)
-copyInvokerPropertiesToProjects(leafProjects)
 List dirsWithPoms = findAllDirsWithPom()
 List filteredLeafProjects = resolveProjectExplicitFiltering(leafProjects)
 List toExclude = dirsWithPoms.minus(filteredLeafProjects)
+copyInvokerPropertiesToProjects(filteredLeafProjects)
 excludeFromInvokerExecution(toExclude)
