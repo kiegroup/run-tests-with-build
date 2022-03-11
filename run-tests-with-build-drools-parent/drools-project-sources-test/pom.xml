@@ -26,7 +26,7 @@
     <filter10>kie-archetypes/kie-kjar-archetype</filter10>
     <filter11>kie-archetypes/kie-model-archetype</filter11>
     <filter12>kie-archetypes/kie-service-spring-boot-archetype</filter12>
-    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3},${filter4},${filter5},${filter6},${filter7},${filter8},${filter9}},${filter10}},${filter11}},${filter12}</maven.modules.explicit.filtering>
+    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3},${filter4},${filter5},${filter6},${filter7},${filter8},${filter9},${filter10},${filter11},${filter12}</maven.modules.explicit.filtering>
     <maven.modules.explicit.filtering.type>out</maven.modules.explicit.filtering.type>
 
     <project1>!drools-examples</project1>
