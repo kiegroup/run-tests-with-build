@@ -25,7 +25,8 @@
     <maven.modules.explicit.filtering.type>out</maven.modules.explicit.filtering.type>
 
     <project1>!drools-examples</project1>
-    <maven.additional.options>-pl ${project1}</maven.additional.options>
+    <project2>!kie-archetypes</project2>
+    <maven.additional.options>-pl ${project1},${project2}</maven.additional.options>
   </properties>
 
   <dependencies>
