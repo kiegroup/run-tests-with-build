@@ -21,7 +21,7 @@
     <filter6>drools-impact-analysis/drools-impact-analysis-model</filter6>
     <filter7>drools-impact-analysis/drools-impact-analysis-graph/drools-impact-analysis-graph-common</filter7>
     <filter8>drools-impact-analysis/drools-impact-analysis-graph/drools-impact-analysis-graph-graphviz</filter8>
-    <filter9>kie-archetypes/</filter9>
+    <filter9>kie-archetypes</filter9>
     <filter10>kie-archetypes/kie-drools-archetype</filter10>
     <filter11>kie-archetypes/kie-kjar-archetype</filter11>
     <filter12>kie-archetypes/kie-model-archetype</filter12>
@@ -31,8 +31,7 @@
     <maven.modules.explicit.filtering.type>out</maven.modules.explicit.filtering.type>
 
     <project1>!drools-examples</project1>
-    <project2>!kie-archetypes</project2>
-    <maven.additional.options>-pl ${project1},${project2}</maven.additional.options>
+    <maven.additional.options>-pl ${project1}</maven.additional.options>
   </properties>
 
   <dependencies>
