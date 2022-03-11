@@ -187,8 +187,8 @@
         </property>
       </activation>
       <properties>
-        <group.id>org.drools</group.id>
-        <artifact.id>drools</artifact.id>
+        <group.id>org.kie</group.id>
+        <artifact.id>drools-parent</artifact.id>
         <version>${download.sources.version}</version>
       </properties>
     </profile>
