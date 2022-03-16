@@ -92,6 +92,9 @@
             <configuration>
               <!-- this file is created by write-test-properties-file-for-invoker execution above -->
               <testPropertiesFile>test.properties</testPropertiesFile>
+              <properties>
+                <productized>true</productized>
+              </properties>
               <!-- script deciding if included project is
               executed (either script missing or returning true)
               or skipped (when returns false or throws error) -->
