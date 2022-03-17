@@ -13,21 +13,15 @@
   <artifactId>drools-project-sources-test</artifactId>
 
   <properties>
-    <filter1>drools-persistence/drools-persistence-jpa</filter1>
-    <filter2>drools-persistence/drools-persistence-api</filter2>
-    <filter3>drools-test-coverage/test-integration-nomvel</filter3>
-    <filter4>drools-impact-analysis/drools-impact-analysis-itests</filter4>
-    <filter5>drools-impact-analysis/drools-impact-analysis-parser</filter5>
-    <filter6>drools-impact-analysis/drools-impact-analysis-model</filter6>
-    <filter7>drools-impact-analysis/drools-impact-analysis-graph/drools-impact-analysis-graph-common</filter7>
-    <filter8>drools-impact-analysis/drools-impact-analysis-graph/drools-impact-analysis-graph-graphviz</filter8>
-    <filter9>kie-archetypes</filter9>
-    <filter10>kie-archetypes/kie-drools-archetype</filter10>
-    <filter11>kie-archetypes/kie-kjar-archetype</filter11>
-    <filter12>kie-archetypes/kie-model-archetype</filter12>
-    <filter13>kie-archetypes/kie-service-spring-boot-archetype</filter13>
+    <filter1>drools-examples-api/kiemodulemodel-example</filter1>
+    <filter2>drools-examples-api/kie-module-from-multiple-files</filter2>
+    <filter3>drools-examples-api/named-kiesession-from-file</filter3>
+    <filter4>drools-examples-api/kiecontainer-from-kierepo</filter4>
+    <filter5>kie-dmn/kie-dmn-core</filter5>
+    <filter6>drools-test-coverage/standalone/kie-ci-without-domain/tests</filter6>
+    <filter7>drools-test-coverage/standalone/kie-ci-with-domain/tests</filter7>
 
-    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3},${filter4},${filter5},${filter6},${filter7},${filter8},${filter9},${filter10},${filter11},${filter12},${filter13}</maven.modules.explicit.filtering>
+    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3},${filter4},${filter5},${filter6},${filter7}</maven.modules.explicit.filtering>
     <maven.modules.explicit.filtering.type>out</maven.modules.explicit.filtering.type>
 
     <project1>!drools-examples</project1>
@@ -86,6 +80,13 @@
             <pomInclude>**/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
+            <pomExclude>**/kie-archetypes/kie-drools-archetype/pom.xml</pomExclude>
+            <pomExclude>**/kie-archetypes/kie-drools-archetype/src/main/resources/archetype-resources/pom.xml</pomExclude>
+            <pomExclude>**/kie-archetypes/kie-service-spring-boot-archetype/src/main/resources/archetype-resources/pom.xml</pomExclude>
+            <pomExclude>**/kie-archetypes/kie-drools-archetype/target/test-classes/projects/integrationtestWithEclipse/project/basic/pom.xml</pomExclude>
+            <pomExclude>**/kie-archetypes/kie-drools-archetype/target/test-classes/projects/integrationtestWithCEP/project/basic/pom.xml</pomExclude>
+            <pomExclude>**/kie-archetypes/kie-drools-archetype/target/test-classes/projects/integrationtestDefaults/project/basic/pom.xml</pomExclude>
+            <pomExclude>**/drools-test-coverage/standalone/kie-ci-with-domain/tests/pom.xml</pomExclude>
             <!-- Excludes work still as expected. -->
           </pomExcludes>
         </configuration>
