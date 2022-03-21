@@ -13,22 +13,6 @@
   <artifactId>drools-project-sources-test</artifactId>
 
   <properties>
-    <filter1>drools-examples-api/kiemodulemodel-example</filter1>
-    <filter2>drools-examples-api/kie-module-from-multiple-files</filter2>
-    <filter3>drools-examples-api/named-kiesession-from-file</filter3>
-    <filter4>drools-examples-api/kiecontainer-from-kierepo</filter4>
-    <filter5>drools-examples-api/default-kiesession-from-file</filter5>
-<!--    <filter6>kie-dmn/kie-dmn-core</filter6>-->
-    <filter7>drools-test-coverage/standalone/kie-ci-without-domain/tests</filter7>
-    <filter8>drools-test-coverage/standalone/kie-ci-with-domain/tests</filter8>
-    <filter9>kie-archetypes</filter9>
-    <filter10>kie-archetypes/kie-drools-archetype</filter10>
-    <filter11>kie-archetypes/kie-kjar-archetype</filter11>
-    <filter12>kie-archetypes/kie-model-archetype</filter12>
-    <filter13>kie-archetypes/kie-service-spring-boot-archetype</filter13>
-
-    <maven.modules.explicit.filtering>${filter1},${filter2},${filter3},${filter5},${filter6},${filter7},${filter8},${filter9},${filter10},${filter11},${filter12},${filter13}</maven.modules.explicit.filtering>
-    <maven.modules.explicit.filtering.type>out</maven.modules.explicit.filtering.type>
 
     <project1>!drools-examples</project1>
     <maven.additional.options>-pl ${project1}</maven.additional.options>
@@ -85,7 +69,6 @@
             which adds invoker-run.groovy script containing 'return false' near each pom.xml
             that should be excluded.-->
             <pomInclude>**/pom.xml</pomInclude>
-<!--            <pomInclude>**/kie-dmn/kie-dmn-core/pom.xml</pomInclude>-->
           </pomIncludes>
           <pomExcludes>
             <pomExclude>**/kie-archetypes/kie-drools-archetype/pom.xml</pomExclude>
