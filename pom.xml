@@ -85,7 +85,10 @@
       -Dmaven.test.error.ignore=${maven.test.error.ignore}
     </maven.default.command>
 
-    <git.server.url>https://github.com/kiegroup</git.server.url>
+    <!-- Enables changing repo owner when building the module by specifying the property value in mvn command -->
+    <repo.owner>kiegroup</repo.owner>
+
+    <git.server.url>https://github.com/${repo.owner}</git.server.url>
     <kie.sources.revision>main</kie.sources.revision>
     <sources.revision.type>tag</sources.revision.type>
 
