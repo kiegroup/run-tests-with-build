@@ -83,6 +83,15 @@
                 <exclude>*/build/quickstarts-showcase/pom.xml</exclude>
                 <exclude>*/technology/java-spring-boot/pom.xml</exclude>
                 <exclude>*/hello-world/pom.xml</exclude>
+                <exclude>*/optaplanner-activemq-quarkus-school-timetabling-solver/pom.xml</exclude>
+                <exclude>*/optaplanner-kotlin-quarkus-school-timetabling-quickstart/pom.xml</exclude>
+                <exclude>*/optaplanner-quarkus-call-center-quickstart/pom.xml</exclude>
+                <exclude>*/optaplanner-quarkus-facility-location-quickstart/pom.xml</exclude>
+                <exclude>*/optaplanner-quarkus-maintenance-scheduling-quickstart/pom.xml</exclude>
+                <exclude>*/optaplanner-quarkus-order-picking-quickstart/pom.xml</exclude>
+                <exclude>*/optaplanner-quarkus-school-timetabling-quickstart/pom.xml</exclude>
+                <exclude>*/optaplanner-quarkus-vaccination-scheduling-quickstart/pom.xml</exclude>
+                <exclude>*/optaplanner-quarkus-vehicle-routing-quickstart/pom.xml</exclude>
               </pomExcludes>
             </configuration>
           </plugin>
