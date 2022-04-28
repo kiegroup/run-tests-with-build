@@ -97,6 +97,9 @@
                   <quarkus.native.container-runtime>${quarkus.native.container-runtime}</quarkus.native.container-runtime>
                   <quarkus.native.builder-image>${quarkus.native.builder-image}</quarkus.native.builder-image>
                 </properties>
+                <pomExcludes>
+                <exclude>*/optaplanner-quarkus-integration/*/*integration-test/pom.xml</exclude>
+                </pomExcludes>
               </configuration>
             </plugin>
           </plugins>
