@@ -139,6 +139,11 @@
                   <quarkus.native.container-runtime>${quarkus.native.container-runtime}</quarkus.native.container-runtime>
                   <quarkus.native.builder-image>${quarkus.native.builder-image}</quarkus.native.builder-image>
                 </properties>
+                <pomExcludes>
+                  <exclude>**/dmn-pmml-quarkus-example/pom.xml</exclude>
+                  <exclude>**/pmml-event-driven-quarkus/pom.xml</exclude>
+                  <exclude>**/pmml-quarkus-example/pom.xml</exclude>
+                </pomExcludes>
               </configuration>
             </plugin>
           </plugins>
