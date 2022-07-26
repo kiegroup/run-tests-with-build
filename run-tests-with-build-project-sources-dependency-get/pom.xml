@@ -17,7 +17,7 @@
     <group.id></group.id>
     <artifact.id></artifact.id>
     <version></version>
-    <enforcer.regex.project.sources.artifact>^(kogito-runtimes|kogito-examples|optaplanner|optaplanner-quickstarts|optaweb-vehicle-routing|optaweb-employee-rostering)$</enforcer.regex.project.sources.artifact>
+    <enforcer.regex.project.sources.artifact>^(kogito-runtimes|kogito-examples|optaplanner|optaplanner-quickstarts|optaweb-vehicle-routing|optaweb-employee-rostering|drools)$</enforcer.regex.project.sources.artifact>
   </properties>
 
   <build>
@@ -175,6 +175,20 @@
       <properties>
         <group.id>org.optaweb.employeerostering</group.id>
         <artifact.id>optaweb-employee-rostering</artifact.id>
+        <version>${download.sources.version}</version>
+      </properties>
+    </profile>
+    <profile>
+      <id>drools</id>
+      <activation>
+        <property>
+          <name>project.sources.artifact</name>
+          <value>drools</value>
+        </property>
+      </activation>
+      <properties>
+        <group.id>org.kie</group.id>
+        <artifact.id>drools-parent</artifact.id>
         <version>${download.sources.version}</version>
       </properties>
     </profile>
