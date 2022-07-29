@@ -44,7 +44,7 @@
           <!-- path relative from the pom.xml location below -->
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
-            <pomInclude>kogito-*/*kogito-examples*/pom.xml</pomInclude>
+            <pomInclude>*/*kogito-examples*/pom.xml</pomInclude>
           </pomIncludes>
         </configuration>
       </plugin>

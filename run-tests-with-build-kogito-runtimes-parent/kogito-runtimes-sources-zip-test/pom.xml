@@ -53,7 +53,7 @@
               <!-- path relative to the poms included below -->
               <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
               <pomIncludes>
-                <pomInclude>kogito-*/*kogito-runtimes*/pom.xml</pomInclude>
+                <pomInclude>*/*kogito-runtimes*/pom.xml</pomInclude>
               </pomIncludes>
             </configuration>
           </execution>

@@ -41,7 +41,7 @@
           <!-- path relative from the pom.xml location below -->
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
-            <pomInclude>kogito-*/*optaplanner-quickstarts*/pom.xml</pomInclude>
+            <pomInclude>*/*optaplanner-quickstarts*/pom.xml</pomInclude>
           </pomIncludes>
         </configuration>
       </plugin>
