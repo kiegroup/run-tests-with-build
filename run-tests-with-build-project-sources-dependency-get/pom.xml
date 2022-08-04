@@ -17,7 +17,7 @@
     <group.id></group.id>
     <artifact.id></artifact.id>
     <version></version>
-    <enforcer.regex.project.sources.artifact>^(kogito-runtimes|kogito-examples|optaplanner|optaplanner-quickstarts|optaweb-vehicle-routing|optaweb-employee-rostering|drools)$</enforcer.regex.project.sources.artifact>
+    <enforcer.regex.project.sources.artifact>^(kogito-runtimes|kogito-apps|kogito-examples|optaplanner|optaplanner-quickstarts|optaweb-vehicle-routing|optaweb-employee-rostering|drools)$</enforcer.regex.project.sources.artifact>
   </properties>
 
   <build>
@@ -105,6 +105,20 @@
       <properties>
         <group.id>org.kie.kogito</group.id>
         <artifact.id>kogito-runtimes</artifact.id>
+        <version>${download.sources.version}</version>
+      </properties>
+    </profile>
+    <profile>
+      <id>kogito-apps</id>
+      <activation>
+        <property>
+          <name>project.sources.artifact</name>
+          <value>kogito-apps</value>
+        </property>
+      </activation>
+      <properties>
+        <group.id>org.kie.kogito</group.id>
+        <artifact.id>kogito-apps</artifact.id>
         <version>${download.sources.version}</version>
       </properties>
     </profile>

@@ -22,6 +22,7 @@
     <module>run-tests-with-build-sources-zip-download</module>
     <module>run-tests-with-build-project-sources-dependency-get</module>
     <module>run-tests-with-build-kogito-runtimes-parent</module>
+    <module>run-tests-with-build-kogito-apps-parent</module>
     <module>run-tests-with-build-kogito-examples-parent</module>
     <module>run-tests-with-build-optaplanner-parent</module>
     <module>run-tests-with-build-optaplanner-quickstarts-parent</module>
