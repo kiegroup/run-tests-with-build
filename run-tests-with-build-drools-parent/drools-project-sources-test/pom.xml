@@ -66,10 +66,13 @@
           </pomIncludes>
           <pomExcludes>
             <!-- Excludes work still as expected. -->
+            <pomExclude>**/kie-archetypes/kie-drools-archetype/pom.xml</pomExclude>
             <pomExclude>**/kie-archetypes/kie-drools-archetype/src/main/resources/archetype-resources/pom.xml</pomExclude>
             <pomExclude>**/kie-archetypes/kie-service-spring-boot-archetype/src/main/resources/archetype-resources/pom.xml</pomExclude>
             <pomExclude>**/kie-archetypes/kie-drools-exec-model-archetype/src/main/resources/archetype-resources/pom.xml</pomExclude>
             <pomExclude>**/kie-archetypes/kie-drools-exec-model-ruleunit-archetype/src/main/resources/archetype-resources/pom.xml</pomExclude>
+            <pomExclude>**/drools-test-coverage/standalone/kie-ci-with-domain/tests/pom.xml</pomExclude>
+            <pomExclude>**/drools-test-coverage/standalone/kie-ci-without-domain/tests/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
