@@ -12,8 +12,7 @@
 
   <artifactId>run-tests-with-build-drools-parent</artifactId>
   <properties>
-    <!-- We can not skip src/main/java module compilation -->
-    <maven.main.skip>false</maven.main.skip>
+    <maven.main.skip>true</maven.main.skip>
 
     <!-- Fail build if there is any issue in tests. This is passed to maven-invoker-plugin -->
     <maven.test.failure.ignore>false</maven.test.failure.ignore>
