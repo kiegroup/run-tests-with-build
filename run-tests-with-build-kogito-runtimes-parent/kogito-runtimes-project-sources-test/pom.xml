@@ -32,6 +32,7 @@
       container.image.kafka,
       container.image.mongodb
     </invoker.test.properties.list>
+    <maven.main.skip>true</maven.main.skip>
   </properties>
   <dependencies>
     <!-- define as dependency to assure reactor order -->
@@ -85,6 +86,11 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
+          <goals>
+            <goal>clean</goal>
+            <goal>org.kie:unpack-build-maven-plugin:${unpack.build.version}:unpack-build</goal>
+            <goal>verify</goal>
+          </goals>
         </configuration>
         <executions>
           <execution>
