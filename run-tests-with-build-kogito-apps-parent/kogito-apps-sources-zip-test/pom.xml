@@ -12,6 +12,20 @@
 
   <artifactId>kogito-apps-sources-zip-test</artifactId>
 
+  <properties>
+    <!-- Following are being passed to invoked projects as system properties using testPropertiesFile in invoker.
+         The entry in properties file is created only when the value for given property is passed using `-D` to the
+         overall maven build. -->
+    <invoker.test.properties.list>
+      container.image.infinispan,
+      container.image.keycloak,
+      container.image.kafka,
+      container.image.mongodb
+    </invoker.test.properties.list>
+    <!-- We DON'T want to skip main compilation, sources-zip is supposed to validate full build -->
+    <maven.main.skip>false</maven.main.skip>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -34,6 +48,19 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>write-test-properties-file-for-invoker</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
@@ -48,6 +75,8 @@
                 <goal>install</goal> <!-- ok to install, will build full project from parent - all is taken from reactor anyway -->
                 <goal>-pl !ui-packages</goal> <!-- JS module -->
               </goals>
+              <!-- this file is created by write-test-properties-file-for-invoker execution above -->
+              <testPropertiesFile>test.properties</testPropertiesFile>
               <properties>
                 <productized>true</productized>
               </properties>

@@ -17,16 +17,6 @@
     The entry in properties file is created only when the value for given property is passed using `-D` to the
     overall maven build. -->
     <invoker.test.properties.list>
-      quarkus.platform.group-id,
-      quarkus.platform.artifact-id,
-      quarkus.platform.version,
-      quarkus-plugin.version,
-      kogito.bom.group-id,
-      kogito.bom.artifact-id,
-      kogito.bom.version,
-      optaplanner.bom.group-id,
-      optaplanner.bom.artifact-id,
-      optaplanner.bom.version,
       container.image.infinispan,
       container.image.keycloak,
       container.image.kafka,
