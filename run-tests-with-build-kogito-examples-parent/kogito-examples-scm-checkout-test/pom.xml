@@ -24,9 +24,10 @@
       kogito.bom.group-id,
       kogito.bom.artifact-id,
       kogito.bom.version,
-      optaplanner.bom.group-id,
-      optaplanner.bom.artifact-id,
-      optaplanner.bom.version
+      container.image.infinispan,
+      container.image.keycloak,
+      container.image.kafka,
+      container.image.mongodb
     </invoker.test.properties.list>
   </properties>
 
