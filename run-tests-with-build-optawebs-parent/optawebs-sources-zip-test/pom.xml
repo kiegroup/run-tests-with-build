@@ -41,7 +41,7 @@
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
             <!-- relying here that which particular of the optaweb apps is tested is decided in run-tests-with-build-sources-zip-download -->
-            <pomInclude>*/*optaweb*/pom.xml</pomInclude>
+            <pomInclude>**/*optaweb*/pom.xml</pomInclude>
           </pomIncludes>
         </configuration>
       </plugin>

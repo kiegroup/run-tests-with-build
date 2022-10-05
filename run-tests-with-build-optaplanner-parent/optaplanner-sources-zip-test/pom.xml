@@ -38,6 +38,9 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
+          <properties>
+            <asciidoctor.skip>false</asciidoctor.skip>
+          </properties>
           <!-- path relative from the pom.xml location below -->
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
