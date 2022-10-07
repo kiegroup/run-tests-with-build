@@ -20,7 +20,8 @@
       container.image.infinispan,
       container.image.keycloak,
       container.image.kafka,
-      container.image.mongodb
+      container.image.mongodb,
+      quarkus.container-image.build
     </invoker.test.properties.list>
     <!-- We DON'T want to skip main compilation, sources-zip is supposed to validate full build -->
     <maven.main.skip>false</maven.main.skip>
