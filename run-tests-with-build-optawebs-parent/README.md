@@ -60,3 +60,6 @@ Download configuration of particular deliverable is provided by modules
   * Used for downloads from arbitrary url.
 * [run-tests-with-build-project-sources-dependency-get](../run-tests-with-build-project-sources-dependency-get)
   * Used for tar.gz archives with the classifier project-sources from nexus repository.
+
+https://bxms-qe.rhev-ci-vms.eng.rdu2.redhat.com:8443/nexus/content/groups/rhbop-main-nightly/org/optaweb/vehiclerouting/optaweb-vehicle-routing/8.29.0.redhat-2022100410/optaweb-vehicle-routing-8.29.0.redhat-2022100410-project-sources.tar.gz
+https://bxms-qe.rhev-ci-vms.eng.rdu2.redhat.com:8443/nexus/content/groups/rhbop-main-nightly/org/optaweb/vehiclerouting/optaweb-vehicle-routing/8.29.0.redhat-2022100923/optaweb-vehicle-routing-8.29.0.redhat-2022100923-project-sources.tar.gz

@@ -42,6 +42,7 @@
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
             <pomInclude>**/*optaplanner-quickstarts*/pom.xml</pomInclude>
+            <pomInclude>**/org.optaweb.optaweb-vehicle-routing*/pom.xml</pomInclude>
           </pomIncludes>
         </configuration>
       </plugin>
