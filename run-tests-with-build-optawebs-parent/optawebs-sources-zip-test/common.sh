@@ -10,13 +10,15 @@ function run_cypress() {
   local _cypress_image_version=$3
   local _container_runtime=$4
 
+  echo "Running cypress test for ${_container_runtime} run --network=host --volume ${_frontend_directory}:/e2e:Z --workdir /e2e --entrypoint cypress cypress/included:${_cypress_image_version} run --project . --config baseUrl=${_application_url}"
+
   "${_container_runtime}" run \
       --network=host \
       --volume "${_frontend_directory}":/e2e:Z \
       --workdir /e2e \
       --entrypoint cypress \
       cypress/included:"${_cypress_image_version}" run --project . \
-      --config baseUrl="${_application_url}"
+      --config baseUrl="${_application_url}",viewportWidth=1280,viewportHeight=720
 }
 
 # Waits for a URL to become available by returning HTTP 200 or timeout.
