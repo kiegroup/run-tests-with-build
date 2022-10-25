@@ -87,7 +87,7 @@
                   </executable>
                   <arguments>
                     <argument>
-                      ${sources.directory.module.sources.download}/org.optaweb.optaweb-vehicle-routing-${download.sources.zip.version}
+                      ${sources.directory.module.sources.download}
                     </argument>
                     <argument>${version.cypress.docker}</argument>
                     <argument>${openshift.api-url}</argument>
