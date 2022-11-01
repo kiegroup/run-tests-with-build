@@ -54,6 +54,31 @@
           </execution>
         </executions>
       </plugin>
+<!--      Remove after fix https://issues.redhat.com/browse/RHBOP-22https://issues.redhat.com/browse/RHBOP-22-->
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-antrun-plugin</artifactId>
+         <version>3.1.0</version>
+         <executions>
+           <execution>
+             <id>change-shemagen</id>
+             <phase>test</phase>
+             <configuration>
+               <target>
+                 <replace token= "&lt;sources>" value="&lt;clearOutputDir>false&lt;/clearOutputDir>&lt;sources>" dir="${sources.directory.module.project.sources.dependency.get}/optaplanner-parent-${download.sources.version}/core/optaplanner-core-impl">
+                   <include name="pom.xml"/>
+                 </replace>
+                 <replace token= "&lt;sources>" value="&lt;clearOutputDir>false&lt;/clearOutputDir>&lt;sources>" dir="${sources.directory.module.project.sources.dependency.get}/optaplanner-parent-${download.sources.version}/optaplanner-benchmark">
+                   <include name="pom.xml"/>
+                 </replace>
+               </target>
+             </configuration>
+             <goals>
+               <goal>run</goal>
+             </goals>
+           </execution>
+         </executions>
+       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
