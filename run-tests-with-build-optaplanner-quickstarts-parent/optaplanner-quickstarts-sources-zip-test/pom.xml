@@ -33,6 +33,28 @@
           </execution>
         </executions>
       </plugin>
+<!--      Remove -Dproductized to check RHBOP-23-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>remove-productized-profile</id>
+            <phase>test</phase>
+            <configuration>
+              <target>
+                <replace token="-Dproductized" value="" dir="${sources.directory.module.sources.download}/">
+                  <include name="**/maven.config"/>
+                </replace>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-invoker-plugin</artifactId>
