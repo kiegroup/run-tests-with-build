@@ -12,6 +12,10 @@
 
   <artifactId>optaplanner-quickstarts-sources-zip-test</artifactId>
 
+  <properties>
+    <pom.include>**/*optaplanner-quickstarts*/pom.xml</pom.include>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -33,7 +37,37 @@
           </execution>
         </executions>
       </plugin>
-<!--      Remove -Dproductized to check RHBOP-23-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <configuration>
+          <parallelThreads>1</parallelThreads>
+          <properties>
+            <asciidoctor.skip>false</asciidoctor.skip>
+          </properties>
+          <!-- path relative from the pom.xml location below -->
+          <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
+          <pomIncludes>
+            <pomInclude>${pom.include}</pomInclude>
+          </pomIncludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>quickstart-baseline</id>
+      <activation>
+        <property>
+          <name>quickstart-baseline</name>
+        </property>
+      </activation>
+      <properties>
+        <pom.include>**/*optaplanner-quickstarts*/hello-world/pom.xml</pom.include>
+      </properties>
+      <!--      Remove -Dproductized to check RHBOP-23-->
+     <build>
+      <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
@@ -41,7 +75,7 @@
         <executions>
           <execution>
             <id>remove-productized-profile</id>
-            <phase>test</phase>
+            <phase>process-resources</phase>
             <configuration>
               <target>
                 <replace token="-Dproductized" value="" dir="${sources.directory.module.sources.download}/">
@@ -55,22 +89,8 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-invoker-plugin</artifactId>
-        <configuration>
-          <parallelThreads>1</parallelThreads>
-          <properties>
-            <asciidoctor.skip>false</asciidoctor.skip>
-          </properties>
-          <!-- path relative from the pom.xml location below -->
-          <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
-          <pomIncludes>
-            <pomInclude>**/*optaplanner-quickstarts*/pom.xml</pomInclude>
-            <pomInclude>**/org.optaweb.optaweb-vehicle-routing*/pom.xml</pomInclude>
-          </pomIncludes>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+      </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
