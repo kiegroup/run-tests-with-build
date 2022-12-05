@@ -7,13 +7,6 @@ This module serves as an invocation point for tests of optaplanner-quickstarts-p
 Project pom defines profiles that can invoke tests for a particular delivery option.
 Download of artifacts is provided by means described in [Module structure](#module-structure).
 
-### Project-sources testing
-```
-mvn clean verify \
--Dtest.type=project-sources \
--Dproject.sources.artifact=optaplanner-quickstarts \
--Ddownload.sources.version=<VERSION>
-```
 ### Sources-zip testing
 ```
 mvn clean verify \
@@ -21,12 +14,6 @@ mvn clean verify \
 -Ddownload.sources.url=http://link.to/source.zip
 ```
 
-### Quickstarts-zip testing
-```
-mvn clean verify \
--Dtest.type=quickstarts-zip \
--Ddownload.sources.url=http://link.to/quickstarts.zip
-```
 ### Scm-checkout testing
 ```
 mvn clean verify \
@@ -34,6 +21,15 @@ mvn clean verify \
 -Drepository.url=https://github.com/kiegroup/optaplanner-quickstarts \
 -Dsources.revision=8.11.x
 ```
+
+### Hello-world testing
+```
+mvn clean verify \
+-Dtest.type=sources-zip \
+-Ddownload.sources.url=http://link.to/source.zip
+-Dquickstart-baseline
+```
+
 ## Passing system properties
 ### Static
 Any system properties that needs to be passed to particular invoked project, and are known

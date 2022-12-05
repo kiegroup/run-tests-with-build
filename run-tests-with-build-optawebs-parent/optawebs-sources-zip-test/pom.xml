@@ -12,6 +12,14 @@
 
   <artifactId>optawebs-sources-zip-test</artifactId>
 
+  <properties>
+    <openshift.api-url>https://api.crc.testing:6443</openshift.api-url>
+    <openshift.user>developer</openshift.user>
+    <openshift.password>developer</openshift.password>
+    <version.cypress.docker>7.0.1</version.cypress.docker>
+    <container.runtime>podman</container.runtime>
+  </properties>
+
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -41,10 +49,59 @@
           <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <pomIncludes>
             <!-- relying here that which particular of the optaweb apps is tested is decided in run-tests-with-build-sources-zip-download -->
-            <pomInclude>*/*optaweb*/pom.xml</pomInclude>
+            <pomInclude>**/org.optaweb.optaweb-vehicle-routing*/pom.xml</pomInclude>
           </pomIncludes>
         </configuration>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>openshift</id>
+      <properties>
+        <skip.invoker.tests>${skipTests}</skip.invoker.tests>
+        <!-- Relying on profile activation property from run-tests-with-build-project-sources-dependency-get module.
+        Enforcer of that module assures that the value is set properly.-->
+        <optaweb.project.name>${project.sources.artifact}</optaweb.project.name>
+      </properties>
+      <activation>
+        <property>
+          <name>openshift</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>exec-maven-plugin</artifactId>
+            <groupId>org.codehaus.mojo</groupId>
+            <executions>
+              <execution>
+                <id>deploy-to-openshift-and-test</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <configuration>
+                  <executable>
+                    ${main.basedir}/run-tests-with-build-optawebs-parent/optawebs-sources-zip-test/optaweb-vehicle-routing-test-script-openshift.sh
+                  </executable>
+                  <arguments>
+                    <argument>
+                      ${sources.directory.module.sources.download}
+                    </argument>
+                    <argument>${version.cypress.docker}</argument>
+                    <argument>${openshift.api-url}</argument>
+                    <argument>${openshift.user}</argument>
+                    <argument>${openshift.password}</argument>
+                    <argument>${settings.xml.file}</argument>
+                    <argument>${container.runtime}</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

@@ -86,39 +86,5 @@
                 <module>optawebs-sources-zip-test</module>
             </modules>
         </profile>
-        <profile>
-            <id>optawebs-quickstarts-zip</id>
-            <activation>
-                <property>
-                    <name>test.type</name>
-                    <value>quickstarts-zip</value>
-                </property>
-            </activation>
-            <properties>
-                <!-- Invoker expecting sources.directory property to point at sources -->
-                <sources.directory>${sources.directory.module.sources.download}</sources.directory>
-            </properties>
-            <modules>
-                <module>../run-tests-with-build-sources-zip-download</module>
-                <module>optawebs-quickstarts-zip-test</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>optawebs-project-sources</id>
-            <activation>
-                <property>
-                    <name>test.type</name>
-                    <value>project-sources</value>
-                </property>
-            </activation>
-            <properties>
-                <!-- Invoker expecting sources.directory property to point at sources -->
-                <sources.directory>${sources.directory.module.project.sources.dependency.get}</sources.directory>
-            </properties>
-            <modules>
-                <module>../run-tests-with-build-project-sources-dependency-get</module>
-                <module>optawebs-project-sources-test</module>
-            </modules>
-        </profile>
     </profiles>
 </project>

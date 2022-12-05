@@ -17,6 +17,7 @@
     <quarkus.native.container-build>true</quarkus.native.container-build>
     <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
     <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11</quarkus.native.builder-image>
+    <maven.main.skip>true</maven.main.skip>
   </properties>
 
   <dependencies>
@@ -58,6 +59,15 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <configuration>
           <parallelThreads>1</parallelThreads>
+          <goals>
+            <goal>clean</goal>
+            <goal>org.kie:unpack-build-maven-plugin:${unpack.build.version}:unpack-build</goal>
+            <goal>verify</goal>
+          </goals>
+          <properties>
+            <productized>true</productized>
+          </properties>
+          <invokerPropertiesFile>../../invoker.properties</invokerPropertiesFile>
           <!--
           script deciding if included project is:
             executed (either script missing or returning true)

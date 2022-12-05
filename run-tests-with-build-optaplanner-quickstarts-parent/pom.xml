@@ -70,40 +70,6 @@
       </modules>
     </profile>
     <profile>
-      <id>optaplanner-quickstarts-quickstarts-zip</id>
-      <activation>
-        <property>
-          <name>test.type</name>
-          <value>quickstarts-zip</value>
-        </property>
-      </activation>
-      <properties>
-        <!-- Invoker expecting sources.directory property to point at sources -->
-        <sources.directory>${sources.directory.module.sources.download}</sources.directory>
-      </properties>
-      <modules>
-        <module>../run-tests-with-build-sources-zip-download</module>
-        <module>optaplanner-quickstarts-quickstarts-zip-test</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>optaplanner-quickstarts-project-sources</id>
-      <activation>
-        <property>
-          <name>test.type</name>
-          <value>project-sources</value>
-        </property>
-      </activation>
-      <properties>
-        <!-- Invoker expecting sources.directory property to point at sources -->
-        <sources.directory>${sources.directory.module.project.sources.dependency.get}</sources.directory>
-      </properties>
-      <modules>
-        <module>../run-tests-with-build-project-sources-dependency-get</module>
-        <module>optaplanner-quickstarts-project-sources-test</module>
-      </modules>
-    </profile>
-    <profile>
       <id>optaplanner-quickstarts-scm-checkout</id>
       <activation>
         <property>

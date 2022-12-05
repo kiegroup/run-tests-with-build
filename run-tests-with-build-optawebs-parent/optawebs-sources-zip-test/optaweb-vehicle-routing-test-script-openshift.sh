@@ -24,12 +24,9 @@ then
   exit 0
 fi
 
-readonly project_basedir=$1
-[[ -d ${project_basedir} ]] || {
-  echo "Project base directory $project_basedir does not exist!"
-  display_help
-  exit 1
-}
+readonly basedir_arg=$1
+cd ${basedir_arg}/org.optaweb.optaweb-vehicle-routing-*
+readonly project_basedir=$PWD
 
 #open street map git url
 readonly test_osm_data_url="https://github.com/kiegroup/optaweb-vehicle-routing/raw/main/optaweb-vehicle-routing-standalone/data/openstreetmap/planet_12.032%2C53.0171_12.1024%2C53.0491.osm.pbf"
