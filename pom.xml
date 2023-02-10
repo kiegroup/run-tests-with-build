@@ -13,10 +13,6 @@
     <module>run-tests-with-build-drools</module>
     <module>run-tests-with-build-drools-turtle</module>
     <module>run-tests-with-build-jbpm</module>
-    <module>run-tests-with-build-kie-osgi</module>
-    <module>run-tests-with-build-camel-container</module>
-    <module>run-tests-with-build-integration</module>
-    <module>run-tests-with-build-business-central-community</module>
     <module>run-tests-with-build-drools-db</module>
     <!-- Not a module on purpose, invoke using -f or from that folder:
     <module>run-tests-with-build-sources-zip-download</module>
@@ -31,20 +27,19 @@
   </modules>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
 
-    <scm.plugin.version>1.11.1</scm.plugin.version>
-    <invoker.plugin.version>3.1.0</invoker.plugin.version>
+    <scm.plugin.version>2.0.0-M3</scm.plugin.version>
+    <invoker.plugin.version>3.4.0</invoker.plugin.version>
     <unpack.build.version>1.0-SNAPSHOT</unpack.build.version>
     <dependency.plugin.version>3.1.2</dependency.plugin.version>
-    <gmavenplus.plugin.version>1.12.1</gmavenplus.plugin.version>
-    <groovy.version>3.0.8</groovy.version>
-    <enforcer.plugin.version>3.0.0-M2</enforcer.plugin.version>
-    <download.plugin.version>1.6.3</download.plugin.version>
-    <resources.plugin.version>3.1.0</resources.plugin.version>
+    <gmavenplus.plugin.version>2.1.0</gmavenplus.plugin.version>
+    <groovy.version>4.0.9</groovy.version>
+    <enforcer.plugin.version>3.2.1</enforcer.plugin.version>
+    <download.plugin.version>1.6.8</download.plugin.version>
+    <resources.plugin.version>3.3.0</resources.plugin.version>
 
-    <kie.download.build.version>7.60.0-SNAPSHOT</kie.download.build.version>
+    <kie.download.build.version>8.35.0-SNAPSHOT</kie.download.build.version>
     <!--TODO - settings.xml-->
     <main.basedir>${maven.multiModuleProjectDirectory}</main.basedir>
     <settings.xml.file>${main.basedir}/settings/settings.xml</settings.xml.file>
@@ -71,7 +66,7 @@
     <maven.main.skip>false</maven.main.skip>
     <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-    <jdk.min.version>1.8.0</jdk.min.version>
+    <jdk.min.version>11</jdk.min.version>
     <maven.test.error.ignore>true</maven.test.error.ignore>
 
     <maven.unnecessary.plugins.skip>-Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip</maven.unnecessary.plugins.skip>
@@ -125,7 +120,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.codehaus.groovy</groupId>
+        <groupId>org.apache.groovy</groupId>
         <artifactId>groovy-all</artifactId>
         <version>${groovy.version}</version>
         <type>pom</type>
@@ -134,7 +129,7 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>org.codehaus.groovy</groupId>
+      <groupId>org.apache.groovy</groupId>
       <artifactId>groovy-all</artifactId>
       <type>pom</type>
       <scope>runtime</scope>
@@ -316,6 +311,11 @@
 
   <repositories>
     <repository>
+      <id>maven-central</id>
+      <name>Maven Central</name>
+      <url>	https://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
       <id>jboss-public-repository-group</id>
       <name>JBoss Public Repository Group</name>
       <url>https://repository.jboss.org/nexus/content/groups/public/</url>
@@ -329,6 +329,11 @@
     </repository>
   </repositories>
   <pluginRepositories>
+    <pluginRepository>
+      <id>maven-central</id>
+      <name>Maven Central</name>
+      <url>	https://repo1.maven.org/maven2/</url>
+    </pluginRepository>
     <pluginRepository>
       <id>jboss-public-repository-group</id>
       <name>JBoss Public Repository Group</name>
