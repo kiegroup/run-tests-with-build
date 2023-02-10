@@ -28,17 +28,6 @@
               <checkoutDirectory>${sources.directory}/drools</checkoutDirectory>
             </configuration>
           </execution>
-          <execution>
-            <id>checkout-droolsjbpm-knowledge</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>checkout</goal>
-            </goals>
-            <configuration>
-              <connectionUrl>scm:git:${droolsjbpm.knowledge.repo.url}</connectionUrl>
-              <checkoutDirectory>${sources.directory}/droolsjbpm-knowledge</checkoutDirectory>
-            </configuration>
-          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -68,7 +57,6 @@
         <configuration>
           <pomIncludes>
             <pomInclude>drools/*/pom.xml</pomInclude>
-            <pomInclude>droolsjbpm-knowledge/*/pom.xml</pomInclude>
           </pomIncludes>
           <pomExcludes>
             <pomExclude>drools/drools-persistence/pom.xml</pomExclude>
