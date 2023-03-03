@@ -21,7 +21,7 @@
       container.image.keycloak,
       container.image.kafka,
       container.image.mongodb,
-      data-index-ephemeral.image
+      data-index-ephemeral.image.test
     </invoker.test.properties.list>
     <maven.main.skip>true</maven.main.skip>
   </properties>
