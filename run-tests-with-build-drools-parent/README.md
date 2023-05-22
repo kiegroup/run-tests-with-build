@@ -1,7 +1,7 @@
-# Kogito Runtimes Parent
+# Drools Parent
 
 ## Description
-This module serves as an invocation point for tests of kogito-runtimes repository.
+This module serves as an invocation point for tests of drools repository.
 
 ## Usage
 Project pom defines profiles that can invoke tests for a particular delivery option.
@@ -11,14 +11,8 @@ Download of artifacts is provided by means described in [Module structure](#modu
 ```
 mvn clean verify \
 -Dtest.type=project-sources \
--Dproject.sources.artifact=kogito-runtimes \
+-Dproject.sources.artifact=drools \
 -Ddownload.sources.version=<VERSION>
-```
-### Sources-zip testing
-```
-mvn clean verify \
--Dtest.type=sources-zip \
--Ddownload.sources.url=http://link.to/source.zip
 ```
 ### Local-repo testing
 ```
@@ -65,7 +59,7 @@ using `invoker-maven-plugin`'s configuration option `<testPropertiesFile>`.
 ```
 By default, all properties passed to run-tests-with-build are passed - this can be changed by
 the configuration property `invoker.test.properties.list`, which is a comma-separated list
-of system properties that are passed (but only if they are actally passed to overall run-tests-with-build maven build).
+of system properties that are passed (but only if they are actually passed to overall run-tests-with-build maven build).
 This will help you to filter out run-tests-with-build internally used properties (e.g. `-Dtest.type`).
 ```xml
 <properties>

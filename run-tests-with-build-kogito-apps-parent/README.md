@@ -20,6 +20,12 @@ mvn clean verify \
 -Dtest.type=sources-zip \
 -Ddownload.sources.url=http://link.to/source.zip
 ```
+### Local-repo testing
+```
+mvn clean verify \
+-Dtest.type=local-repo \
+-Dsources.directory.local.repo=/path/to/cloned/repo
+```
 
 ## Passing system properties
 ### Static
