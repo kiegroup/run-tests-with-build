@@ -25,6 +25,7 @@
     </invoker.test.properties.list>
     <!-- We DON'T want to skip main compilation, sources-zip is supposed to validate full build -->
     <maven.main.skip>false</maven.main.skip>
+    <invoker.goal>${invoker.goal.install}</invoker.goal>
   </properties>
 
   <dependencies>
@@ -73,7 +74,7 @@
             <configuration>
               <goals>
                 <goal>clean</goal>
-                <goal>install</goal> <!-- ok to install, will build full project from parent - all is taken from reactor anyway -->
+                <goal>${invoker.goal}</goal> <!-- ok to install, will build full project from parent - all is taken from reactor anyway -->
                 <goal>-pl !ui-packages</goal> <!-- JS module -->
               </goals>
               <!-- this file is created by write-test-properties-file-for-invoker execution above -->
