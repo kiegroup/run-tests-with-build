@@ -33,6 +33,12 @@ mvn clean verify \
 -Drepository.url=https://github.com/kiegroup/kogito-examples \
 -Dsources.revision=1.11.x
 ```
+### Local-repo testing
+```
+mvn clean verify \
+-Dtest.type=local-repo \
+-Dsources.directory.local.repo=/path/to/cloned/repo
+```
 
 ## Passing system properties
 ### Static

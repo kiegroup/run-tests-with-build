@@ -21,7 +21,7 @@
     <maven.test.failure.ignore>false</maven.test.failure.ignore>
     <!-- just for enforcer activation section of profiles does not interpolate properties -->
     <activation.property.name>test.type</activation.property.name>
-    <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources}|${enforcer.test.type.quickstarts.zip}|${enforcer.test.type.scm.checkout})$</enforcer.regex.activation.property>
+    <enforcer.regex.activation.property>^(${enforcer.test.type.sources.zip}|${enforcer.test.type.project.sources}|${enforcer.test.type.quickstarts.zip}|${enforcer.test.type.scm.checkout}|${enforcer.test.type.local.repo})$</enforcer.regex.activation.property>
   </properties>
 
   <build>
@@ -123,6 +123,21 @@
       <modules>
         <module>../run-tests-with-build-scm-checkout</module>
         <module>kogito-examples-scm-checkout-test</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>kogito-examples-local-repo</id>
+      <activation>
+        <property>
+          <name>test.type</name>
+          <value>local-repo</value>
+        </property>
+      </activation>
+      <properties>
+        <sources.directory>${sources.directory.local.repo}</sources.directory>
+      </properties>
+      <modules>
+        <module>kogito-examples-local-repo-test</module>
       </modules>
     </profile>
   </profiles>

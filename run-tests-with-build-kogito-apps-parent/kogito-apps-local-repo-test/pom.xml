@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run-tests-with-build-kogito-apps-parent</artifactId>
+    <groupId>org.kie</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+
+  <artifactId>kogito-apps-local-repo-test</artifactId>
+
+  <properties>
+    <!-- Following are being passed to invoked projects as system properties using testPropertiesFile in invoker.
+    The entry in properties file is created only when the value for given property is passed using `-D` to the
+    overall maven build. -->
+    <invoker.test.properties.list>
+      container.image.infinispan,
+      container.image.keycloak,
+      container.image.kafka,
+      container.image.mongodb,
+      quarkus.container-image.build
+    </invoker.test.properties.list>
+    <maven.main.skip>true</maven.main.skip>
+  </properties>
+  <dependencies>
+    <!-- no dependency for getting the sources is needed, invoking on provided sources path -->
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-property</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules combine.children="append">
+                <requireProperty>
+                  <property>sources.directory.local.repo</property>
+                  <message>Property sources.directory.local.repo is not set!</message>
+                  <regex>.*\W+.*</regex>
+                  <regexMessage>Property sources.directory.local.repo does not contain value.</regexMessage>
+                </requireProperty>
+                <requireFilesExist>
+                  <message>Property sources.directory.local.repo does not reference existing location: '${sources.directory.local.repo}'</message>
+                  <files>
+                    <file>${sources.directory.local.repo}</file>
+                  </files>
+                </requireFilesExist>
+              </rules>
+              <fail>true</fail>
+              <failFast>true</failFast>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-invoker-properties</id>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>write-test-properties-file-for-invoker</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+          <!-- Invoking groovy script that dynamically decides if project should be included in build or not -->
+          <execution>
+            <id>resolve-includes</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <configuration>
+          <parallelThreads>1</parallelThreads>
+          <goals>
+            <goal>clean</goal>
+            <goal>org.kie:unpack-build-maven-plugin:${unpack.build.version}:unpack-build</goal>
+            <goal>verify</goal>
+          </goals>
+        </configuration>
+        <executions>
+          <execution>
+            <id>run-tests</id>
+            <configuration>
+              <!-- this file is created by write-test-properties-file-for-invoker execution above -->
+              <testPropertiesFile>test.properties</testPropertiesFile>
+              <!-- script deciding if included project is
+              executed (either script missing or returning true)
+              or skipped (when returns false or throws error) -->
+              <selectorScript>${maven.modules.resolution.selector.script.name}</selectorScript>
+              <pomIncludes>
+                <!-- includes everything, filtering is done in resolve-includes.groovy script
+                which adds invoker-run.groovy script containing 'return false' near each pom.xml
+                that should be excluded.-->
+                <pomInclude>**/pom.xml</pomInclude>
+              </pomIncludes>
+              <pomExcludes>
+                <!-- Excludes work still as expected. -->
+              </pomExcludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

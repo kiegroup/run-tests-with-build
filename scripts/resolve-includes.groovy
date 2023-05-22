@@ -1,5 +1,6 @@
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.StandardCopyOption
 import java.util.stream.Collectors
 import java.util.stream.Stream
 
@@ -19,8 +20,7 @@ private Stream<String> mvnExecute(String mvnCommand) {
     List envPropsList = session.userProperties.collect(formatProp) + System.getenv().collect(formatProp)
     log.debug("Passing env properties: ${envPropsList.toString()}")
     def mvnExec = mvnCommand
-            .execute(envPropsList, new File(basedir)
-                    .listFiles({ d, f -> Files.isDirectory(d.toPath().resolve(f)) } as FilenameFilter)[0])
+            .execute(envPropsList, getRootPomLocation((String)basedir))
     mvnExec.consumeProcessOutput(out, err)
     mvnExec.waitForOrKill(Long.valueOf(mavenExecutionTimeoutMs))
     logDebug(stdoutLogFile, out.toString().lines().collect(Collectors.toList()))
@@ -32,6 +32,37 @@ private Stream<String> mvnExecute(String mvnCommand) {
         throw new RuntimeException("Mvn command ended with error code ${mvnExec.exitValue()}")
     }
     return out.toString().lines()
+}
+
+/**
+ * Decides where to start the maven invocation. Given a location it checks whether it's a directory and pom.xml exists
+ * in it. If there's no pom.xml in the given location, but there's a single child directory with pom.xml inside it, use
+ * that as fallback.
+ * @param basedir string with path to the location
+ * @return directory where root pom.xml is
+ */
+private File getRootPomLocation(String basedir) {
+    if (!Path.of(basedir).toFile().isDirectory()) {
+        throw new RuntimeException("Expecting directory passed by basedir property.")
+    }
+    if (Path.of(basedir, "pom.xml").toFile().exists()) {
+        return Path.of(basedir).toFile()
+    } else {
+        File[] childDirs = Path.of(basedir).toFile()
+                .listFiles({ d, f -> Files.isDirectory(d.toPath().resolve(f)) } as FilenameFilter)
+        if (childDirs.size() != 1) {
+            throw new RuntimeException(
+                    "Directory ${basedir} does not contain pom.xml, and does not have single child directory " +
+                            "(has ${childDirs.size()}). Check the basedir value passed to resolve-includes.groovy script.")
+        }
+        if (!Path.of(childDirs[0], "pom.xml").toFile().exists()) {
+            throw new RuntimeException(
+                    "Directory ${basedir} does not contain pom.xml, nor does its only child directory (${childDirs[0].toPath()}. " +
+                            "Check the basedir value passed to resolve-includes.groovy script."
+            )
+        }
+        return childDirs[0]
+    }
 }
 
 /**
@@ -131,14 +162,16 @@ private String getMvnCommand() {
 }
 
 /**
- * Method to prevent execution of provided projects by adding invoker-specific script into project folder.
+ * Method to control execution of provided projects by adding invoker-specific script into project folder.
  * @param toExclude list of projects to exclude
+ * @param toInclude list of projects to include
  */
-private void excludeFromInvokerExecution(List toExclude) {
+private void controlInvokerExecution(List toExclude, List toInclude) {
     def ignoredLog = "ignored-interim-poms.log"
     log.info("Ignored projects are logged as ${Path.of(logdir).resolve(ignoredLog).toString()} .")
     logDebug(ignoredLog, toExclude)
     writeInvokerScripts(toExclude, "false")
+    writeInvokerScripts(toInclude, "true")
 }
 
 /**
@@ -151,7 +184,7 @@ private void copyInvokerPropertiesToProjects(List<String> projects) {
     Path invokerPropertiesFile = basedirPath.resolve(invokerPropertiesFileName)
     if (Files.exists(invokerPropertiesFile)) {
         log.info("Copying invoker.properties file into all leaf projects. (from ${invokerPropertiesFile.toString()})")
-        projects.each { relativePath -> Files.copy(invokerPropertiesFile, basedirPath.resolve(relativePath).resolve(invokerPropertiesFileName)) }
+        projects.each { relativePath -> Files.copy(invokerPropertiesFile, basedirPath.resolve(relativePath).resolve(invokerPropertiesFileName), StandardCopyOption.REPLACE_EXISTING) }
     } else {
         log.info("Not using invoker.properties. No invoker.properties file found in ${invokerPropertiesFile.toString()}")
     }
@@ -162,4 +195,4 @@ List leafProjects = resolveLeafProjects(projectsInReactor)
 copyInvokerPropertiesToProjects(leafProjects)
 List dirsWithPoms = findAllDirsWithPom()
 List toExclude = dirsWithPoms.minus(leafProjects)
-excludeFromInvokerExecution(toExclude)
+controlInvokerExecution(toExclude, leafProjects)

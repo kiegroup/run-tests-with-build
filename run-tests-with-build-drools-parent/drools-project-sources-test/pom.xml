@@ -12,6 +12,14 @@
 
   <artifactId>drools-project-sources-test</artifactId>
 
+  <properties>
+    <!-- Following are being passed to invoked projects as system properties using testPropertiesFile in invoker.
+    The entry in properties file is created only when the value for given property is passed using `-D` to the
+    overall maven build. -->
+    <invoker.test.properties.list>
+    </invoker.test.properties.list>
+    <maven.main.skip>true</maven.main.skip>
+  </properties>
   <dependencies>
     <!-- define as dependency to assure reactor order -->
     <dependency>
@@ -37,6 +45,13 @@
         <groupId>org.codehaus.gmavenplus</groupId>
         <artifactId>gmavenplus-plugin</artifactId>
         <executions>
+          <execution>
+            <id>write-test-properties-file-for-invoker</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+          </execution>
           <execution>
             <id>resolve-includes</id>
             <phase>generate-resources</phase>
