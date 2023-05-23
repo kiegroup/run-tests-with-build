@@ -55,7 +55,7 @@ private File getRootPomLocation(String basedir) {
                     "Directory ${basedir} does not contain pom.xml, and does not have single child directory " +
                             "(has ${childDirs.size()}). Check the basedir value passed to resolve-includes.groovy script.")
         }
-        if (!Path.of(childDirs[0], "pom.xml").toFile().exists()) {
+        if (!Path.of(childDirs[0].toString(), "pom.xml").toFile().exists()) {
             throw new RuntimeException(
                     "Directory ${basedir} does not contain pom.xml, nor does its only child directory (${childDirs[0].toPath()}. " +
                             "Check the basedir value passed to resolve-includes.groovy script."
