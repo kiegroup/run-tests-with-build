@@ -116,6 +116,10 @@
 
     <!-- Property used to filter contents of dynamically collected invoker test.properties. -->
     <invoker.test.properties.list></invoker.test.properties.list>
+    <invoker.goal.test>test</invoker.goal.test>
+    <invoker.goal.verify>verify</invoker.goal.verify>
+    <invoker.goal.install>install</invoker.goal.install>
+    <invoker.goal>${invoker.goal.verify}</invoker.goal>
   </properties>
 
   <dependencyManagement>
@@ -206,7 +210,7 @@
             </properties>
             <goals>
               <goal>clean</goal>
-              <goal>verify</goal>
+              <goal>${invoker.goal}</goal>
             </goals>
           </configuration>
           <executions>

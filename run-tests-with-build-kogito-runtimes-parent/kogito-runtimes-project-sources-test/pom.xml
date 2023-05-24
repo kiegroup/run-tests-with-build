@@ -80,7 +80,7 @@
           <goals>
             <goal>clean</goal>
             <goal>org.kie:unpack-build-maven-plugin:${unpack.build.version}:unpack-build</goal>
-            <goal>verify</goal>
+            <goal>${invoker.goal}</goal>
           </goals>
         </configuration>
         <executions>
