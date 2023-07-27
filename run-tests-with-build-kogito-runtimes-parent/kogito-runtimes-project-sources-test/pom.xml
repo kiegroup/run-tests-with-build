@@ -20,8 +20,7 @@
       container.image.infinispan,
       container.image.keycloak,
       container.image.kafka,
-      container.image.mongodb,
-      data-index-ephemeral.image.test
+      container.image.mongodb
     </invoker.test.properties.list>
     <maven.main.skip>true</maven.main.skip>
   </properties>
