@@ -167,6 +167,7 @@
               <configuration>
                 <version>${kie.download.build.version}</version>
                 <rootDirectory>${sources.directory}</rootDirectory>
+                <recursive>true</recursive>
                 <excludeDirectories>
                   <excludeDirectory>.*-distribution</excludeDirectory>
                   <excludeDirectory>.*-docs</excludeDirectory>
