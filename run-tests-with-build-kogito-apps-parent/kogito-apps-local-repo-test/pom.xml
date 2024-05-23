@@ -22,7 +22,10 @@
       container.image.kafka,
       container.image.mongodb,
       quarkus.container-image.build,
-      data-index-ephemeral.image.test
+      data-index-ephemeral.image.test,
+      data-index-postgresql.image.test,
+      job-service-ephemeral.image.test,
+      job-service-postgresql.image.test
     </invoker.test.properties.list>
     <maven.main.skip>true</maven.main.skip>
   </properties>
