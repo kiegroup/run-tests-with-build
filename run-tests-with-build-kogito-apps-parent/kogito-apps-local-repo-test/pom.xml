@@ -17,15 +17,12 @@
     The entry in properties file is created only when the value for given property is passed using `-D` to the
     overall maven build. -->
     <invoker.test.properties.list>
-      container.image.infinispan,
       container.image.keycloak,
       container.image.kafka,
-      container.image.mongodb,
       quarkus.container-image.build,
-      data-index-ephemeral.image.test,
-      data-index-postgresql.image.test,
-      job-service-ephemeral.image.test,
-      job-service-postgresql.image.test
+      container.image.data-index-service-postgresql,
+      container.image.jobs-service,
+      data-index-ephemeral.image.test
     </invoker.test.properties.list>
     <maven.main.skip>true</maven.main.skip>
   </properties>
