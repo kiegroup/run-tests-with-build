@@ -27,7 +27,7 @@
   </modules>
 
   <properties>
-    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.release>17</maven.compiler.release>
 
     <scm.plugin.version>2.0.0-M3</scm.plugin.version>
     <invoker.plugin.version>3.4.0</invoker.plugin.version>
@@ -66,7 +66,7 @@
     <maven.main.skip>false</maven.main.skip>
     <maven.compiler.useIncrementalCompilation>false</maven.compiler.useIncrementalCompilation>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-    <jdk.min.version>11</jdk.min.version>
+    <jdk.min.version>17</jdk.min.version>
     <maven.test.error.ignore>true</maven.test.error.ignore>
 
     <maven.unnecessary.plugins.skip>-Denforcer.skip -Drevapi.skip -Dsource.skip -Dasciidoctor.skip</maven.unnecessary.plugins.skip>
