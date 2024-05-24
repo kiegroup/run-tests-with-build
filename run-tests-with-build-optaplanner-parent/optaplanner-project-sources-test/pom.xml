@@ -16,7 +16,7 @@
     <quarkus.profile></quarkus.profile>
     <quarkus.native.container-build>true</quarkus.native.container-build>
     <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
-    <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11</quarkus.native.builder-image>
+    <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java17</quarkus.native.builder-image>
     <maven.main.skip>true</maven.main.skip>
   </properties>
 
