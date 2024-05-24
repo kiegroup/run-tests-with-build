@@ -79,7 +79,6 @@
               <goals>
                 <goal>clean</goal>
                 <goal>${invoker.goal}</goal> <!-- ok to install, will build full project from parent - all is taken from reactor anyway -->
-                <goal>-pl !ui-packages</goal> <!-- JS module -->
               </goals>
               <!-- this file is created by write-test-properties-file-for-invoker execution above -->
               <testPropertiesFile>test.properties</testPropertiesFile>
