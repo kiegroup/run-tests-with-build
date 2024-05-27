@@ -19,7 +19,7 @@
     <invoker.test.properties.list>
       container.image.keycloak,
       container.image.kafka,
-      quarkus.container-image.build
+      quarkus.container-image.build,
       container.image.data-index-service-postgresql,
       container.image.jobs-service,
       data-index-ephemeral.image.test
