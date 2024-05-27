@@ -107,8 +107,6 @@
                 <pomInclude>**/pom.xml</pomInclude>
               </pomIncludes>
               <pomExcludes>
-                <!-- Excludes work still as expected. -->
-                <pomExclude>**/ui-packages/pom.xml</pomExclude>
               </pomExcludes>
             </configuration>
           </execution>
