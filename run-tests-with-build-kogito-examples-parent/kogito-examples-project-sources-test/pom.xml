@@ -17,7 +17,7 @@
     <quarkus.profile></quarkus.profile>
     <quarkus.native.container-build>true</quarkus.native.container-build>
     <quarkus.native.container-runtime>docker</quarkus.native.container-runtime>
-    <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java11</quarkus.native.builder-image>
+    <quarkus.native.builder-image>quay.io/quarkus/ubi-quarkus-mandrel:21.3-java17</quarkus.native.builder-image>
     <!-- Following are being passed to invoked projects as system properties using testPropertiesFile in invoker.
      The entry in properties file is created only when the value for given property is passed using `-D` to the
      overall maven build. -->
