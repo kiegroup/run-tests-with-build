@@ -17,10 +17,8 @@
     The entry in properties file is created only when the value for given property is passed using `-D` to the
     overall maven build. -->
     <invoker.test.properties.list>
-      container.image.infinispan,
       container.image.keycloak,
-      container.image.kafka,
-      container.image.mongodb
+      container.image.kafka
     </invoker.test.properties.list>
     <maven.main.skip>true</maven.main.skip>
   </properties>
