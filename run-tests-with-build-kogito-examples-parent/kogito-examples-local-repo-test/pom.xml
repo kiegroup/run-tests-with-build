@@ -24,10 +24,8 @@
       kogito.bom.group-id,
       kogito.bom.artifact-id,
       kogito.bom.version,
-      container.image.infinispan,
       container.image.keycloak,
-      container.image.kafka,
-      container.image.mongodb
+      container.image.kafka
     </invoker.test.properties.list>
   </properties>
   <dependencies>
