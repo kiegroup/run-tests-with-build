@@ -17,6 +17,7 @@
          The entry in properties file is created only when the value for given property is passed using `-D` to the
          overall maven build. -->
     <invoker.test.properties.list>
+      checkstyle.skip,
       container.image.keycloak,
       container.image.kafka,
       quarkus.container-image.build,
