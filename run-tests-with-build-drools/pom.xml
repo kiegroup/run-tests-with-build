@@ -46,6 +46,7 @@
                 <excludeDirectory>.*drools-persistence.*</excludeDirectory>
                 <excludeDirectory>.*drools-impact.*</excludeDirectory>
                 <excludeDirectory>.*test-integration-nomvel.*</excludeDirectory>
+                <excludeDirectory>.*kie-ci.*</excludeDirectory>
               </excludeDirectories>
             </configuration>
           </execution>
@@ -62,6 +63,7 @@
             <pomExclude>drools/drools-persistence/pom.xml</pomExclude>
             <pomExclude>drools/drools-impact-analysis/pom.xml</pomExclude>
             <pomExclude>drools/test-integration-nomvel/pom.xml</pomExclude>
+            <pomExclude>drools/kie-ci/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
