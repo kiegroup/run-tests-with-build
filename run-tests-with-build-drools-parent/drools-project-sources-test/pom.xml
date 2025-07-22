@@ -83,6 +83,7 @@
           <pomExcludes>
             <!-- Excludes work still as expected. -->
             <pomExclude>**/kie-archetypes/**/archetype-resources/pom.xml</pomExclude>
+	    <pomExclude>**/kie-ci/**/pom.xml</pomExclude>
           </pomExcludes>
         </configuration>
       </plugin>
